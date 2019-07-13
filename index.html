@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>傳產工業4.0化範例頁面</title>
+	<title>傳產設備工業 4.0</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.0.min.js" integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4=" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -66,9 +67,7 @@
 				if (status == "success") {
 					$('#navbar>div>nav>a').attr('onclick', 'return false;').click(function(){
 						var href = $(this).attr('href');
-						if (href=="#") {
-							$('html').animate({scrollTop:$('.sw-tag-back').first().offset().top},1000);
-						}else{
+						if (href!="#") {
 							$('.R-side').empty().load(href,function(resp,stat){
 								if (stat == "success") {
 									RsideInit();
@@ -76,6 +75,8 @@
 							});
 							$('#navbar>div>nav>a').removeClass('nav-active');
 							$(this).addClass('nav-active');
+						} else {
+							$('html').animate({scrollTop:$('.sw-tag-back').first().offset().top},1000);
 						}
 					});
 					$('#navbar>div>nav>a').first().trigger('click');
