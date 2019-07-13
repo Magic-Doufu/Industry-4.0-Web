@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>傳產工業4.0化範例頁面</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.0.min.js" integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body>
+	<div class="container-fluid">
+		<img src="img/Web/Landing.jpg" class="img-fluid" alt="Landing image">
+		<div class="row sw-tag-back">
+			<div class="col text-right"> 
+				<div class="px-5 sw-tag sw-tagT" list="listT">Thinger.io</div>
+			</div>
+			<div class="col">
+				<div class="px-5 sw-tag sw-tagS" list="listS">Sensors</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<!--左側-->
+			<div class="col col-12 col-xl-2 col-md-3 L-side bg-white" style="z-index: 10">
+				<div class="card">
+  					<div class="card-header text-center" data-toggle="collapse" data-target="#navbar" aria-expanded="true" style="cursor: pointer;">
+  						Menu
+  					</div>
+					<div class="collapse show" id="navbar">
+						<div>
+							<nav class="nav flex-column">
+  								<a class="nav-link active" href="#">Active</a>
+  								<a class="nav-link" href="test/web1">Link</a>
+  								<a class="nav-link" href="#">Link</a>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--右側-->
+			<div class="col col-12 col-xl-10 col-md-9 R-side mt-4 px-5">
+				<div id="#result">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function RsideInit() {
+			$('.R-side a[internal]').attr('onclick', 'return false;').click(function(){
+				var href = $(this).attr('href');
+				$('.R-side').empty().load(href,function(resp,stat){
+					if (stat == "success") {
+						RsideInit();
+						$('#navbar>div>nav>a').removeClass('nav-active');
+						$('#navbar>div>nav>a[href=\'' + href + '\']').addClass('nav-active');
+						$('html').animate({scrollTop:$('.sw-tag-back').first().offset().top},1000);
+					}
+				});
+			})
+		}
+		function loadList(list){
+			$('#navbar>div>nav').empty().load('ajax/' + list + '.html',function(response,status){
+				if (status == "success") {
+					$('#navbar>div>nav>a').attr('onclick', 'return false;').click(function(){
+						var href = $(this).attr('href');
+						if (href=="#") {
+							$('html').animate({scrollTop:$('.sw-tag-back').first().offset().top},1000);
+						}else{
+							$('.R-side').empty().load(href,function(resp,stat){
+								if (stat == "success") {
+									RsideInit();
+								}
+							});
+							$('#navbar>div>nav>a').removeClass('nav-active');
+							$(this).addClass('nav-active');
+						}
+					});
+					$('#navbar>div>nav>a').first().trigger('click');
+				}
+			});
+		}
+		$(document).ready(function(){
+			loadList("listT");
+			$('.sw-tag').first().addClass('active');
+			$('.sw-tag').click(function(){
+				$('.sw-tag').removeClass('active');
+				loadList($(this).attr('list'));
+				$(this).addClass('active');
+			})
+			$('#navbar').collapse();
+		})
+	</script>
+	</style>
+</body>
+</html>
