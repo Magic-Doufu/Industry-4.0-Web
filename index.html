@@ -67,8 +67,8 @@
 				if (status == "success") {
 					$('#navbar>div>nav>a').attr('onclick', 'return false;').click(function(){
 						var href = $(this).attr('href');
-						window.sessionStorage.setItem('page',href);
 						if (href!="#") {
+							window.sessionStorage.setItem('page',href);
 							$('.R-side').empty().load(href,function(resp,stat){
 								if (stat == "success") {
 									RsideInit();
