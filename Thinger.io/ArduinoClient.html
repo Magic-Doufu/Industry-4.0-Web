@@ -18,7 +18,7 @@
 要安裝thinger.io程式庫，請按照以下步驟操作：<br>
 打開程式庫管理器<br>
 <img src="./img/ArduinoDevice/LibManager.jpg" alt="" title="程式庫管理員"><br>
-在Arduino的選單中打開程式庫管理器 <code class="highlighter-rouge">工具 &gt; 管理程式庫</code><br>
+在Arduino的選單中打開程式庫管理器 <code>工具 &gt; 管理程式庫</code><br>
 搜尋並安裝 thinger.io 程式庫<br>
 <img src="./img/ArduinoDevice/LibManagerSearch.jpg" alt="" title="程式庫管理員"><br>
 使用名稱 thinger.io 搜尋，然後單擊 Install 進行安裝。<br>
@@ -54,7 +54,7 @@ loop()僅僅是不斷調用thing.handle()方法去維持與伺服器的聯繫，
 這將導致設備在參與我們的命令時出現明顯的延遲。<br>
 當你安裝完成後，通常可以找到一些範例程式。<br>
 結構示範：<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//引入任何需要使用的標頭檔
+<div><div><pre><code>//引入任何需要使用的標頭檔
 #include &lt;SPI.h&gt;
 #include &lt;Ethernet.h&gt;
 #include &lt;ThingerEthernet.h&gt;
@@ -81,7 +81,7 @@ void loop() {
 在控制台中創建設備時，您基本上是在創建新設備標籤並設置設備憑據。<br>
 因此，您還需要在Arduino代碼中設置此憑據，以便識別設備並將其與您的帳戶相關聯。<br>
 這通常在代碼中初始化Thinger實例時完成。也就是說，當您定義thing實例時。在此替換您的username，deviceId以及deviceCredential您在雲中註冊的值。<br>
-<code class="highlighter-rouge">ThingerWifi thing("username", "deviceId", "deviceCredential");</code></p>
+<code>ThingerWifi thing("username", "deviceId", "deviceCredential");</code></p>
 <h3 id="新增資源">新增資源</h3>
 <p>在Thinger.io平台中，每個設備都可以定義多個資源。您可以認為資源是您可以感測或觸發的任何資源。
 例如，典型的資源將是溫度或濕度等傳感器值，或者打開和關閉燈的繼電器。
@@ -90,7 +90,7 @@ void loop() {
 有三種不同類型的資源，將在以下各節中進行說明。</p>
 <h4 id="輸入類資源伺服器端輸入至裝置">輸入類資源(伺服器端輸入至裝置)</h4>
 <p>如果您需要控制或啟動IoT設備，則需要定義輸入資源。通過這種方式，輸入資源可以為您的設備提供資訊。例如打開和關閉燈或繼電器，改變伺服馬達位置，調整設備參數等的資源。<br>
-要定義輸入資源，請使用<code class="highlighter-rouge">&lt;&lt;</code>指向資源名稱的運算符，它使用C ++ 11 Lambda函數來定義函數。<br></p>
+要定義輸入資源，請使用<code>&lt;&lt;</code>指向資源名稱的運算符，它使用C ++ 11 Lambda函數來定義函數。<br></p>
 
 <p>範例為接受一個參數的輸入資源函數，pson是一種泛型，可以包含布林值，數字，浮點數，字符串，甚至是JSON文檔中的結構化資訊。<br>
 以下小節將說明如何為典型用例定義不同的輸入資源。<br></p>
@@ -98,7 +98,7 @@ void loop() {
 <p>這種資源只需要一個開/關狀態，因此可以根據需要啟用或禁用它。由於pson類型包含多種數據類型，我們可以認為pson輸入函數的參數類似於布林值。<br>
 因此，在setup函數內部，您可以放置​​一個名為led（您也可以使用任何其他名稱）的資源，其輸入參數類型可以使用pson。<br>
 該示例將使用in參數上的三元運算符來打開/關閉數字引腳10 。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["led"] &lt;&lt; [](pson&amp; in){
+<div><div><pre><code>thing["led"] &lt;&lt; [](pson&amp; in){
   digitalWrite(10, in ? HIGH : LOW);
 };
 </code></pre></div></div>
@@ -106,14 +106,14 @@ void loop() {
 
 <p>修改伺服馬達位置非常類似於打開/關閉LED。但是，在這種情況下，必須使用整數值。<br>
 由於pson類型可以包含多種數據類型，我們仍然可以將該pson類型用作整數值。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["servo"] &lt;&lt; [](pson&amp; in){
+<div><div><pre><code>thing["servo"] &lt;&lt; [](pson&amp; in){
     myServo.write(in);
 };
 </code></pre></div></div>
 <h5 id="更新變數">更新變數</h5>
 
 <p>您還可以使用輸入資源更新變數，以便動態更改設備行為。在某些您希望臨時禁用警報，更改報告間隔，更新滯後值等情況下，這非常有用。通過這種方式，您可以定義其他資源來更改變量。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>float hysteresis = 0; // defined as a global variable
+<div><div><pre><code>float hysteresis = 0; // defined as a global variable
 thing["hysteresis"] &lt;&lt; [](pson&amp; in){
     hysteresis = in;
 };
@@ -121,7 +121,7 @@ thing["hysteresis"] &lt;&lt; [](pson&amp; in){
 <h5 id="傳遞多個參數">傳遞多個參數</h5>
 
 <p>該pson數據類型，不僅可以容納不同的數據類型，也就是使用JSON文件完全相容。因此，您可以使用pson數據類型同時接收多個值。此範例將接收使用lat和lon鍵(key)存儲的兩個不同浮點數(value)。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["location"] &lt;&lt; [](pson&amp; in){
+<div><div><pre><code>thing["location"] &lt;&lt; [](pson&amp; in){
     float lat = in["lat"];
     float lon = in["lon"];
 };
@@ -134,7 +134,7 @@ thing["hysteresis"] &lt;&lt; [](pson&amp; in){
 <p>那麼，Dashboards或API如何知道輸入資源的當前狀態是什麼？如果資源為空，則資源必須在輸入參數中設置其當前狀態，如果存在，則使用輸入值。這樣，我們可以獲得三個不同的東西：查詢當前資源狀態（不修改它），修改當前資源狀態，以及獲取資源上的預期輸入（這是設備上的API資源管理器的工作方式）。</p>
 
 <p>因此，實際上允許在儀表板或API中顯示資源的當前狀態的正確輸入資源定義將類似於此範例程式碼。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["resource"] &lt;&lt; [](pson&amp; in){
+<div><div><pre><code>thing["resource"] &lt;&lt; [](pson&amp; in){
     if(in.is_empty()){
         in = currentState;
     }
@@ -144,7 +144,7 @@ thing["hysteresis"] &lt;&lt; [](pson&amp; in){
 }
 </code></pre></div></div>
 <p>如果沒有輸入物件，此示例代碼基本上返回當前狀態（如布林值，數字等），或使用傳入數據更新當前狀態。這可以很容易地適用於控制LED，同時在打開或更新時在儀表板中顯示其當前狀態。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["led"] &lt;&lt; [](pson&amp; in){
+<div><div><pre><code>thing["led"] &lt;&lt; [](pson&amp; in){
     if(in.is_empty()){
         in = (bool) digitalRead(pin);
     }
@@ -153,21 +153,21 @@ thing["hysteresis"] &lt;&lt; [](pson&amp; in){
     }
 }
 </code></pre></div></div>
-<p>注意：要控制數字引腳，只需使用<code class="highlighter-rouge">更易用的資源定義</code>部分中說明的方法。</p>
+<p>注意：要控制數字引腳，只需使用<code>更易用的資源定義</code>部分中說明的方法。</p>
 <h4 id="輸出類資源裝置輸出至伺服器端">輸出類資源(裝置輸出至伺服器端)</h4>
 <p>當您需要感知或讀取傳感器值（如溫度，濕度等）時，通常應使用輸出資源。因此，輸出資源對於從設備中提取信息非常有用。<br>
 為了定義輸出資源，使用操作符»指出資源名稱，它使用C ++ 11 Lambda函數來定義輸出函數。<br>
 範例為接收一個參數的輸出資源函數，pson是一種泛型，可以包含布林值，數字，浮點數，字符串，甚至是JSON文檔中的結構化資訊。<br>
 以下小節將說明如何為典型用例定義不同的輸出資源。<br></p>
 <h5 id="讀取傳感器值">讀取傳感器值</h5>
-<p>定義輸出資源與定義輸入資源非常相似，但在這種情況下，它使用運算符<code class="highlighter-rouge">&gt;&gt;</code>。在回調函數中，可以用任何我們想要的值替換out值，比如在這種情況下傳感器讀數的輸出。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["temperature"] &gt;&gt; [](pson&amp; out){
+<p>定義輸出資源與定義輸入資源非常相似，但在這種情況下，它使用運算符<code>&gt;&gt;</code>。在回調函數中，可以用任何我們想要的值替換out值，比如在這種情況下傳感器讀數的輸出。<br></p>
+<div><div><pre><code>thing["temperature"] &gt;&gt; [](pson&amp; out){
       out = dht.readTemperature();
 };
 </code></pre></div></div>
 <h5 id="讀取多個數據">讀取多個數據</h5>
 <p>以相同的方式輸入資源可以同時接收多個值，輸出資源也可以提供多個數據。這是從GPS提供緯度和經度的示例。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["location"] &gt;&gt; [](pson&amp; out){
+<div><div><pre><code>thing["location"] &gt;&gt; [](pson&amp; out){
       out["lat"] = gps.getLatitude();
       out["lon"] = gps.getLongitude();
 };
@@ -175,7 +175,7 @@ thing["hysteresis"] &lt;&lt; [](pson&amp; in){
 <h5 id="取得變數數值">取得變數數值</h5>
 
 <p>如果無法提供單個傳感器讀數，因為它正在進行某種數據收集，則輸出資源也可用於讀取變數，其中計算結果會經常更新。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>float yaw = 0; // defined as a global variable
+<div><div><pre><code>float yaw = 0; // defined as a global variable
 thing["yaw"] &gt;&gt; [](pson&amp; out){
       out = yaw;
 };
@@ -186,12 +186,12 @@ thing["yaw"] &gt;&gt; [](pson&amp; out){
 <p>這種資源通常由供應商定義。<br>
 在這種情況下，該函數採用兩個不同的pson參數。一個用於輸入數據，另一個用於輸出數據。<br>
 此示例使用BMP180傳感器提供高度讀數。它將參考高度作為輸入，並提供當前高度作為輸出。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["altitude"] = [](pson&amp; in, pson&amp; out){
+<div><div><pre><code>thing["altitude"] = [](pson&amp; in, pson&amp; out){
     out = bmp.readAltitude(in);
 };
 </code></pre></div></div>
 <p>您還可以定義更複雜的輸入/輸出資源（需要多個輸入值），以提供多個輸出值，例如此示例中包含value1和value2提供sum和mult值。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["in_out"] = [](pson&amp; in, pson&amp; out){
+<div><div><pre><code>thing["in_out"] = [](pson&amp; in, pson&amp; out){
     out["sum"] = (long)in["value1"] + (long)in["value2"];
     out["mult"] = (long)in["value1"] * (long)in["value2"];
 };
@@ -199,7 +199,7 @@ thing["yaw"] &gt;&gt; [](pson&amp; out){
 <h4 id="沒有參數的資源">沒有參數的資源</h4>
 <p>您也可以定義不需要任何輸入的資源，也不會生成任何輸出。它們就像可以根據需要執行的回調，例如重啟設備或執行一些必要的操作。<br>
 在這種情況下，資源被定義為沒有任何輸入或輸出參數的函數。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["resource"] = [](){
+<div><div><pre><code>thing["resource"] = [](){
     // write here your execution code
 };
 </code></pre></div></div>
@@ -210,27 +210,27 @@ thing["yaw"] &gt;&gt; [](pson&amp; out){
 <h4 id="控制數位引腳">控制數位引腳</h4>
 <p>這種資源將允許定義用於聲明對數位引腳的控制的資源，因此您可以交替開啟/關閉狀態，可以用於控制LED，繼電器，燈等。<br>
 需要在設置程式碼中將數位引腳定義為OUTPUT，否則資源將無法正常工作。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["relay"] &lt;&lt; digitalPin(PIN_NUMBER);
+<div><div><pre><code>thing["relay"] &lt;&lt; digitalPin(PIN_NUMBER);
 thing["relay"] &lt;&lt; invertedDigitalPin(PIN_NUMBER);
 </code></pre></div></div>
 <h4 id="定義輸出資源">定義輸出資源</h4>
 <p>這種資源定義用於宣告唯讀資源，例如從傳感器獲取的值，或者我們程式中的初始化變數。<br>
 在這個例子中，我們定義了一個暴露傳感器讀數的資源，比如DHT11傳感器溫度。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["temperature"] &gt;&gt; outputValue(dht.readTemperature());
+<div><div><pre><code>thing["temperature"] &gt;&gt; outputValue(dht.readTemperature());
 </code></pre></div></div>
 <p>我們也可以在程式中為任何全域變數定義輸出資源。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["variable"] &gt;&gt; outputValue(myVar);
+<div><div><pre><code>thing["variable"] &gt;&gt; outputValue(myVar);
 </code></pre></div></div>
 <h4 id="修改變數">修改變數</h4>
 <p>我們的程式通常定義一些在循環中使用的參數或變數。這種資源通常用於處理或控制行為。<br>
 有了這種資源，我們可以修改我們想要公開的任何參數，比如浮點數，整數，布林值等。<br></p>
 
-<p>在此示例中，可以遠端修改<code class="highlighter-rouge">sdLogging</code>定義為全域變數的布林變數變量。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["logging"] &lt;&lt; inputValue(sdLogging);
+<p>在此示例中，可以遠端修改<code>sdLogging</code>定義為全域變數的布林變數變量。</p>
+<div><div><pre><code>thing["logging"] &lt;&lt; inputValue(sdLogging);
 </code></pre></div></div>
 <p>也可以定義一個回調函數來知道變數何時發生了變化，因此我們可以執行任何其他操作。<br>
-對於此用例，請將資源定義為以下內容，以便在<code class="highlighter-rouge">hysteresisVar</code>更改時執行某些代碼。<br></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["hysteresis"] &lt;&lt; inputValue(hysteresisVar, {
+對於此用例，請將資源定義為以下內容，以便在<code>hysteresisVar</code>更改時執行某些代碼。<br></p>
+<div><div><pre><code>thing["hysteresis"] &lt;&lt; inputValue(hysteresisVar, {
     // execute some code when the value change
     Serial.println("Hystereis changed to: ");
     Serial.print(hysteresisVar);
@@ -240,11 +240,81 @@ thing["relay"] &lt;&lt; invertedDigitalPin(PIN_NUMBER);
 <p>還可以定義用於控制伺服實例的資源。這樣，定義的資源將根據API交互自動處理您的伺服實例，讀取其當前位置或更改為新的。</p>
 
 <p>要定義伺服資源，只需像往常一樣定義和初始化伺服機，然後在資源定義中使用聲明的實例。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>thing["servo"] &lt;&lt; servo(myServoInstance);
+<div><div><pre><code>thing["servo"] &lt;&lt; servo(myServoInstance);
 </code></pre></div></div>
 <h3 id="不同裝置間的橫向溝通">不同裝置間的橫向溝通</h3>
+<p>在Thinger.io中，設備可以在它們之間進行通信。這裡有兩種狀況。一個是來自同一帳戶的設備之間的通信，另一個是來自不同帳戶的設備之間的通信。我們將描述兩種不同的方法：</p>
 <h4 id="裝置位於同一個帳戶管理下">裝置位於同一個帳戶管理下</h4>
+<p>對於此用例，設備可以使用特定方法與其他設備進行通信。假設我們有一個<mark>deviceA</mark>，並且<mark>deviceB</mark>想要在它們之間進行通信。</p>
+
+在<mark>deviceA</mark>定義如下面的例子一樣的資源。
+<code><pre>
+setup(){
+    thing[“resourceOnA”] = [](){
+        Serial.println("Someone is calling me!");
+    };
+}
+</pre></code>
+<p><mark>deviceB</mark>可以通過運行以下命令輕鬆調用此方法。</p>
+<code><pre>
+loop(){
+    thing.handle();
+    // be sure to call it at an appropiate rate
+    thing.call_device("deviceA", "resourceOnA");
+}
+</pre></code>
+<p><mark>deviceA</mark>也可以定義具有一些預期輸入的資源。</p>
+<code><pre>
+setup(){
+    thing[“resourceOnA”] << [](pson& in){
+        int val1 = in["anyValue1"];
+        float val2 = in["anyValue2"];
+        // Work with the updated parameters here
+    };
+}
+</pre></code>
+<p><mark>deviceB</mark>也可以通過定義一個<mark>pson</mark>填充了相同key的類型來調用此方法來提供<mark>resourceOnA</mark>適當的輸入</p>
+<code><pre>
+loop(){
+    thing.handle();
+    // be sure to call it at an appropiate rate
+    pson data;
+    data["anyValue1"] = 3;
+    data["anyValue2"] = 43.1;
+    thing.call_device("deviceA", "resourceOnA", data);
+}
+</pre></code>
+<p><mark>deviceB</mark> 也可以通過提供來自回傳數據的已定義資源的數據來調用此方法，在這種情況下，調用與前面的示例類似，但使用資源作為數據源。</p>
+<code><pre>
+setup(){
+    thing["resourceName"] >> [](pson& out){
+        out["anyValue1"] = 3;
+        out["anyValue2"] = 43.1;
+    };
+}
+
+loop(){
+    thing.handle();
+    // be sure to call it at an appropiate rate
+    thing.call_device("deviceA", "resourceOnA", thing["resourceName"]);
+}
+</pre></code>
 <h4 id="裝置位於不同帳戶">裝置位於不同帳戶</h4>
+<p>如果我們想要通過不同帳戶進行通信，我們可以通過調用類型的端點來實現<mark>Thinger.io Device Call</mark>只需在控制台中註冊此類型的端點，如下例所示。</p>
+<img src="http://docs.thinger.io/arduino/assets/device_call.png">
+<p>
+    在這種情況下，需要在端點中定義不同的參數：
+    <ul>
+        <li>端點標識符：設備用於調用設備的端點ID。</li>
+        <li>設備所有者：設備所有者用戶名。</li>
+        <li>設備標識符：其他帳戶的設備ID。</li>
+        <li>資源名稱：要調用的設備上的資源。</li>
+        <li>設備存取令牌(token)：在另一個帳戶中生成的設備令牌，用於授予對設備的外部存取權限。</li>
+    </ul>
+    定義後，設備將能夠調用端點，如以下部分所述。它基本上包括調用<mark>call_endpoint</mark>方法。
+</p>
+<code>thing.call_endpoint("DeviceACall");</code>
+<p></p>
 <h3 id="終端裝置">終端裝置</h3>
 <h4 id="呼叫終端裝置">呼叫終端裝置</h4>
 <h4 id="傳送資料給終端裝置">傳送資料給終端裝置</h4>

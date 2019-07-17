@@ -67,6 +67,7 @@
 				if (status == "success") {
 					$('#navbar>div>nav>a').attr('onclick', 'return false;').click(function(){
 						var href = $(this).attr('href');
+						window.sessionStorage.setItem('page',href);
 						if (href!="#") {
 							$('.R-side').empty().load(href,function(resp,stat){
 								if (stat == "success") {
@@ -75,11 +76,18 @@
 							});
 							$('#navbar>div>nav>a').removeClass('nav-active');
 							$(this).addClass('nav-active');
+							$('#navbar').addClass('show');
 						} else {
 							$('html').animate({scrollTop:$('.sw-tag-back').first().offset().top},1000);
 						}
 					});
-					$('#navbar>div>nav>a').first().trigger('click');
+					var href = window.sessionStorage.getItem('page');
+					if (href) {
+						$('#navbar>div>nav>a[href="' + href + '"]').trigger('click');
+					} else {
+						$('#navbar>div>nav>a').first().trigger('click');
+					}
+					
 				}
 			});
 		}
