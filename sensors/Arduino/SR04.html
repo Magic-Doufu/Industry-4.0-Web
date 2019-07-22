@@ -1,0 +1,76 @@
+﻿<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>
+			超音波測距 SR04</h1>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+
+模組工作原理：
+採用I/O觸發測距，給至少為10us的高電位信號
+模組自動發送 8個 40KHZ的方波，自動檢測是否有信號返回
+有信號返回，通過I/O輸出一高電位，高電位持續的時間就是超聲波從發射到返回的時間
+測試距離 =（高電位時間 x 聲速（340M / S））/ 2
+
+規格:
+電源：DC5V/2mA
+輸出電位( 1/ 0)：5V/ 0V
+精度：3mm
+距離範圍：2 ~ 450cm
+有效的角度：&lt;15℃
+觸發輸入信號：10uS TTL pulse
+ECHO輸出信號： Input TTL lever signal and the range in proportion
+接線方式：VCC&rarr;5V、trig (控制端)&rarr;任意Digital Pin
+         echo (接收端)&rarr;任意Digital Pin、GND&rarr;GND
+</pre>
+		<p>
+			<img height="450" src=".\img\sensors\SR04\SR04.jpg" width="600" /></p>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+程式範例：
+
+int trigPin = 12;                  //Trig Pin
+int echoPin = 11;                  //Echo Pin
+long duration, cm, inches;
+ 
+void setup() {
+  Serial.begin (9600);             // Serial Port begin
+  pinMode(trigPin, OUTPUT);        //Define inputs and outputs 
+  pinMode(echoPin, INPUT);
+}
+ 
+void loop()
+{
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trigPin, HIGH);     // 給 Trig 高電位，持續 10微秒
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  pinMode(echoPin, INPUT);             // 讀取 echo 的電位
+  duration = pulseIn(echoPin, HIGH);   // 收到高電位時的時間
+ 
+  cm = (duration/2) / 29.1;         // 將時間換算成距離 cm 或 inch  
+  inches = (duration/2) / 74; 
+
+  Serial.print(&quot;Distance : &quot;);  
+  Serial.print(inches);
+  Serial.print(&quot;in,   &quot;);
+  Serial.print(cm);
+  Serial.print(&quot;cm&quot;);
+  Serial.println();
+  
+  delay(1000);
+}
+
+</pre>
+		<p>
+			電路(接線)</p>
+		<p>
+			<img height="450" src=".\img\sensors\SR04\SR04(2).jpg" width="600" /> <img height="450" src=".\img\sensors\SR04\SR04(3).jpg" width="600" /></p>
+		<p>
+			結果:</p>
+		<p>
+			<img height="600" src=".\img\sensors\SR04\SR04(1).PNG" width="450" /></p>
+	</body>
+</html>

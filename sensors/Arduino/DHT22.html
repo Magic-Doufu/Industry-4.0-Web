@@ -1,0 +1,107 @@
+﻿<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>
+			DHT22溫濕度傳感器</h1>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+</pre>
+		<div>
+			<span style="font-size:20px;">AM2302(又稱DHT22)濕敏電容數位溫濕度模組是一款含有己校準數位信號輸出的溫濕度複合感測器。它應用專用的數位模組採集技術和溫濕度傳感技術，確保產品具有極高的可靠性與卓越的長期穩定性。</span></div>
+		<div>
+			&nbsp;</div>
+		<div>
+			<span style="font-size:20px;">感測器包括一個電容式感濕元件和一個高精度測溫元件，並與一個高性能8位單片機相連接。因此該產品具有品質卓越、超快回應、抗干擾能力強、性價比極高等優點。每個感測器都在極為精確的濕度校驗室中進行校準。校準係數以程式的形式儲存在單片機中，感測器內部在檢測信號的處理過程中要調用這些校準係數。</span></div>
+		<div>
+			&nbsp;</div>
+		<div>
+			<span style="font-size:20px;">標準單匯流排界面，使系統集成變得簡易快捷。超小的體積、極低的功耗，信號傳輸距離可達20米以上，使其成為各類應用甚至最為苛刻的應用場合的最佳選擇。產品為3引線（單匯流排界面）連接方便。特殊封裝形式可根據用戶需求而提供。</span></div>
+		<p>
+			<span style="font-size:22px;"><span style="font-size:24px;"><b>規格:</b></span> </span></p>
+		<div>
+			<span style="font-size:20px;">尺寸大小：40 x 23mm</span></div>
+		<div>
+			<span style="font-size:20px;">產品重量：4g</span></div>
+		<div>
+			<span style="font-size:20px;">工作電壓：5V</span></div>
+		<div>
+			<span style="font-size:20px;">連接埠：數位雙向單匯流排</span></div>
+		<div>
+			<span style="font-size:20px;">溫度範圍：-40~80℃ &plusmn;0.5℃</span></div>
+		<div>
+			<span style="font-size:20px;">濕度範圍：20~90%RH &plusmn;2%RH</span></div>
+		<div>
+			<span style="font-size:20px;">使用平臺：Arduino、單晶片</span></div>
+		<p>
+			<span style="font-size:24px;"><b>DHT22接腳說明：</b></span></p>
+		<p>
+			<img src=".\img\sensors\DHT22\DHT22.jpg" /></p>
+		<p>
+			<span style="font-size:20px;">程式開始前，需先下載程式庫。</span></p>
+		<p>
+			<img height="650" src=".\img\sensors\DHT22\DHT22L.JPG" width="450" /></p>
+		<p>
+			<span style="font-size:20px;">搜尋DHT，下載DHT sensor library</span><span style="font-size: 20px;">。</span></p>
+		<p>
+			<img height="500" src=".\img\sensors\DHT22\tempsnip.png" width="800" /></p>
+		<p>
+			<span style="font-size:24px;"><b>程式範例：</b></span></p>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+#include &quot;DHT.h&quot;
+#define DHTPIN 2          // 接腳 PIN2
+#define DHTTYPE DHT22     // DHT22
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println(&quot;DHT22 test!&quot;);
+  dht.begin();
+}
+
+void loop() {
+
+  delay(2000);   
+       //傳感器讀取時間需要大約2秒
+  float h = dht.readHumidity();
+       //讀取濕度 
+  float t = dht.readTemperature();
+       //讀取溫度(攝氏)
+  float f = dht.readTemperature(true);
+       //讀取溫度(華氏)(isFahrenheit = true)
+
+  if (isnan(h) || isnan(t) || isnan(f)) {
+    Serial.println(&quot;Failed to read from DHT sensor!&quot;);
+    return;
+           //檢查是否讀取失敗,提前退出,再一次
+  }
+
+  float hif = dht.computeHeatIndex(f, h);
+  float hic = dht.computeHeatIndex(t, h, false);
+
+  Serial.print(&quot;Humidity: &quot;);
+  Serial.print(h);
+  Serial.print(&quot; %\t&quot;);
+  Serial.print(&quot;Temperature: &quot;);
+  Serial.print(t);
+  Serial.print(&quot; *C &quot;);
+  Serial.print(f);
+  Serial.print(&quot; *F\t&quot;);
+  Serial.print(&quot;Heat index: &quot;);
+  Serial.print(hic);
+  Serial.print(&quot; *C &quot;);
+  Serial.print(hif);
+  Serial.println(&quot; *F&quot;);
+         //顯示結果
+}
+
+<span style="font-size:24px;"><b>結果：</b></span>
+</pre>
+		<p>
+			電路(接線)<br />
+			<img height="450" src=".\img\sensors\DHT22\DHT22(3).jpg" width="600" /></p>
+		<p>
+			紅線為開始使用吹風機(溫度上升濕度下降)<br />
+			<img height="600" src=".\img\sensors\DHT22\DHT22(1).PNG" width="600" /></p>
+	</body>
+</html>
