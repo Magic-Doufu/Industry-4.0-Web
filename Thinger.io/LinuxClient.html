@@ -1,0 +1,147 @@
+<img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/67c344bcaf24746012ef751c63731fa96b457e4a.gif">
+<p>
+	這個操作方法將介紹如何在Raspberry Pi中使用thinger.io平台時獲得第一步。這包括如何下載，編譯和執行GitHub存儲庫中可用的主要示例。
+</p>
+<hr>
+<h2>要求</h2>
+Raspberry Pi上運行Raspbian，且可透過終端或SSH存取。像Ubuntu這樣的其他操作系統可能有效，但尚未經過測試。
+在thinger.io控制台中註冊設備並手動保存憑據。如果您需要有關此部分的幫助，請檢視其他操作方法。
+<hr>
+<h2>安裝較新的GCC版本</h2>
+<mark>注意：Raspbian Jessie或更新版本不需要。</mark>
+<p>
+	必需使用現代編譯器來構建thinger.io示例。
+</p>
+<p>
+	新的Raspbian版本，從<mark>Jessie</mark>開始已經提供了一個現代編譯器，但如果您使用較舊的Raspbian版本，則需要安裝更新的編譯器。至少需為GCC 4.8.2以上。請在終端中鍵入<code>gcc -v</code>以檢查是否需要更新編譯器。
+</p>
+<p>
+	必須保持所有系統的更新，因此請首先鍵入以下命令來升級所有已安裝的軟件包。這可能需要一些時間，具體取決於您的Internet連接。
+</p>
+<pre><code>sudo apt-get update
+sudo apt-get upgrade
+</code></pre>
+<p>
+	接下來，打開<mark>/etc/apt/sources.list</mark>一個編輯器，並將名稱<mark>wheezy</mark>替代為<mark>jessie</mark>。
+</p>
+<code>sudo nano /etc/apt/sources.list</code>
+<p>
+	然後我們將再次更新包列表，以便我們可以訪問更新的<mark>jessie</mark>包：
+</p>
+<code>sudo apt-get update</code>
+<p>
+	現在我們終於可以安裝安裝GCC 4.9了
+</p>
+<code>sudo apt-get install gcc-4.9 g++-4.9</code>
+<p>
+	最後一步是將<mark>Jessie</mark>恢復為<mark>Wheezy</mark>，打開<mark>/etc/apt/sources.list</mark>將<mark>jessie</mark>取代為<mark>wheezy</mark>，然後更新包列表：
+</p>
+<pre><code>sudo nano /etc/apt/sources.list
+sudo apt-get update
+</code></pre>
+<p>
+	如果我們此時輸入<mark>gcc -v</mark>，預設版本仍為4.7。所以我們需要將預設版本設為新的gcc 4.9。首先刪除所有gcc備用方案。
+</p>
+<pre><code>sudo update-alternatives --remove-all gcc
+sudo update-alternatives --remove-all g++
+</code></pre>
+<p>
+	之後新增兩個gcc替代品，並優先考慮GCC 4.9版本。
+</p>
+<pre><code>sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.6
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
+</code></pre>
+<p>
+	在此階段，如果鍵入<mark>gcc-v</mark>，則應顯示版本4.9.2或更高版本。您始終可以使用以下指令更改預設編譯器。
+</p>
+<code>sudo update-alternatives --config gcc
+</code>
+<hr>
+<h2>安裝其他依賴項</h2>
+<p>
+	如果您需要將thinger安裝為守護程式，則必須使用CMake編譯示例。如果我們想要使用TLS安全地連接到平台，還需要安裝Open SSL。
+</p>
+<p>
+	首先更新apt存儲庫：
+</p>
+<code>sudo apt-get update
+</code>
+<p>
+	安裝依賴項（CMake和OpenSSL）
+</p>
+<code>sudo apt-get install cmake libssl-dev
+</code>
+
+<hr>
+<h2>從平台開始</h2>
+<p>
+	從GitHub下載最新的Linux客戶端版本。
+</p>
+<code>git clone https://github.com/thinger-io/Linux-Client.git
+</code>
+<p>
+	輸入我們剛剛克隆的Linux-Client文件夾。
+</p>
+<code>cd Linux-Client
+</code>
+<p>
+	現在是時候在主項目文件中輸入憑據了。所以我們<mark>main.cpp</mark>要從<mark>src</mark>文件夾中編輯文件。您可以使用任何所需的編輯器。我們將在這裡使用<mark>nano</mark>。
+</p>
+<code>nano src/main.cpp
+</code>
+<p>
+	在這種情況下，您必須將字段<mark>USER_ID</mark>，<mark>DEVICE_ID</mark>以及<mark>DEVICE_CREDENTIAL</mark>替換為您在平台中註冊設備時提供的資訊。以下是main.cpp編輯這些字段之前文件應如何顯示的示例螢幕截圖。
+</p>
+<img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/2697e5c757b23eec7537fc9ac232544f5923d583.png">
+<p>
+	完成參數編輯後，按 Ctrl+X 退出 nano，然後鍵入"y"以儲存變更。
+	如果您在Raspberry Pi上執行腳本，請確保<mark>run.sh</mark>包含<mark>-DRASPBERRY=ON</mark>指令參數，如下所示-
+</p>
+<code>cmake -DCMAKE_BUILD_TYPE=Release -DDAEMON=OFF -DRASPBERRY=ON
+</code>
+<p>
+	現在，您必須向<mark>run.sh</mark>腳本加入執行權限。
+</p>
+<code>chmod +x run.sh
+</code>
+<p>
+	現在您可以執行它來測試一切正常。
+</p>
+<code>./run.sh
+</code>
+<p>
+	如果一切順利，你應該看看程序是如何自動編譯和執行的。該程序實際上報告了一些調試文本，可以幫助我們檢查我們是否已經很好地配置了憑據。您應該看到的預期結果如下圖所示。 
+</p>
+<img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/e321714a8b9fcac120cb1dafae8502cca65e9b39.png">
+<p>
+	現在，您可以轉到thinger.io控制台並檢查Raspberry是否顯示為已連接。您甚至可以嘗試執行僅在執行總和時<mark>sum</mark>定義的資源<mark>main.cpp</mark>。要測試設備資源，請轉到設備儀表板中顯示的API Explorer。
+</p>
+<img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/7b3bf8846f66eb57b422a803ac157560ea608e19.png">
+<hr>
+<h2>將客戶端安裝為守護程序</h2>
+<p>
+	此時，如果關閉終端或結束SSH連接，客戶端將會停止運作。但是，您可以將客戶端安裝為守護程序服務，因此即使您的Raspberry重新啟動它也會自動啟動。
+</p>
+<p>
+	要安裝已作為服務運行的客戶端，請轉到Raspberry安裝文件夾：
+</p>
+<code>cd install/raspberry/
+</code>
+<p>
+	然後運行<mark>install.sh</mark>腳本，將編譯並安裝客戶端作為服務。
+</p>
+<p>
+	此步驟將複製init腳本文件到<mark>/etc/init.d/thinger</mark>，並將已編譯的二進制文件複製到<mark>/usr/local/bin/thinger</mark>。因此，如果要刪除客戶端守護程序，可以停止該服務並刪除這些文件。
+</p>
+<code>chmod +x install.sh
+./install.sh 
+</code>
+<p></p>
+<div class="alert alert-warning">
+	請注意，此指令將在後台安裝並執行thinger.io客戶端作為守護程序，因此如果再次調用run.sh運行獨立客戶端的腳本，則兩個客戶端將連接到平台並持續斷開連接。如果需要停止後台客戶端，請使用此命令。
+</div>
+<code>sudo service thinger stop
+</code>
+<p>
+	
+</p>

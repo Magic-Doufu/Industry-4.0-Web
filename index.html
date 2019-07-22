@@ -8,6 +8,8 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<META HTTP-EQUIV="EXPIRES" CONTENT="0">
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 </head>
 <body>
 	<div class="container-fluid">
@@ -52,6 +54,8 @@
 		function RsideInit() {
 			$('.R-side a[internal]').attr('onclick', 'return false;').click(function(){
 				var href = $(this).attr('href');
+				if (href!="#")
+					window.sessionStorage.setItem('page',href);
 				$('.R-side').empty().load(href,function(resp,stat){
 					if (stat == "success") {
 						RsideInit();
@@ -63,18 +67,22 @@
 			})
 		}
 		function loadList(list){
-			$('#navbar>div>nav').empty().load('ajax/' + list + '.html',function(response,status){
+			//清空nav並載入列表
+			$('#navbar>div>nav').empty().load('ajax/' + list + '.html?_=' + $.now(),function(response,status){
 				if (status == "success") {
+					//關閉列表跳轉
 					$('#navbar>div>nav>a').attr('onclick', 'return false;').click(function(){
+						//右側刷新&左側字重
 						var href = $(this).attr('href');
 						if (href!="#") {
-							window.sessionStorage.setItem('page',href);
-							$('.R-side').empty().load(href,function(resp,stat){
+							$('.R-side').empty().load(href + '?_=' + $.now(),function(resp,stat){
 								if (stat == "success") {
+									window.sessionStorage.setItem('page',href);
 									RsideInit();
 								}
 							});
-							$('#navbar>div>nav>a').removeClass('nav-active');
+							//字重
+							$('#navbar>div>nav>a').not(this).removeClass('nav-active');
 							$(this).addClass('nav-active');
 							$('#navbar').addClass('show');
 						} else {
@@ -91,15 +99,26 @@
 				}
 			});
 		}
-		$(document).ready(function(){
-			loadList("listT");
-			$('.sw-tag').first().addClass('active');
+		function sw_init() {
+			var sw_tag = window.sessionStorage.getItem('sw_tag');
+			if (sw_tag) {
+				$('.sw-tag[list=' + sw_tag + ']').addClass('active');
+				loadList(sw_tag);
+			} else {
+				$('.sw-tag').first().addClass('active');
+				loadList("listT");
+			}
 			$('.sw-tag').click(function(){
 				$('.sw-tag').removeClass('active');
-				loadList($(this).attr('list'));
+				window.sessionStorage.setItem('sw_tag', $(this).attr('list'));
+				loadList(window.sessionStorage.getItem('sw_tag'));
+				window.sessionStorage.removeItem('page');
 				$(this).addClass('active');
 			})
 			$('#navbar').collapse();
+		}
+		$(document).ready(function(){
+			sw_init();
 		})
 	</script>
 	</style>

@@ -2,37 +2,36 @@
 <p>伺服器可以安装在任何與 Ubuntu Snap 套件包相容的架構中，如 x86，AMD64，ARM64 或 armhf（僅支援 Ubuntu OS，相容清單請參考<a href="https://snapcraft.io/">此頁</a>）。</p>
 <p>但是，建議使用 64 位元系統，因為在 32 位元系统中， MongoDB 資料庫中的資料量將會被限制為 2GB。</p>
 <p>強烈建議您在執行任何其他步驟之前，先執行以下指令來更新 Ubuntu 安裝：</p>
-  <pre><code>
-    sudo apt update
+  <pre><code>    sudo apt update
     sudo apt upgrade
   </code></pre>
 
-<h3 id="安裝-mongodb">安裝 MongoDB</h3>
+<hr><h3 id="安裝-mongodb">安裝 MongoDB</h3>
 <p>Thinger.io IoT 平台需要 MongoDB 伺服器來存儲一些伺服器資訊。</p>
 <p>因此，第一步是在主機中安裝 MongoDB 伺服器。</p>
 <p>以下資訊來自官方文件。<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/</a></p>
 <mark><strong>注意</strong> 此步驟適用於 AMD64 / ARM64 系統架構。</mark>
 <p>如果要在其他架構的系統中安裝伺服器，則應閱讀該系統架構的安裝說明。</p>
 
-<h4 id="導入套件管理系統使用的公共金鑰">導入套件管理系統使用的公共金鑰</h4>
+<hr><h4 id="導入套件管理系統使用的公共金鑰">導入套件管理系統使用的公共金鑰</h4>
 
 <p>Ubuntu 套件管理系統（即 dpkg 和 apt）通過要求發行者使用 GPG 密鑰對套件包進行簽名來確保套件包的一致性和真實性。執行以下命令以引入 MongoDB 公共 GPG 密鑰：</p>
 <code>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6</code>
-<h4 id="為-mongodb-建立一個列表文件">為 MongoDB 建立一個列表文件</h4>
+<hr><h4 id="為-mongodb-建立一個列表文件">為 MongoDB 建立一個列表文件</h4>
 
 <p>建立列表文件 /etc/apt/sources.list.d/mongodb-org-3.4.list :</p>
 <code>echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list</code>
 
-<h4 id="重新載入本機套件管理系統資料庫">重新載入本機套件管理系統資料庫</h4>
+<hr><h4 id="重新載入本機套件管理系統資料庫">重新載入本機套件管理系統資料庫</h4>
 
 <p>執行以下命令以重新載入本機套件管理系統資料庫：<br>
 <code class="highlighter-rouge">sudo apt update</code></p>
 
-<h4 id="安裝-mongodb-與相依套件">安裝 MongoDB 與相依套件<br></h4>
+<hr><h4 id="安裝-mongodb-與相依套件">安裝 MongoDB 與相依套件<br></h4>
 
 <p><code class="highlighter-rouge">sudo apt install -y mongodb-org</code></p>
 
-<h4 id="使-mongodb-在開機時啟動">使 MongoDB 在開機時啟動</h4>
+<hr><h4 id="使-mongodb-在開機時啟動">使 MongoDB 在開機時啟動</h4>
 
 <p>編輯以下文件以使MongoDB在啟動時作為服務運行。<br>
 <code class="highlighter-rouge">sudo nano /etc/systemd/system/mongodb.service</code><br>
@@ -49,13 +48,13 @@ ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
 WantedBy=multi-user.target
 </code></pre></div></div>
 
-<h4 id="啟動-mongodb">啟動 MongoDB</h4>
+<hr><h4 id="啟動-mongodb">啟動 MongoDB</h4>
 <p>現在，將 MongoDB 作為系統服務啟用。</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl start mongodb
 sudo systemctl enable mongodb
 </code></pre></div></div>
 
-<h4 id="確認-mongodb-運作狀態">確認 MongoDB 運作狀態</h4>
+<hr><h4 id="確認-mongodb-運作狀態">確認 MongoDB 運作狀態</h4>
 
 <p><code class="highlighter-rouge">sudo systemctl status mongodb</code></p>
 
@@ -74,16 +73,16 @@ sudo systemctl enable mongodb
 ene 21 10:56:13 supermicro systemd[1]: Started High-performance, schema-free document-oriented database.
 </code></pre></div></div>
 
-<h3 id="安裝-thingerio-伺服器">安裝 THINGER.IO 伺服器</h3>
-<h4 id="使用-snap-指令">使用 Snap 指令</h4>
+<hr><h3 id="安裝-thingerio-伺服器">安裝 THINGER.IO 伺服器</h3>
+<hr><h4 id="使用-snap-指令">使用 Snap 指令</h4>
 
 <p>安裝伺服器就像安裝 Snap 套件一樣簡單。只需將以下命令輸入您的終端即可。<br>
 <code class="highlighter-rouge">sudo snap install thinger-maker-server</code></p>
 
-<h4 id="使用-ubuntu-store">使用 Ubuntu Store</h4>
+<hr><h4 id="使用-ubuntu-store">使用 Ubuntu Store</h4>
 <p>您也可以通過從 Ubuntu Store 來安裝伺服器。只需搜尋 Thinger.io，就會出現套件包。</p>
 
-<h3 id="確認伺服器服務狀態">確認伺服器服務狀態</h3>
+<hr><h3 id="確認伺服器服務狀態">確認伺服器服務狀態</h3>
 <p>您可以通過執行以下命令來檢查 Thinger.io Daemon 服務的狀態：<br>
 <code class="highlighter-rouge">sudo service snap.thinger-maker-server.thingerd status</code></p>
 
@@ -106,9 +105,9 @@ ene 20 22:39:19 supermicro systemd[1]: Started Service for snap application thin
 <p>此時您應該能夠在瀏覽器中透過本機IP存取網頁控制台，就像雲端控制台一樣。
 <img src="http://docs.thinger.io/deployment/assets/console.png" title="控制台範例" class="img-fluid" alt="控制台範例"></p>
 
-<h4 id="重新啟動系統服務">重新啟動系統服務</h4>
+<hr><h4 id="重新啟動系統服務">重新啟動系統服務</h4>
 <p>如果更新配置文件，可以通過以下指另重新啟動服務。<br>
 <code class="highlighter-rouge">sudo service snap.thinger-maker-server.thingerd restart</code></p>
-<h4 id="停止系統服務">停止系統服務</h4>
+<hr><h4 id="停止系統服務">停止系統服務</h4>
 <p>或者您可以在需要時停止服務。<br>
 <code class="highlighter-rouge">sudo service snap.thinger-maker-server.thingerd stop</code></p>

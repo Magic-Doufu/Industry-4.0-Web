@@ -1,5 +1,5 @@
 <h2 id="esp32nodemcu範例程式">ESP32(NodeMCU)範例程式</h2>
-<h3 id="led閃爍">LED閃爍</h3>
+<hr><h3 id="led閃爍">LED閃爍</h3>
 <h4 id="這支程式將示範如何使用bpi-uno測試板載led">這支程式將示範如何使用BPI UNO測試板載LED</h4>
 <pre><code>#define _DEBUG_ //Debug 模式
 #define _DISABLE_TLS_ //關閉TLS認證
@@ -45,7 +45,7 @@ void loop() {
   thing.handle();
 }
 </code></pre>
-<h3 id="pwm控制rgbled">PWM控制RGBLED</h3>
+<hr><h3 id="pwm控制rgbled">PWM控制RGBLED</h3>
 <h4 id="這支程式將示範如何使用bpi-uno以pwm方式驅動板載led">這支程式將示範如何使用BPI UNO以PWM方式驅動板載LED</h4>
 <pre><code>#define _DEBUG_ //Debug 模式
 #define _DISABLE_TLS_ //關閉TLS認證
@@ -104,11 +104,11 @@ void loop() {
   thing.handle();
 }
 </code></pre>
-<h3 id="dht溫溼度感測器">DHT溫溼度感測器</h3>
+<hr><h3 id="dht溫溼度感測器">DHT溫溼度感測器</h3>
 <h4 id="安裝dht系列感測器使用的程式庫">安裝DHT系列感測器使用的程式庫</h4>
 <p>先透過程式庫管理員搜尋 esp32 dht 並安裝此程式庫<br>
 <img src="./img/ArduinoDevice/LibManagerSearch_DHT.jpg" alt="" title="安裝DHT程式庫"><br></p>
-<h4 id="這支程式將示範如何使用bpi-uno讀取溫溼度感測器dht系列">這支程式將示範如何使用BPI UNO讀取溫溼度感測器(DHT系列)</h4>
+<hr><h4 id="這支程式將示範如何使用bpi-uno讀取溫溼度感測器dht系列">這支程式將示範如何使用BPI UNO讀取溫溼度感測器(DHT系列)</h4>
 <pre><code>#define _DEBUG_ //Debug 模式
 #define _DISABLE_TLS_ //關閉TLS認證
 #define THINGER_SERVER "192.168.137.233" //Server IP
@@ -152,10 +152,10 @@ void loop() {
   thing.handle();
 }
 </code></pre>
-<h3 id="伺服馬達">伺服馬達</h3>
+<hr><h3 id="伺服馬達">伺服馬達</h3>
 <p>先透過程式庫管理員搜尋 esp32 servo 並安裝此程式庫<br>
 <img src="./img/ArduinoDevice/LibManagerSearch_Servo.jpg" alt="" title="安裝DHT程式庫"><br></p>
-<h4 id="這支程式將示範如何使用bpi-uno操作伺服馬達">這支程式將示範如何使用BPI UNO操作伺服馬達</h4>
+<hr><h4 id="這支程式將示範如何使用bpi-uno操作伺服馬達">這支程式將示範如何使用BPI UNO操作伺服馬達</h4>
 <pre><code>#define _DEBUG_ //Debug 模式
 #define _DISABLE_TLS_ //關閉TLS認證
 #define THINGER_SERVER "192.168.137.233" //Server IP

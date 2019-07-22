@@ -5,47 +5,47 @@
 此平台支援多種網絡接口和開發板，如Ethernet Shield，Wifi Shield和GSM。<br>
 它還支援其他開發板，如ESP8266（或NodeMCU），TI CC3200 Launchpad 和 Adafruit CC3000 電路板。<br>
 此平台的Arduino IDE最低需求為版本1.6.3。</p>
-<h2 id="安裝">安裝</h2>
+<hr><h2 id="安裝">安裝</h2>
 <p>開始構建 thinger.io 設備的第一步是在 Arduino IDE 中安裝所需的程式庫，以支援披露設備擁有的資源，如傳感器值，燈光，繼電器等。<br>
 如果你還沒有安裝Arduino IDE，那麼現在是開始的好時機，這裡也有一些選擇正確版本的建議。</p>
-<h3 id="arduino-ide">Arduino IDE</h3>
+<hr><h3 id="arduino-ide">Arduino IDE</h3>
 <p>此平台的Arduino IDE最低需求為版本1.6.3，且需要支援「程式庫管理器」，如果您還沒安裝Arduino IDE可由官方網站下載最新版本。<br>
 <strong><a href="https://www.arduino.cc/en/Main/Software" target="_blank">Arduino IDE 下載頁</a></strong><br>
 接下來將為您介紹取得程式庫的方法，建議使用程式庫管理器，此方法極大簡化了搜尋與安裝過程，且會隨著官方發布新版時提供更新。<br>
 <!--另一方法為傳統下載並手動匯入壓縮包的方式。<br/>--></p>
-<h3 id="程式庫管理器">程式庫管理器</h3>
+<hr><h3 id="程式庫管理器">程式庫管理器</h3>
 <p>在Arduino IDE中安裝可用程式庫的最簡單方法是使用程式庫管理器。<br>
 要安裝thinger.io程式庫，請按照以下步驟操作：<br>
 打開程式庫管理器<br>
-<img src="./img/ArduinoDevice/LibManager.jpg" alt="" title="程式庫管理員"><br>
+<img class="img-fluid" src="./img/ArduinoDevice/LibManager.jpg" alt="" title="程式庫管理員"><br>
 在Arduino的選單中打開程式庫管理器 <code>工具 &gt; 管理程式庫</code><br>
 搜尋並安裝 thinger.io 程式庫<br>
-<img src="./img/ArduinoDevice/LibManagerSearch.jpg" alt="" title="程式庫管理員"><br>
+<img class="img-fluid" src="./img/ArduinoDevice/LibManagerSearch.jpg" alt="" title="程式庫管理員"><br>
 使用名稱 thinger.io 搜尋，然後單擊 Install 進行安裝。<br>
 官方發布更新後，您還可以從此管理器更新程式庫。<br>
 現在，應該可以使用一些程式庫提供的範例。
 <!--### 手動匯入
 --></p>
-<h2 id="支援的硬體">支援的硬體</h2>
-<h3 id="arduino--乙太網路">Arduino + 乙太網路</h3>
-<h3 id="arduino--wifi">Arduino + WiFi</h3>
-<h3 id="arduino--cc3000">Arduino + CC3000</h3>
-<h3 id="arduino-yun">Arduino YUN</h3>
-<h3 id="arduino-mkr1000">Arduino MKR1000</h3>
-<h3 id="arduino-mkr-gsm1400">Arduino MKR GSM1400</h3>
-<h3 id="esp8266--nodemcu">ESP8266 / NodeMCU</h3>
-<p>範例程式: <strong><a href="Thinger.io/ESP32Examples.html" internal>ESP 範例</a></strong><br></p>
-<h3 id="ti-launchpad-cc3200">TI LAUNCHPAD CC3200</h3>
-<h3 id="arduino--enc28j60">Arduino + ENC28J60</h3>
-<h3 id="seeedstudio-linkit-one">SEEEDSTUDIO LINKIT ONE</h3>
-<h4 id="wifi-connection">WIFI Connection</h4>
-<h4 id="gprs-connection">GPRS Connection</h4>
-<h2 id="編程">編程</h2>
-<h3 id="架構概觀">架構概觀</h3>
-<p>幾乎所有的 Arduino 結構看起來都一樣。有一個設置方法，有一個循環方法。<br>
+<hr><h2 id="支援的硬體">支援的硬體</h2>
+<hr><h3 id="arduino--乙太網路">Arduino + 乙太網路</h3>
+<hr><h3 id="arduino--wifi">Arduino + WiFi</h3>
+<hr><h3 id="arduino--cc3000">Arduino + CC3000</h3>
+<hr><h3 id="arduino-yun">Arduino YUN</h3>
+<hr><h3 id="arduino-mkr1000">Arduino MKR1000</h3>
+<hr><h3 id="arduino-mkr-gsm1400">Arduino MKR GSM1400</h3>
+<hr><h3 id="esp8266--nodemcu">ESP8266 / NodeMCU</h3>
+<p>範例程式: <strong><a href="./Thinger.io/ESP32Examples.html" internal>ESP 範例</a></strong><br></p>
+<hr><h3 id="ti-launchpad-cc3200">TI LAUNCHPAD CC3200</h3>
+<hr><h3 id="arduino--enc28j60">Arduino + ENC28J60</h3>
+<hr><h3 id="seeedstudio-linkit-one">SEEEDSTUDIO LINKIT ONE</h3>
+<hr><h4 id="wifi-connection">WIFI Connection</h4>
+<hr><h4 id="gprs-connection">GPRS Connection</h4>
+<hr><h2 id="編程">編程</h2>
+<hr><h3 id="架構概觀">架構概觀</h3>
+<p>幾乎所有的 Arduino 結構看起來都一樣。有一個設定方法，有一個循環方法。<br>
 與Thinger.io集成時，這裡沒有任何變化。<br>
 但是，您必須知道應該在何處定義設備資源，或者可以在何處與外部服務進行交互。一般而言，必須在setup()方法內定義任何設備資源（LED，繼電器，傳感器，伺服等）。<br>
-除了初始化設備，設置數字引腳的輸入/輸出方向，或初始化串行端口速度，您還需要在此初始化您的資源。這基本上包括設定要通過網路公開的值或資源。<br>
+除了初始化設備，設定數字引腳的輸入/輸出方向，或初始化串行端口速度，您還需要在此初始化您的資源。這基本上包括設定要通過網路公開的值或資源。<br>
 loop()僅僅是不斷調用thing.handle()方法去維持與伺服器的聯繫，因此較小的程式庫即可處理與平台的連接。<br>
 這也是調用終端或將即時資料流傳輸至目的地的地方。<br>
 請注意，除非您知道自己在做什麼，否則不要在loop()內部添加任何延遲，例如在您的設備中使用深度睡眠模式等。<br>
@@ -76,25 +76,25 @@ void loop() {
   //在此可以呼叫終端還有傳遞您的串流資料
 }
 </code></pre></div></div>
-<h3 id="設定驗證資訊">設定驗證資訊</h3>
+<hr><h3 id="設定驗證資訊">設定驗證資訊</h3>
 <p>連接到雲端平台的所有設備都需要針對服務器進行身份驗證。<br>
-在控制台中創建設備時，您基本上是在創建新設備標籤並設置設備憑據。<br>
-因此，您還需要在Arduino代碼中設置此憑據，以便識別設備並將其與您的帳戶相關聯。<br>
+在控制台中創建設備時，您基本上是在創建新設備標籤並設定設備憑據。<br>
+因此，您還需要在Arduino代碼中設定此憑據，以便識別設備並將其與您的帳戶相關聯。<br>
 這通常在代碼中初始化Thinger實例時完成。也就是說，當您定義thing實例時。在此替換您的username，deviceId以及deviceCredential您在雲中註冊的值。<br>
 <code>ThingerWifi thing("username", "deviceId", "deviceCredential");</code></p>
-<h3 id="新增資源">新增資源</h3>
+<hr><h3 id="新增資源">新增資源</h3>
 <p>在Thinger.io平台中，每個設備都可以定義多個資源。您可以認為資源是您可以感測或觸發的任何資源。
 例如，典型的資源將是溫度或濕度等傳感器值，或者打開和關閉燈的繼電器。
 這樣，您應該定義通過網路披露所需的資源。
 必須在Arduino的setup()方法中定義所有資源。這樣，資源將在初始化時被配置，之後可以根據需求進行存取。
 有三種不同類型的資源，將在以下各節中進行說明。</p>
-<h4 id="輸入類資源伺服器端輸入至裝置">輸入類資源(伺服器端輸入至裝置)</h4>
+<hr><h4 id="輸入類資源伺服器端輸入至裝置">輸入類資源(伺服器端輸入至裝置)</h4>
 <p>如果您需要控制或啟動IoT設備，則需要定義輸入資源。通過這種方式，輸入資源可以為您的設備提供資訊。例如打開和關閉燈或繼電器，改變伺服馬達位置，調整設備參數等的資源。<br>
 要定義輸入資源，請使用<code>&lt;&lt;</code>指向資源名稱的運算符，它使用C ++ 11 Lambda函數來定義函數。<br></p>
 
 <p>範例為接受一個參數的輸入資源函數，pson是一種泛型，可以包含布林值，數字，浮點數，字符串，甚至是JSON文檔中的結構化資訊。<br>
 以下小節將說明如何為典型用例定義不同的輸入資源。<br></p>
-<h5 id="打開關閉led繼電器等">打開/關閉LED，繼電器等</h5>
+<hr><h5 id="打開關閉led繼電器等">打開/關閉LED，繼電器等</h5>
 <p>這種資源只需要一個開/關狀態，因此可以根據需要啟用或禁用它。由於pson類型包含多種數據類型，我們可以認為pson輸入函數的參數類似於布林值。<br>
 因此，在setup函數內部，您可以放置​​一個名為led（您也可以使用任何其他名稱）的資源，其輸入參數類型可以使用pson。<br>
 該示例將使用in參數上的三元運算符來打開/關閉數字引腳10 。<br></p>
@@ -102,7 +102,7 @@ void loop() {
   digitalWrite(10, in ? HIGH : LOW);
 };
 </code></pre></div></div>
-<h5 id="修改伺服馬達位置">修改伺服馬達位置</h5>
+<hr><h5 id="修改伺服馬達位置">修改伺服馬達位置</h5>
 
 <p>修改伺服馬達位置非常類似於打開/關閉LED。但是，在這種情況下，必須使用整數值。<br>
 由於pson類型可以包含多種數據類型，我們仍然可以將該pson類型用作整數值。<br></p>
@@ -110,7 +110,7 @@ void loop() {
     myServo.write(in);
 };
 </code></pre></div></div>
-<h5 id="更新變數">更新變數</h5>
+<hr><h5 id="更新變數">更新變數</h5>
 
 <p>您還可以使用輸入資源更新變數，以便動態更改設備行為。在某些您希望臨時禁用警報，更改報告間隔，更新滯後值等情況下，這非常有用。通過這種方式，您可以定義其他資源來更改變量。</p>
 <div><div><pre><code>float hysteresis = 0; // defined as a global variable
@@ -118,7 +118,7 @@ thing["hysteresis"] &lt;&lt; [](pson&amp; in){
     hysteresis = in;
 };
 </code></pre></div></div>
-<h5 id="傳遞多個參數">傳遞多個參數</h5>
+<hr><h5 id="傳遞多個參數">傳遞多個參數</h5>
 
 <p>該pson數據類型，不僅可以容納不同的數據類型，也就是使用JSON文件完全相容。因此，您可以使用pson數據類型同時接收多個值。此範例將接收使用lat和lon鍵(key)存儲的兩個不同浮點數(value)。</p>
 <div><div><pre><code>thing["location"] &lt;&lt; [](pson&amp; in){
@@ -126,12 +126,12 @@ thing["hysteresis"] &lt;&lt; [](pson&amp; in){
     float lon = in["lon"];
 };
 </code></pre></div></div>
-<h5 id="在儀表板和api中顯示輸入資源狀態">在儀表板和API中顯示輸入資源狀態</h5>
+<hr><h5 id="在儀表板和api中顯示輸入資源狀態">在儀表板和API中顯示輸入資源狀態</h5>
 
 <p>Dashboards或API的工作方式是，當您打開它們時，它們會查詢相關資源以正確顯示其當前狀態，即開關打開或關閉。<br>
 這樣，當API或儀表板打開時，調用每個相關的輸入資源，在調用中接收空數據，因為無意控制資源（pson輸入將為空）。</p>
 
-<p>那麼，Dashboards或API如何知道輸入資源的當前狀態是什麼？如果資源為空，則資源必須在輸入參數中設置其當前狀態，如果存在，則使用輸入值。這樣，我們可以獲得三個不同的東西：查詢當前資源狀態（不修改它），修改當前資源狀態，以及獲取資源上的預期輸入（這是設備上的API資源管理器的工作方式）。</p>
+<p>那麼，Dashboards或API如何知道輸入資源的當前狀態是什麼？如果資源為空，則資源必須在輸入參數中設定其當前狀態，如果存在，則使用輸入值。這樣，我們可以獲得三個不同的東西：查詢當前資源狀態（不修改它），修改當前資源狀態，以及獲取資源上的預期輸入（這是設備上的API資源管理器的工作方式）。</p>
 
 <p>因此，實際上允許在儀表板或API中顯示資源的當前狀態的正確輸入資源定義將類似於此範例程式碼。</p>
 <div><div><pre><code>thing["resource"] &lt;&lt; [](pson&amp; in){
@@ -154,25 +154,25 @@ thing["hysteresis"] &lt;&lt; [](pson&amp; in){
 }
 </code></pre></div></div>
 <p>注意：要控制數字引腳，只需使用<code>更易用的資源定義</code>部分中說明的方法。</p>
-<h4 id="輸出類資源裝置輸出至伺服器端">輸出類資源(裝置輸出至伺服器端)</h4>
+<hr><h4 id="輸出類資源裝置輸出至伺服器端">輸出類資源(裝置輸出至伺服器端)</h4>
 <p>當您需要感知或讀取傳感器值（如溫度，濕度等）時，通常應使用輸出資源。因此，輸出資源對於從設備中提取信息非常有用。<br>
 為了定義輸出資源，使用操作符»指出資源名稱，它使用C ++ 11 Lambda函數來定義輸出函數。<br>
 範例為接收一個參數的輸出資源函數，pson是一種泛型，可以包含布林值，數字，浮點數，字符串，甚至是JSON文檔中的結構化資訊。<br>
 以下小節將說明如何為典型用例定義不同的輸出資源。<br></p>
-<h5 id="讀取傳感器值">讀取傳感器值</h5>
+<hr><h5 id="讀取傳感器值">讀取傳感器值</h5>
 <p>定義輸出資源與定義輸入資源非常相似，但在這種情況下，它使用運算符<code>&gt;&gt;</code>。在回調函數中，可以用任何我們想要的值替換out值，比如在這種情況下傳感器讀數的輸出。<br></p>
 <div><div><pre><code>thing["temperature"] &gt;&gt; [](pson&amp; out){
       out = dht.readTemperature();
 };
 </code></pre></div></div>
-<h5 id="讀取多個數據">讀取多個數據</h5>
+<hr><h5 id="讀取多個數據">讀取多個數據</h5>
 <p>以相同的方式輸入資源可以同時接收多個值，輸出資源也可以提供多個數據。這是從GPS提供緯度和經度的示例。<br></p>
 <div><div><pre><code>thing["location"] &gt;&gt; [](pson&amp; out){
       out["lat"] = gps.getLatitude();
       out["lon"] = gps.getLongitude();
 };
 </code></pre></div></div>
-<h5 id="取得變數數值">取得變數數值</h5>
+<hr><h5 id="取得變數數值">取得變數數值</h5>
 
 <p>如果無法提供單個傳感器讀數，因為它正在進行某種數據收集，則輸出資源也可用於讀取變數，其中計算結果會經常更新。<br></p>
 <div><div><pre><code>float yaw = 0; // defined as a global variable
@@ -180,7 +180,7 @@ thing["yaw"] &gt;&gt; [](pson&amp; out){
       out = yaw;
 };
 </code></pre></div></div>
-<h4 id="輸入輸出資源">輸入/輸出資源</h4>
+<hr><h4 id="輸入輸出資源">輸入/輸出資源</h4>
 <p>最後一種資源類型是一種資源，它不僅接受輸入或輸出，而且接受兩個參數。當您想要讀取依賴於輸入的輸出時，即當您需要向傳感器提供變化的參考值時，這非常有用。<br></p>
 
 <p>這種資源通常由供應商定義。<br>
@@ -196,24 +196,24 @@ thing["yaw"] &gt;&gt; [](pson&amp; out){
     out["mult"] = (long)in["value1"] * (long)in["value2"];
 };
 </code></pre></div></div>
-<h4 id="沒有參數的資源">沒有參數的資源</h4>
+<hr><h4 id="沒有參數的資源">沒有參數的資源</h4>
 <p>您也可以定義不需要任何輸入的資源，也不會生成任何輸出。它們就像可以根據需要執行的回調，例如重啟設備或執行一些必要的操作。<br>
 在這種情況下，資源被定義為沒有任何輸入或輸出參數的函數。</p>
 <div><div><pre><code>thing["resource"] = [](){
     // write here your execution code
 };
 </code></pre></div></div>
-<h3 id="更易用的資源定義">更易用的資源定義</h3>
+<hr><h3 id="更易用的資源定義">更易用的資源定義</h3>
 <p>客戶端庫還包含一些有用的語法定義，用於更輕鬆地聲明資源，而無需考慮輸入或輸出資源。這種語法特性是自動擴展的腳本，以標準方式定義資源。<br>
 使用這種定義的優點是，當您從API查詢時，您的資源將能夠處理狀態。<br>
 例如，如果啟用或禁用了數字引腳，則可以在API資源管理器或儀表板中檢視其當前狀態。<br></p>
-<h4 id="控制數位引腳">控制數位引腳</h4>
+<hr><h4 id="控制數位引腳">控制數位引腳</h4>
 <p>這種資源將允許定義用於聲明對數位引腳的控制的資源，因此您可以交替開啟/關閉狀態，可以用於控制LED，繼電器，燈等。<br>
-需要在設置程式碼中將數位引腳定義為OUTPUT，否則資源將無法正常工作。<br></p>
+需要在設定程式碼中將數位引腳定義為OUTPUT，否則資源將無法正常工作。<br></p>
 <div><div><pre><code>thing["relay"] &lt;&lt; digitalPin(PIN_NUMBER);
 thing["relay"] &lt;&lt; invertedDigitalPin(PIN_NUMBER);
 </code></pre></div></div>
-<h4 id="定義輸出資源">定義輸出資源</h4>
+<hr><h4 id="定義輸出資源">定義輸出資源</h4>
 <p>這種資源定義用於宣告唯讀資源，例如從傳感器獲取的值，或者我們程式中的初始化變數。<br>
 在這個例子中，我們定義了一個暴露傳感器讀數的資源，比如DHT11傳感器溫度。<br></p>
 <div><div><pre><code>thing["temperature"] &gt;&gt; outputValue(dht.readTemperature());
@@ -221,7 +221,7 @@ thing["relay"] &lt;&lt; invertedDigitalPin(PIN_NUMBER);
 <p>我們也可以在程式中為任何全域變數定義輸出資源。<br></p>
 <div><div><pre><code>thing["variable"] &gt;&gt; outputValue(myVar);
 </code></pre></div></div>
-<h4 id="修改變數">修改變數</h4>
+<hr><h4 id="修改變數">修改變數</h4>
 <p>我們的程式通常定義一些在循環中使用的參數或變數。這種資源通常用於處理或控制行為。<br>
 有了這種資源，我們可以修改我們想要公開的任何參數，比如浮點數，整數，布林值等。<br></p>
 
@@ -236,46 +236,42 @@ thing["relay"] &lt;&lt; invertedDigitalPin(PIN_NUMBER);
     Serial.print(hysteresisVar);
 });
 </code></pre></div></div>
-<h4 id="控制伺服馬達">控制伺服馬達</h4>
+<hr><h4 id="控制伺服馬達">控制伺服馬達</h4>
 <p>還可以定義用於控制伺服實例的資源。這樣，定義的資源將根據API交互自動處理您的伺服實例，讀取其當前位置或更改為新的。</p>
 
 <p>要定義伺服資源，只需像往常一樣定義和初始化伺服機，然後在資源定義中使用聲明的實例。</p>
 <div><div><pre><code>thing["servo"] &lt;&lt; servo(myServoInstance);
 </code></pre></div></div>
-<h3 id="不同裝置間的橫向溝通">不同裝置間的橫向溝通</h3>
+<hr><h3 id="不同裝置間的橫向溝通">不同裝置間的橫向溝通</h3>
 <p>在Thinger.io中，設備可以在它們之間進行通信。這裡有兩種狀況。一個是來自同一帳戶的設備之間的通信，另一個是來自不同帳戶的設備之間的通信。我們將描述兩種不同的方法：</p>
-<h4 id="裝置位於同一個帳戶管理下">裝置位於同一個帳戶管理下</h4>
+<hr><h4 id="裝置位於同一個帳戶管理下">裝置位於同一個帳戶管理下</h4>
 <p>對於此用例，設備可以使用特定方法與其他設備進行通信。假設我們有一個<mark>deviceA</mark>，並且<mark>deviceB</mark>想要在它們之間進行通信。</p>
 
 在<mark>deviceA</mark>定義如下面的例子一樣的資源。
-<code><pre>
-setup(){
+<pre><code>setup(){
     thing[“resourceOnA”] = [](){
         Serial.println("Someone is calling me!");
     };
 }
-</pre></code>
+</code></pre>
 <p><mark>deviceB</mark>可以通過運行以下命令輕鬆調用此方法。</p>
-<code><pre>
-loop(){
+<pre><code>loop(){
     thing.handle();
     // be sure to call it at an appropiate rate
     thing.call_device("deviceA", "resourceOnA");
 }
-</pre></code>
+</code></pre>
 <p><mark>deviceA</mark>也可以定義具有一些預期輸入的資源。</p>
-<code><pre>
-setup(){
+<pre><code>setup(){
     thing[“resourceOnA”] << [](pson& in){
         int val1 = in["anyValue1"];
         float val2 = in["anyValue2"];
         // Work with the updated parameters here
     };
 }
-</pre></code>
+</code></pre>
 <p><mark>deviceB</mark>也可以通過定義一個<mark>pson</mark>填充了相同key的類型來調用此方法來提供<mark>resourceOnA</mark>適當的輸入</p>
-<code><pre>
-loop(){
+<pre><code>loop(){
     thing.handle();
     // be sure to call it at an appropiate rate
     pson data;
@@ -283,25 +279,23 @@ loop(){
     data["anyValue2"] = 43.1;
     thing.call_device("deviceA", "resourceOnA", data);
 }
-</pre></code>
+</code></pre>
 <p><mark>deviceB</mark> 也可以通過提供來自回傳數據的已定義資源的數據來調用此方法，在這種情況下，調用與前面的示例類似，但使用資源作為數據源。</p>
-<code><pre>
-setup(){
+<pre><code>setup(){
     thing["resourceName"] >> [](pson& out){
         out["anyValue1"] = 3;
         out["anyValue2"] = 43.1;
     };
 }
-
 loop(){
     thing.handle();
     // be sure to call it at an appropiate rate
     thing.call_device("deviceA", "resourceOnA", thing["resourceName"]);
 }
-</pre></code>
-<h4 id="裝置位於不同帳戶">裝置位於不同帳戶</h4>
+</code></pre>
+<hr><h4 id="裝置位於不同帳戶">裝置位於不同帳戶</h4>
 <p>如果我們想要通過不同帳戶進行通信，我們可以通過調用類型的端點來實現<mark>Thinger.io Device Call</mark>只需在控制台中註冊此類型的端點，如下例所示。</p>
-<img src="http://docs.thinger.io/arduino/assets/device_call.png">
+<img class="img-fluid" src="http://docs.thinger.io/arduino/assets/device_call.png">
 <p>
     在這種情況下，需要在端點中定義不同的參數：
     <ul>
@@ -315,18 +309,205 @@ loop(){
 </p>
 <code>thing.call_endpoint("DeviceACall");</code>
 <p></p>
-<h3 id="終端裝置">終端裝置</h3>
-<h4 id="呼叫終端裝置">呼叫終端裝置</h4>
-<h4 id="傳送資料給終端裝置">傳送資料給終端裝置</h4>
-<h4 id="email-類型終端裝置範例">Email 類型終端裝置範例</h4>
-<h3 id="串流類資源">串流類資源</h3>
-<h3 id="開啟偵錯輸出">開啟偵錯輸出</h3>
-<h3 id="esp8266-深層睡眠與智慧設定">ESP8266 深層睡眠與智慧設定</h3>
-<h2 id="互動">互動</h2>
-<h3 id="android">Android</h3>
-<h4 id="手機端應用程式">手機端應用程式</h4>
-<h4 id="穿戴型裝置">穿戴型裝置</h4>
-<h3 id="雲端控制台">雲端控制台</h3>
-<h4 id="儀錶板">儀錶板</h4>
-<h4 id="api-瀏覽器">API 瀏覽器</h4>
-<h3 id="伺服器api">伺服器API</h3>
+<hr><h3 id="端點">端點</h3>
+<p>
+    在Thinger.io中，端點被定義為可由設備訪問的某種外部資源。借助端點功能，設備可以輕鬆地向外部Web服務發送電子郵件、SMS、推送數據，與IFTTT交互以及使用WebHooks（調用HTTP / HTTPS URL）可以執行的任何操作。
+</p>
+<p>
+    從Arduino裝置上調用端點非常簡單，因為只需要在<code>thing</code>變數上調用<code>call_endpoint</code>方法。
+</p>
+<code>thing.call_endpoint("endpoint_id");</code>
+<p>
+    您可以簡單地調用端點來執行某些操作，例如發送預定義的電子郵件，或者還使用某些數據調用端點，這在您使用使用設備數據的第三方服務時特別有用。
+</p>
+<div class="alert alert-warning">
+    在調用資源時應特別注意，並以適當的速率調用它們。否則，您將很容易消耗大量傳輸流量、寄出數百封電子郵件或在第三方服務中大量消耗API​​調用次數。
+</div>
+<hr>
+<h3>調用端點</h3>
+<p>
+    在這個範例，我們將看到一個基於溫度值發送電子郵件警報的簡單示例。對於此示例，我們已配置一個名為的電子郵件端點<code>high_temp_email</code>，其中包含一些有關溫度的警告文本。
+</p>
+<p>
+    對於這種情況，我們不希望每毫秒檢查溫度，因此我們引入一些變數來控制傳感和警告頻率。在此示例中，每小時檢查一次溫度，如果溫度高於30ºC，它將調用被調用的端點<code>high_temp_email</code>，該端點將向我們發送包含預定義文本的電子郵件。
+</p>
+<p>
+    這裡重要的是不要在循環方法中添加延遲，因為它會阻止所需的<code>thing.handle()</code>方法執行，所以我們在這裡使用基於該<code>millis()</code>函數的非阻塞延遲。
+</p>
+<pre><code>unsigned long lastCheck = 0;
+loop(){
+    thing.handle(); // required thing handle
+    unsigned long currentTs = millis();
+    if(currentTs-lastCheck>=60*60*1000){
+        lastCheck = currentTs;
+        if(dht.readTemperature()>30){
+            thing.call_endpoint("high_temp_email");
+        }
+    }
+}
+</code></pre>
+<p>
+您可以在此處建立給現場感測器調用的端點，例如：您的濕度傳感器報告您的植物中沒有水、設備的位置不符合預期以及許多其他狀況時可以進行調用。
+使用端點的另一種有趣方式是將其與IFTTT集成，因此您可以與多個第三方服務進行交互！
+</p>
+<h4>將數據發送到端點</h4>
+<p>
+    將數據發送到端點（採用JSON格式）也非常簡單。
+    我們需要調用<code>call_endpoint</code>方法，但在這種情況下，根據<code>pson</code>數據格式添加一些資訊，這些資訊將自動轉換為JSON。
+    例如，如果我們想要將數據報告給像Keen.io這樣的第三方服務，我們可以在控制台中建立這種端點。
+    設定完成後，我們可以使用讀數調用端點，例如DHT傳感器的濕度和溫度值。
+</p>
+<pre><code>// be careful of sending data at an appropriate rate!
+pson data;
+data["temperature"] = dht.readTemperature();
+data["humidity"] = dht.readHumidity();
+thing.call_endpoint("keen_endpoint", data);
+</code></pre>
+<p>
+    您還可以根據已定義的資源發送數據，即假設您有一個已經提供溫度和濕度的資源。可以重複使用此定義將相同的數據發送到端點，而無需重新定義傳感器讀數，如下例所示。
+</p>
+<pre><code>setup(){
+    // defined resource in the setup for reading a sensor value
+    thing["data"] >> (pson& out){
+        out["temperature"] = dht.readTemperature();
+        out["humidity"] = dht.readHumidity();
+    }
+}
+
+loop(){
+    // be careful of sending data at an appropriate rate!
+    thing.call_endpoint("endpoint", thing["data"]);
+}
+</code></pre>
+<h4>電子郵件類型端點示例</h4>
+<p>
+    這是一個簡單的示例，應用於具有自定義正文的電子郵件類型端點
+</p>
+<pre><code>setup()
+{
+ thing["Level"] >> outputValue(actualRelative);
+}
+loop()
+{
+ if(actualLevel>UpperLevel && endpointUpperFlag)
+   {
+    thing.call_endpoint("endpoint_id",thing["Level"]);
+    endpointUpperFlag=0;
+   }
+}
+</code></pre>
+<p>
+請注意，有一個變量限制了此“if”只運行一次，重要的是定義任何條件或方法以保證這種enpoint調用只執行一次（或以適當的速率），因為它可以得到一個微控制器通過thinger.io平台生成的大量電子郵件。
+
+在端點配置中，在自定義正文電子郵件中，必須添加雙括號“{{}}”來調用微控制器發送的變數，在我們的示例中，我們使用了以下正文
+
+“實際水平為{{}}％”
+
+並收到一封帶有文字的電子郵件：
+
+實際水平為80.34％
+</p>
+<hr><h3 id="串流資源">串流資源</h3>
+<p>
+在Thinger.io中，您可以打開與設備相關的WebSockets連接，這樣您就可以即時接收傳感器值，事件或任何其他訊息。WebSockets主要用於控制台的儀表板功能，通常用於以固定的可設定間隔傳輸資源。
+</p>
+<p>
+    定義輸出資源時，此功能可立即使用。但是，如果您希望在需要時立即傳輸信息，例如當您的設備檢測到移動，存在等時，您必須編寫一些代碼，這與調用端點非常相似。
+</p>
+<p>
+    例如加速計值超過某個閾值，您的傳感器正在進行偵測，或者羅盤方向是否正在發生變化，在這種情況下，您可以決定何時需要傳輸新數據。
+</p>
+<p>
+    串流資源還要求另一個端點連接並偵聽它們（即，從WebSocket連接），因此如果沒有人監聽此數據，則不會發送數據。這由客戶端庫和伺服器自動處理，因此始終流式傳輸數據是安全的，因為設備僅在有目的地時才傳輸信息。
+</p>
+<p>
+    如果航向值變化超過1度，以下示例將即時報告羅盤航向。
+</p>
+</pre>
+<img class="img-fluid" src="http://docs.thinger.io/arduino/assets/esp8266-real-time-websockets.gif">
+<pre><code>void setup(){
+  thing["heading"] >> [](pson& out){     
+    out = getHeading();
+  };
+}
+
+float previousHeading = 0;
+void loop() {
+  thing.handle();
+  float currentHeading = getHeading();
+  if(abs(currentHeading-previousHeading)>=1.0f){
+    thing.stream(thing["heading"]);
+    previousHeading=currentHeading;
+  }
+}
+</code></pre>
+<hr><h3 id="開啟偵錯輸出">開啟偵錯輸出</h3>
+<p>Thinger.io庫提供了對其活動的廣泛記錄，這在需要解決身份驗證和Wi-Fi連接問題時尤其有用。在草圖中包含以下定義，但在任何其他包含之前確保它首先出現（據報導在某些板上會導致崩潰）。</p>
+<pre><code>#define _DEBUG_
+
+// the rest of your sketch goes here
+</code></pre>
+<p>由於所有除錯信息都通過<mark>Serial</mark>顯示，因此還需要啟用<mark>Serial</mark>。請在<mark>Setup</mark>方法中啟用它。</p>
+<pre><code>void setup() {
+  Serial.begin(115200);
+}
+</code></pre>
+<hr><h3 id="esp8266-深層睡眠與智慧設定">ESP8266 深層睡眠與SmartConfig</h3>
+<p>
+    <mark>SmartConfig</mark>允許用戶通過同一網絡（例如智能手機或其他wifi客戶端）上的外部設備設定主板的WiFi憑證。這意味著沒有敏感信息寫入韌體或設備上的設定文件。
+</p>
+<p>
+<mark>Deep Sleep</mark>是ESP8266的一種特殊模式，它允許它關閉大部分電路並在一些可配置的時間後喚醒。
+要使深度睡眠（和喚醒）正常工作，必須連接<mark>GPIO16</mark>（通常是<mark>D0</mark>開發板）和<mark>RST</mark>引腳。
+</p>
+<p>
+但是，有些電路板選擇將內建LED連接到<mark>D0</mark>引腳，由於該類別在執行時使用LED作為除錯輔助工具，因此使用<mark>ThingerSmartConfig</mark>類時將進入崩潰循環。
+解決方案是使用重構函數並禁用其使用LED。
+</p>
+<pre><code>ThingerSmartConfig thing(USERNAME,
+                         DEVICE_ID,
+                         DEVICE_CREDENTIAL,
+                         false); // required for deep sleep
+</code></pre>
+<hr><h2 id="互動">互動</h2>
+<p>
+一旦您定義了資源並且設備已連接到平台，就可以在幾分鐘內輕鬆地與您的設備進行交互。有幾種交互方式，例如建立儀表板，使用移動設備應用存取（目前僅在Android中），從API資源管理器存取或直接調用API。
+</p>
+<hr><h3 id="android">Android</h3>
+<hr><h4 id="手機端應用程式">手機端應用程式</h4>
+<hr><h4 id="穿戴型裝置">穿戴型裝置</h4>
+<hr><h3 id="雲端控制台">雲端控制台</h3>
+<p>
+    Cloud Console為隨插即用的設備交互加入了一些支援。
+</p>
+<p>
+    您可以從API資源管理器與設備進行交互，也可以創建即時儀表板以顯示設備訊息。沒有必要編寫額外的程式碼來支援這種交互，只需在您的設備中聲明您的資源，您就可以直接在控制台中存取它們。
+</p>
+<p>
+因此，本節將介紹雲控制台的不同交互方法。
+</p>
+<hr><h4 id="儀錶板">儀錶板</h4>
+<p>
+在控制台中，您可以輕鬆建立和設定即時儀表板，以顯示設備數據，如傳感器。您只需選擇設備，關聯資源，然後選擇更新方法，可以是可設定的採樣間隔，也可以根據設備的要求進行更新。
+</p>
+TODO參考雲控制台中的儀表板
+<img class="img-fluid" src="http://docs.thinger.io/arduino/assets/dashboards.gif">
+<hr><h4 id="api-探索">API 探索</h4>
+<p>
+    與API設備交互的另一種方式是使用API​​ Explorer。您可以從API Explorer自動存取設備中的每個已定義資源，以便您可以讀取數據，發送指令或值，調用函數等。
+</p>
+<p>
+    如果要使用Server API與設備進行交互，此功能非常有用，因此您可以輕鬆地可視化設備公開的API以及預期的輸入和輸出。
+    此外，在您的設備上編寫程式碼時非常重要，因此您可以輕鬆檢查資源是否按預期工作，例如讀取傳感器值，打開和關閉繼電器等等。
+</p>
+<p>
+    TODO參考雲控制台中的API Explorer
+</p>
+<video loop autoplay src="http://docs.thinger.io/arduino/assets/api-explorer.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<p>
+    設備中的每個已定義資源（如傳感器，繼電器，指示燈等）都可以從API資源管理器中直接訪問。此示例直接從資源管理器打開和關閉指示燈。
+</p>
+<hr><h3 id="伺服器api">伺服器API</h3>
+正在進行中...

@@ -59,6 +59,16 @@
 		.sw-tag-back {
 			background-color: #111;
 		}
+		p {
+			margin-top: 1rem;
+		}
+		pre {
+			background-color: #f7f7f7;
+			padding: 0.5rem;
+		}
+		pre code{
+			color: #e83e8c;
+		}
 		@media (max-width: 767.98px) {
 			.L-side {
 				margin-top: 0px;
