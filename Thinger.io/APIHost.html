@@ -1,0 +1,682 @@
+<h2>API HOST</h2>
+<hr>
+<p>本文檔中描述的所有示例都基於相對路徑定義URL端點，假設主機只是您的伺服器IP，網域或僅預設的Thinger.io伺服器。對於通過預設Thinger.io雲發出的所有呼叫，主機地址將如下：</p>
+<a href="https://api.thinger.io">https://api.thinger.io</a>
+<p><strong>請注意</strong>，如果您在自己的主機或網域中執行Thinger.io伺服器，則在未設定相應的SSL證書的情況下，HTTPS請求可能會失敗。您也可以使用HTTP進行呼叫，但不建議在生產環境中使用。</p>
+<h2>API身份驗證</h2>
+<hr>
+<h3>REST API身份驗證</h3>
+<hr>
+<p>所有對API Rest接口做的查詢皆須進行簽名才能存取使用者資源。因此，所有請求都必須包含一個具有帳戶存取令牌的<mark>Authorization</mark>標頭：</p>
+<pre><code>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODYwNDkxNTcsImlhdCI6MTQ4NjA0MTk1NywidXNyIjoianQifQ.pkyG43xiEhDtUHLxuycYv156FGuvNh6nDKQ07kGcaGk</code></pre>
+<p>存取令牌是JWT令牌，需要從使用者憑證，更新令牌或使用者定義的存取令牌中取得。所以有兩個不同的概念：</p>
+<h4>存取令牌</h4>
+<hr>
+<p>是用於授予API請求存取權限的令牌。它應該與關鍵字<mark>Bearer</mark>一起包含在<mark>HTTP Authorization</mark>標頭中。它還可以作為URL參數形式包含在HTTP請求中，其鍵為<mark>authorization</mark>（區分大小寫），其值為令牌。</p>
+<p><strong>請注意</strong>，當從使用者憑證或更新令牌取得此令牌時，它的有效期為<strong>2小時</strong>。因此必須定期更新才能擁有有效的存取令牌。</p>
+<h4>更新令牌</h4>
+<hr>
+<p>更新令牌是一種無法提供對使用者資源的存取權限的令牌，它可用於取得新的存取令牌，以防它們過期。</p>
+<p>使用使用者憑證或有效更新令牌取得的此令牌的有效期約為發布日期後<strong>2個月</strong>，並且每次使用它時都會更新以取得新的存取權限並更新令牌。</p>
+<p>因此，身份驗證背後的想法是您需要使用使用者憑證來取得存取令牌和更新令牌。您可以將更新令牌保存在安全的位置，並使用存取令牌來存取使用者資源。存取令牌過期後，使用更新令牌取得新的存取令牌和新的更新令牌。</p>
+<p>這樣，如果定期使用該帳戶，則身份驗證過程不需要使用者憑證。如果存取令牌以某種方式洩露，則攻擊者將具有短的存取時間。如果更新令牌也被洩露，可以手動撤銷它以避免用於取得新令牌。</p>
+<h4>使用者令牌</h4>
+<hr>
+<p>使用者在其帳戶中定義的令牌可以像任何其他存取令牌一樣用於對請求進行身份驗證。但是，與從使用者憑證取得的令牌相反，此令牌預設不會過期，並且使用者可以定義帳戶資源上的存取級別。因此，以這種方式，使用者可以定義用於存取單個設備的令牌，或者用於寫入數據桶而不包括其他帳戶資源。</p>
+<p>這種令牌可以直接從Thinger.io控制台中定義<mark>Access Tokens</mark>。下圖說明如何為令牌新增權限以寫入單個存儲桶，但您可以將其設定為授予對帳戶的不同資源和操作的存取權限。</p>
+<img class="img-fluid" src="http://docs.thinger.io/api/assets/token_permission.png">
+<h3>從使用者憑證取得令牌</h3>
+<hr>
+<p>此方法允許從使用者憑證取得存取令牌和更新令牌。它應該在使用者第一次登錄應用程式時使用。</p>
+<ul>
+  <li>URL
+    <pre><code>/oauth/token</code></pre>
+  </li>
+  <li>方法
+    <pre><code>POST</code></pre>
+  </li>
+  <li>內容類型
+    <pre><code>Content-Type:application/x-www-form-urlencoded</code></pre>
+  </li>
+  <li>內文
+    <pre><code>grant_type=password&username=username&password=password</code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>
+      <li>內文
+        <pre><code><!--
+-->{  
+   "access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODYwNDgzNzcsImlhdCI6MTQ4NjA0MTE3NywidXNyIjoianQifQ.A-Vh715P6GjFDBkbh6TmNGxiHWl0KjbDq8tM4qsmTaI",
+   "expires_in":7200,
+   "refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0OTEzMTE1NzcsImlhdCI6MTQ4NjA0MTE3NywianRpIjoiNTg5MzMwNTkzOWNiZWY0YWEzMDE1YWJiIn0.5Voenem4D90zPNqiS1oVBfguDzygwNzgmcmEi-4N-8Q",
+   "scope":null,
+   "token_type":"bearer"
+}<!--
+       --></code></pre>
+      </li>
+    </ul>
+  </li>
+<li>錯誤響應：
+  <ul>
+    <li>HTTP Code: 401 Unauthorized</li>
+    <li>內文
+<pre><code><!--
+-->{  
+  "error":{  
+     "message":"invalid username or password"
+  }
+}<!--
+--></code></pre>
+    </li>
+  </ul>
+</li>
+</ul>
+<h3>使用更新令牌取得令牌</h3>
+<hr>
+<p>此方法允許從有效的更新令牌取得新的存取令牌和更新令牌。每次存取令牌過期或更新令牌可能過期時都應該調用它。</p>
+<ul>
+  <li>URL
+    <pre><code>/oauth/token</code></pre>
+  </li>
+  <li>方法
+    <pre><code>POST</code></pre>
+  </li>
+  <li>內容類型
+    <pre><code>Content-Type:application/x-www-form-urlencoded</code></pre>
+  </li>
+  <li>內文
+    <pre><code><!--
+-->grant_type=refresh_token&refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0OTEzMTIzNTcsImlhdCI6MTQ4NjA0MTk1NywianRpIjoiNTg5MzMzNjUzOWNiZWY0YWEzMDE1YWJjIn0.BYwRii9eL7jeQQQqMbuBEZAvwmmVRAU8kWYCNZEDn0s<!--
+  --></code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>
+      <li>內文
+  <pre><code><!--
+-->{  
+   "access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODYwNTY0MjYsImlhdCI6MTQ4NjA0OTIyNiwidXNyIjoianQifQ.H7G4N3MMHxUO2gPHzG0a9N1lZ5--Gt56CC4HOiFMKLE",
+   "expires_in":7200,
+   "refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0OTEzMTk2MjYsImlhdCI6MTQ4NjA0OTIyNiwianRpIjoiNTg5MzMzNjUzOWNiZWY0YWEzMDE1YWJjIn0.dqxbZegv4oemeDK6czDzQLRfA3da6NShBcseNLTn33Q",
+   "scope":null,
+   "token_type":"bearer"
+}<!--
+--></code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized</li>
+      <li>內文
+<pre><code><!--
+-->{  
+    "error":{  
+       "message":"invalid refresh token"
+    }
+}<!--
+--></code></pre></li>
+    </ul>
+  </li>
+</ul>
+<h3>檢測存取令牌過期</h3>
+<hr>
+<p>存取令牌在發布日期後約<strong>2小時</strong>後到期。有兩種方法可以確定存取令牌是否已過期以請求新的存取令牌。</p>
+<h4>檢查JWT內容</h4>
+<hr>
+<p>檢查存取令牌是否過期的第一種方法是解析JWT並解碼有效載荷資訊。存取令牌將具有如下所示的有效負載：</p>
+<pre><code><!--
+-->{
+  "exp": 1486048377,
+  "iat": 1486041177,
+  "usr": "alvarolb"
+}<!--
+--></code></pre>
+
+<p>該exp字段是令牌過期時的以秒為單位的unix時間戳（UTC）。如果您的請求在此時間戳之後，則請求將失敗。</p>
+
+<h4>檢查伺服器響應</h4>
+<hr>
+<p>只需嘗試存取任何使用者資源，就可以檢查存取令牌的有效性。如果存取令牌過期，則身份驗證將失敗，並且API請求查詢將返回一個<mark>401 Unautorized</mark>。</p>
+
+<h2>設備API</h2>
+<hr>
+<h3>列出使用者設備</h3>
+<hr>
+<p>此方法允許取得使用者設備。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v1/users/{USER_ID}/devices</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>GET</code></pre>
+  </li>
+  <li>
+    網址參數
+    <p><strong>可選</strong>：通過新增以下url參數來標識設備：</p>
+    <pre><code>id=[device id]</code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>
+      <li>內文：設備陣列，包含設備標識符，描述和連接狀態。
+        <pre><code><!--
+-->[  
+  {  
+     "device":"nodemcu",
+     "description":"NodeMCU With ESP8266",
+     "connection":{  
+        "active":true,
+        "ts":1486047553711
+     }
+  }
+]<!--
+    --></code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized</li>
+      <li>HTTP Code: 400 Bad request if the search device name is not valid</li>
+      <li>HTTP Code: 404 Not Found</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>新增使用者設備</h3>
+<hr>
+<p>此方法允許將設備新增到目前的使用者帳戶。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v1/users/{USER_ID}/devices</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>POST</code></pre>
+  </li>
+  <li>內容類型
+    <pre><code>Content-Type:application/json;charset=UTF-8</code></pre>
+  </li>
+  <li>內文
+    <pre><code><!--
+-->{  
+    "device_id":"nodemcu",
+    "device_description":"NodeMCU With ESP8266",
+    "device_credentials":"BN8RbpRKfxhm"
+ }<!--
+ --></code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>  
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized. If the auth is not success.</li>
+      <li>HTTP Code: 400 Bad request. If there are missing fields, the device is id is not valid (only [a-zA-Z0-9_]{1,25} is allowed), the device already exists, or the user account is limited.</li>
+    </ul>
+  </li>
+</ul>
+<h3>刪除使用者設備</h3>
+<hr>
+<p>此方法允許刪除特定設備。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v1/users/{USER_ID}/devices/{DEVICE_ID}</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>DELETE</code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>  
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized</li>
+      <li>HTTP Code: 400 Bad request if the search device name is not valid</li>
+      <li>HTTP Code: 404 Not Found</li>
+    </ul>
+  </li>
+</ul>
+<h3>取得設備狀態資訊</h3>
+<hr>
+<p>此方法允許即時從其最近建立的連接取得有關設備的狀態資訊（如連接時間戳，遠端IP地址或傳輸數據）。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v1/users/{USER_ID}/devices/{DEVICE_ID}/stats</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>GET</code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>
+      <li>內文有關設備的資訊，如連接狀態和時間戳，目前IP地址和傳輸數據。
+        <pre><code><!--
+-->{  
+  "connected":true,
+  "connected_ts":1486040468781,
+  "ip_address":"83.52.36.133",
+  "rx_bytes":810,
+  "tx_bytes":854
+}<!--
+    --></code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized</li>
+      <li>HTTP Code: 400 Bad request if the search device name is not valid</li>
+      <li>HTTP Code: 404 Not Found</li>
+    </ul>
+  </li>
+  <li>注意
+    <p>此方法可與伺服器發送事件（SSE）一起使用，以取得有關設備狀態資訊的即時更新，如tx和rx字節。如果您無法將授權標頭新增到SSE客戶端，則可以將存取令牌<mark>?authorization=eyJhbGci...</mark>新增到URL中。</p>
+  </li>
+</ul>
+
+<h3>取得設備令牌</h3>
+<hr>
+<p>此方法允許取得有關發出令牌的資訊，以提供對特定設備和資源的存取。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v1/users/{USER_ID}/devices/{DEVICE_ID}/tokens</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>GET</code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>
+      <li>內文包含每個設備令牌資訊的陣列。
+        <pre><code><!--
+-->[  
+   {  
+      "id":"57fa7149114f032fe00f9787",
+      "name":"Door Access",
+      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJwdWVydGEiLCJpYXQiOjE0NzYwMzA3OTMsImp0aSI6IjU3ZmE3MTQ5MTE0ZjAzMmZlMDBlOTc4NyIsInVzciI6Imp0In0.OISg5la0jZbWIYRY5KypzSHLVjVKyFLL3I1hjzYV-_A"
+   }
+]<!--
+    --></code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized</li>
+      <li>HTTP Code: 404 Not Found</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>新增設備令牌</h3>
+<hr>
+<p>此方法允許建立設備令牌，以便以後可以使用它來存取授權的設備和資源。生成的令牌也可以在某個給定時間自動到期。</p>
+
+<p>存取設備資源時，請使用Authorization標頭中生成的令牌，方法與存取令牌相同。您也可以將設備令牌作為url參數傳遞，例如<mark>?authorization=eyJhbGciOi...</mark></p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v1/users/{USER_ID}/devices/{DEVICE_ID}/tokens</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>POST</code></pre>
+  </li>
+  <li>內容類型
+    <pre><code>Content-Type:application/json;charset=UTF-8</code></pre>
+  </li>
+  <li>內文
+    <pre><code><!--
+-->{
+      "token_name": "DoorAccess",
+      "token_resources": ["open", "close"],
+      "token_expiration": 1487894400000
+  }<!--
+ --></code></pre>
+    <p><strong>注意：</strong> <mark>token_resources</mark>和<mark>token_expiration</mark>都是可選的。僅當您需要限制對設備資源的存取權限或使令牌在給定的UTC時間到期時，才使用此字段。</p>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>
+      <li>內文有關建立的令牌的資訊，例如其標識符，名稱和令牌本身。
+        <pre><code><!--
+-->{
+    "id": "58938c016f789e15ee15b583",
+    "name": "DoorAccess",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJkZXZpY2UyIiwiZXhwIjoxNDg3ODk0NDAwLCJpYXQiOjE0ODYwNjQ2NDEsImp0aSI6IjU4OTM4YzAxNmY3ODllMTVlZTE1YjU4MyIsInJlcyI6WyJvcGVuIiwiY3xvc2UiXSwidXNyIjoiYWx2YXJvbGIifQ.lAYQcdMD92RbYzhCfgvkIb2R15DqcWGmdb07cxgE8bM"
+}<!--
+    --></code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized. If the auth is not success.</li>
+      <li>HTTP Code: 400 Bad request. If there are missing fields.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>刪除設備令牌</h3>
+<hr>
+<p>此方法允許刪除給定的設備令牌。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v1/users/{USER_ID}/devices/{DEVICE_ID}/tokens/:token_id</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>DELETE</code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized. If the auth is not success.</li>
+      <li>HTTP Code: 404 Not Found. If the token cannot be found.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>存取設備資源</h3>
+<hr>
+<p>您可以根據您的帳戶ID，設備ID以及您在自己設備中定義的資源調用API端點來存取所有設備資源。本節介紹如何存取不同類型的資源，如輸出，輸入，輸入/輸出和回調資源。</p>
+
+<h4>輸出資源</h4>
+<hr>
+<p>設備輸出資源是外部程式或服務可以向連接的設備查詢資訊的方式，例如感測的參數，讀取目前設備狀態或從設備中提取所需的任何其他值。</p>
+<p>此方法允許存取設備中定義的輸出資源，因此您可以即時讀取每個資源提供的內容。這樣，每個API調用都將執行輸出資源以填充資源中定義的資訊。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v2/users/{USER_ID}/devices/{DEVICE_ID}/{RESOURCE_ID}</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>GET</code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>
+      <li>Content-type: application/json</li>
+      <li>內文: A JSON document with the key out that stores your resource definition.</li>
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized. If the auth is not success.</li>
+      <li>HTTP Code: 404 Not Found. If the device or resource is not available.</li>
+    </ul>
+  </li>
+</ul>
+<h5>例 1</h5>
+<p>如果您的帳戶是<mark>alvarolb</mark>，您的設備標識符是<mark>nodemcu</mark>，並且您的設備中的資源定義如下：</p>
+<pre><code><!--
+-->thing["location"] >> [](pson& out){
+    out["lat"] = gps.getLatitude();
+    out["lon"] = gps.getLongitude();
+};<!--
+--></code></pre>
+<p>您可以通過https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/location發送HTTP GET請求，以取得設備的緯度和經度：</p>
+<pre><code><!--
+-->{
+  "out" : {
+    "latitude" : 40.125698,
+    "longitude" : -5.466911
+  }
+}<!--
+--></code></pre>
+<h5>例 2</h5>
+<p>如果您的帳戶是<mark>alvarolb</mark>，您的設備標識符是<mark>nodemcu</mark>，並且您的設備中的資源定義如下：</p>
+<pre><code><!--
+-->thing["temperature"] >> [](pson& out){
+    out = dht.readTemperature();
+};<!--
+--></code></pre>
+<p>您可以通過https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/temperature發送HTTP GET請求以取得目前溫度：</p>
+<pre><code><!--
+-->{
+  "out" : 21.00
+}<!--
+--></code></pre>
+<h4>輸入資源</h4>
+<hr>
+<p>設備輸入資源是連接設備可以從雲接收資訊的方式，例如通過它們啟動馬達，切換繼電器，移動伺服或進行不同的邏輯設定。</p>
+
+<p>此方法允許您將資料即時推送到設備中定義的輸入資源，因此，調用時將會使用某些資訊來存取您的設備資源。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v2/users/{USER_ID}/devices/{DEVICE_ID}/{RESOURCE_ID}</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>POST</code></pre>
+  </li>
+  <li>內容類型
+    <pre><code>Content-Type:application/json;charset=UTF-8</code></pre>
+  </li>
+  <li>內文
+    <pre><code><!--
+-->{
+  "in": <any json value, json document, or json array>
+}<!--
+--></code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200 OK. If your device is connected and the resource was called successfully.</li>  
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized. If the auth is not success.</li>
+      <li>HTTP Code: 404 Not Found. If the device or resource is not available.</li>
+    </ul>
+  </li>
+</ul>
+<h5>例 1</h5>
+<p>如果您的帳戶是<mark>alvarolb</mark>，您的設備標識符是<mark>nodemcu</mark>，並且您的設備中有一個輸入資源，例如，用於打開/關閉繼電器(Relay)：</p>
+<pre><code><!--
+-->thing["relay"] << [](pson& in){
+    digitalWrite(RELAY_PIN, (bool)in);
+};<!--
+--></code></pre>
+<p>您可以通過https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/relay發送HTTP POST請求以更改目前狀態：</p>
+<pre><code><!--
+-->{
+  "in" : true
+}
+curl \
+  -H "Content-Type: application/json;charset=UTF-8" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
+  -H "Accept: application/json, text/plain, */*" \
+  -X POST \
+  -d '{"in":true}' \
+  https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/relay<!--
+--></code></pre>
+<h5>例 2</h5>
+<p>如果您的帳戶是<mark>alvarolb</mark>，您的設備標識符是<mark>nodemcu</mark>，並且您的設備中有一個輸入資源，例如，用於更改RGB燈顏色：</p>
+<pre><code><!--
+-->thing["rgb"] << [](pson& in){
+    int r = in["r"];
+    int g = in["g"];
+    int b = in["b"];
+    // use here r, g, and b values to change the light color
+};<!--
+--></code></pre>
+<p>您可以通過https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/rgb發送HTTP POST請求以設定目前顏色：</p>
+<pre><code><!--
+-->{
+  "in" : {
+    "r" : 0,
+    "g" : 255,
+    "b" : 0
+  }
+}<!--
+--></code></pre>
+<p><strong>curl 示例</strong>：</p>
+<pre><code><!--
+-->curl \
+  -H "Content-Type: application/json;charset=UTF-8" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
+  -H "Accept: application/json, text/plain, */*" \
+  -X POST \
+  -d '{"in":{"r":0,"g":255,"b":0}}' \
+  https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/rgb<!--
+--></code></pre>
+<h5>例 3</h5>
+<p>如果您的帳戶是<mark>alvarolb</mark>，您的設備標識符是<mark>nodemcu</mark>，並且您的設備中有一個輸入資源，例如，用於執行linux命令，更改螢幕上的文字等：</p>
+<pre><code><!--
+-->thing["command"] << [](pson& in){
+    String command = in;
+    // work here with the string
+};<!--
+--></code></pre>
+<p>您可以通過https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/command發送HTTP POST請求以設定目前顏色：</p>
+<pre><code><!--
+-->{
+  "in" : "New customer: 101 today!"
+}<!--
+--></code></pre>
+<p><strong>curl 示例</strong>：</p>
+<pre><code><!--
+-->curl \
+  -H "Content-Type: application/json;charset=UTF-8" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
+  -H "Accept: application/json, text/plain, */*" \
+  -X POST \
+  -d '{"in":"New customer: 101 today!"}' \
+  https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/command<!--
+--></code></pre>
+<h4>輸入/輸出資源</h4>
+<hr>
+<p>設備資源也可以定義為輸入/輸出資源，也就是說，它們可以基於輸入提供輸出。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v2/users/{USER_ID}/devices/{DEVICE_ID}/{RESOURCE_ID}</code></pre>
+  </li>
+  <li>
+    方法
+    <pre><code>POST</code></pre>
+  </li>
+  <li>內容類型
+    <pre><code>Content-Type:application/json;charset=UTF-8</code></pre>
+  </li>
+  <li>內文
+    <pre><code><!--
+-->{
+  "in": <any json value, json document, or json array>
+}<!--
+--></code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200</li>
+      <li>Content-type: application/json</li>
+      <li>內文: A JSON document with the key out that stores your resource definition.</li>
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized. If the auth is not success.</li>
+      <li>HTTP Code: 404 Not Found. If the device or resource is not available.</li>
+    </ul>
+  </li>
+</ul>
+<h5>例 1</h5>
+<p>如果您的帳戶是<mark>alvarolb</mark>，您的設備標識符是<mark>nodemcu</mark>，並且您的設備中的輸入/輸出資源io定義如下，即用於回傳總和和乘法：</p>
+<pre><code><!--
+-->thing["io"] = [](pson& in, pson& out){
+    out["sum"] = (long)in["value1"] + (long)in["value2"];
+    out["mult"] = (long)in["value1"] * (long)in["value2"];
+};<!--
+--></code></pre>
+<p>您可以通過https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/io發送HTTP POST請求，以根據輸入獲得結果：</p>
+<strong>輸入</strong>
+<pre><code><!--
+-->{
+  "in" : {
+    "value1" : 20,
+    "value2" : 10
+  }
+}<!--
+--></code></pre>
+<strong>產量</strong>
+<pre><code><!--
+-->{
+  "out" : {
+    "sum" : 30,
+    "mult" : 200
+  }
+}<!--
+--></code></pre>
+<p><strong>curl 示例</strong></p>
+<pre><code><!--
+-->curl \
+  -H "Content-Type: application/json;charset=UTF-8" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
+  -H "Accept: application/json, text/plain, */*" \
+  -X POST \
+  -d '{"value1":20,"value2":10}' \
+  https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/io<!--
+--></code></pre>
+<h4>沒有參數的資源</h4>
+<hr>
+<p>這種資源不提供或要求執行任何資訊。它們就像設備中定義的可以根據需要調用的功能，例如，強制設備更新，重啟系統或任何其他操作。</p>
+<p>此API方法允許調用設備中定義的資源，因此您可以執行相關的功能。</p>
+<ul>
+  <li>
+    URL
+    <pre><code>/v2/users/{USER_ID}/devices/{DEVICE_ID}/{RESOURCE_ID}</code></pre>
+  </li>
+  <li>
+    method：
+    <code>GET</code></pre>
+  </li>
+  <li>成功回應：
+    <ul>
+      <li>HTTP Code: 200 OK。如果您的設備已連接且資源已成功調用。</li>
+    </ul>
+  </li>
+  <li>錯誤響應：
+    <ul>
+      <li>HTTP Code: 401 Unauthorized。如果auth不成功。</li>
+      <li>HTTP Code: 404未找到。如果設備或資源不可用。</li>
+    </ul>
+  </li>
+</ul>
+<h5>例 1</h5>
+<p>如果您的帳戶是<mark>alvarolb</mark>，您的設備標識符是<mark>nodemcu</mark>，並且您<mark>reset</mark>的設備中的資源定義如下，即重新啟動ESP8266設備。</p>
+<pre><code>
+thing["reset"] = [](){
+    ESP.reset();
+};<!--
+--></code></pre>
+<p>您可以通過https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/reset發送HTTP GET請求以重啟設備：</p>
+<pre><code>
+curl \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
+  https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/reset<!--
+--></code></pre>

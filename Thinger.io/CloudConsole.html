@@ -1,28 +1,31 @@
 <h2>介紹</h2>
+<hr>
 <p>本文檔提供有關Thinger.io IoT平台後端控制台的資訊。通過這種方式，您將學習如何管理平台的不同元素，如設備，端點，數據存儲桶或存取令牌。</p>
 
 <p>登錄Thinger.io帳戶後，預設情況下您將存取<mark>Statistics</mark>部分，您可以在其中檢視有關您帳戶的一些基本資訊，例如設備數量，端點，數據存儲桶等。還有一張地圖，顯示所連接設備目前的大致位置。最後，根據發送或接收的資訊，您可以獲得有關設備用量的一些統計資訊。</p>
 <p>在<mark>Statistics</mark>頁面的左側，您將找到主選單，其中包含構建IoT項目時所需的所有平台功能。以下各節將更詳細地介紹這些功能。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/Stadistics.PNG">
-<hr>
+
 <h2>設備</h2>
+<hr>
 <h3>建立設備</h3>
-<p>在Thinger.io中啟動IoT項目的第一步（除了像Sigfox這樣沒有連接的設備）是通過建立設備來授予存取權限，以便將您的設備連接到您的帳戶。任何設備皆必須註冊Thinger.io才能存取雲。每個人都有自己的標識符和憑據，並與用戶帳戶相關。本節介紹在您的帳戶中註冊新設備所需的步驟。
+<hr>
+<p>在Thinger.io中啟動IoT項目的第一步（除了像Sigfox這樣沒有連接的設備）是通過建立設備來授予存取權限，以便將您的設備連接到您的帳戶。任何設備皆必須註冊Thinger.io才能存取雲。每個人都有自己的標識符和憑證，並與用戶帳戶相關。本節介紹在您的帳戶中註冊新設備所需的步驟。
 </p>
 <p>要註冊新設備，請在登錄控制台儀表板後，轉到左側選單中顯示的<mark>Device</mark>部分。</p>
 <img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/8b411097d72092216e8611aab2d02efea16ef797.png">
 <p>此部分將列出您註冊的設備，並將顯示有關其連接的一些資訊。類似於下圖的東西。</p>
 <img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/58e06f4e8771738d9a1fa7f26a53fdb2864b5937.png">
-<p>在此畫面中，單擊<mark>Add Device</mark>，將打開一個表單，您可以在其中引入設備憑據。</p>
+<p>在此畫面中，單擊<mark>Add Device</mark>，將打開一個表單，您可以在其中引入設備憑證。</p>
 <img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/b0a8aa7501dfb947a8b6d0add5a9d4b698bb657a.png">
-<p>在此處新增<strong>device identifier</strong>（在您的設備中是唯一的），可以幫助您識別設備的<strong>device description</strong>以及<strong>device credentials</strong>。每個設備都有自己的標識符/憑證，因此其中的設備間不會互相影響。伺服器中的所有密碼都透過<mark>PRNG</mark>產生32字節的鹽，並使用<mark>PBKDF2 SHA256</mark>與不可消耗的迭代次數進行安全存儲。保留您的<strong>device identifier</strong>和<strong>device credentials</strong>，因為您需要它們來連接您的設備（密碼以後無法恢復）。</p>
+<p>在此處新增<strong>device identifier</strong>（在您的設備中是唯一的），可以幫助您識別設備的<strong>device description</strong>以及<strong>device credentials</strong>。每個設備都有自己的標識符/憑證，因此其中的設備間不會互相影響。伺服器中的所有密碼都透過<mark>PRNG</mark>產生32字節的鹽，並使用<mark>PBKDF2 SHA256</mark>與不可消耗的迭代次數進行安全存儲。保留您的<strong>device identifier</strong>和<strong>device credentials</strong>，因為您需要它們來連接您的設備（密碼設定後將無法再次檢視）。</p>
 
 <p>如果一切順利，你應該看到一些成功的消息</p>
 <img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/68e13f2c4df7ecb9f0261d84ba36e12b3d8498ce.png">
 
 <p>現在，您可以返回設備列表，設備應顯示為已斷開連接。</p>
 <img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/ed5abaa692e2257e08cc06bbed7065d6a4ff3a58.png">
-<p>現在，您可以使用新設備ID和設備憑據連接新設備。根據您的設備，您需要安裝所需的函式庫或開發環境，因此請根據您的設備檢視以下部分：</p>
+<p>現在，您可以使用新設備ID和設備憑證連接新設備。根據您的設備，您需要安裝所需的函式庫或開發環境，因此請根據您的設備檢視以下部分：</p>
 <a href="./Thinger.io/ArduinoClient.html" internal><div class="button button-info">Arduino兼容板</div></a>
 <a href="./Thinger.io/LinuxClient.html" internal><div class="button button-info">Linux和Raspberry Pi</div></a>
 <a href="#" hidden>ARM Mbed</a>
@@ -30,7 +33,7 @@
 <p>請記住，Sigfox設備不共享連接設備的概念，因為它們預設是定期發送資訊的離線設備。如果您想存儲來自這些設備的資訊，請檢視以下文檔。</p>
 <a href="#">Sigfox設備</a>
 
-<p>對於以下示例，我們將使用Arduino IDE和ESP8266設備，如NodeMCU，在這種情況下，您可以打開ESP8266的範例程式，並填寫設備詳細資訊：您的用戶名，設備ID以及建立設備時建立的設備憑據。下圖顯示了程式與帳戶中建立的設備之間的關係。</p>
+<p>對於以下示例，我們將使用Arduino IDE和ESP8266設備，如NodeMCU，在這種情況下，您可以打開ESP8266的範例程式，並填寫設備詳細資訊：您的用戶名，設備ID以及建立設備時建立的設備憑證。下圖顯示了程式與帳戶中建立的設備之間的關係。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/AddDevice2.PNG">
 
 <p>一旦我們在程式中建立了我們的帳戶標識符，設備標識符和設備憑證，我們就可以編譯並刷新程式。同時，我們只需在設備列表中單擊其標識符即可在雲控制台中打開我們的設備。在設備畫面中，您將能夠即時檢視有關設備的一些資訊，例如IP地址，連接狀態或發送/接收的資訊。預設情況下，我們的設備將顯示為已斷開連接，如下圖所示。</p>
@@ -39,8 +42,9 @@
 <p>設備連接到帳戶後，界面將更改其狀態，顯示已連接，並且正在傳輸資訊，如下圖所示：</p>
 <img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/f61eadbe92939d1c7a6bc066df698e6b88ecb74e.png">
 <p>所以，現在我們已將設備連接到我們的帳戶，我們已準備好開始通過網際網路與設備進行交互。</p>
-<hr>
+
 <h3>設備API</h3>
+<hr>
 <p>Thinger.io平台的一個很酷的功能是，它允許發現設備中定義的資源。資源可以是傳感器讀數，如溫度，濕度或壓力。資源也可以是任何可操作的元素，如燈，繼電器或電機。但一般來說，任何設備資源都像一個可以通過Rest API調用（按需）的回調函數。通過這種方式，本節介紹瞭如何通過雲控制台與設備資源進行交互，同時您還將了解如何發出自己的REST API調用來查詢設備。</p>
 
 <p>將設備連接到帳戶後，如上一節所述，您可以存取其資源並使用以下命令探索API Rest端點 API EXPLORER。您可以通過設備儀表板存取此畫面，方法是單擊名為的小藍色按鈕Device API。</p>
@@ -71,6 +75,7 @@ thing["millis"] >> outputValue(millis());<!--
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/showQuery.PNG">
 <p>有關API的更多資訊可在此處與您的設備進行交互。</p>
 <h3>設備令牌</h3>
+<hr>
 <p>所有與您連接的設備的交互，即使用上面評論的REST API端點或智慧手機，都需要針對平台進行身份驗證。預設情況下，當您通過Thinger.io控制台與設備進行交互時，您將使用從用戶名和密碼獲取的存取令牌隱式地將所有請求簽核到平台。這種授權允許存取您的所有帳戶資源，因此您可以設定設備，存儲桶等。但是，此授權經常過期（但由瀏覽器自動續訂），並且不能用於授予我們對其他設備的存取權限用戶或平台，因為您將提供對所有帳戶的存取權限。</p>
 <p>在這種情況下，可以建立特定的存取令牌以授予對設備的存取權限，甚至可以授予對設備上特定資源的存取權限。此外，通過啟用到期日期，可以及時定義令牌有效性。這樣，如果您需要為第三方工具（如IFTTT，外部網頁，移動電話或任何其他服務）提供對某些設備資源的存取權限，強烈建議您建立設備令牌。</p>
 <p>要建立設備令牌，請打開設備儀表板，然後檢視名為 <strong>“Device Tokens”</strong>的子部分。然後，單擊該框右側的綠色<mark>Add</mark>按鈕。然後，會出現一個視窗，您可以設定不同的參數：</p>
@@ -84,17 +89,20 @@ thing["millis"] >> outputValue(millis());<!--
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/addTockenForm.PNG">
 <p>保存令牌後，界面將顯示要在REST API調用中使用的存取令牌，如下圖所示。如果您需要幫助以在REST API調用中集成此存取令牌，請檢視<a href="./Thinger.io/APIHost.html">此</a>文檔。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/deviceTokenValue.png">
+
+<h3>設備設定</h3>
 <hr>
-<h3>設備設置</h3>
-<p>通過單擊設備儀表板右上角的齒輪圖示，可以調整某些設備詳細資訊，如描述或憑據。這樣，您可以通過您選擇的新設備更改設備憑據，以防忘記密碼（密碼無法從數據庫中恢復，因為它已加密）。請注意，更改設備密碼不會斷開設備，但會在斷開連接後阻止其重新連接。</p>
+<p>通過單擊設備儀表板右上角的齒輪圖示，可以調整某些設備詳細資訊，如描述或憑證。這樣，您可以通過您選擇的新設備更改設備憑證，以防忘記密碼（密碼無法從數據庫中恢復，因為它已加密）。請注意，更改設備密碼不會斷開設備，但會在斷開連接後阻止其重新連接。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/deviceEdit.png">
 <p>如果您需要更改設備標識符，則必須刪除該設備並使用所需設備註冊一個新設備。</p>
-<hr>
+
 <h2>數據桶</h2>
+<hr>
 <p>數據桶是某種虛擬存儲，您可以在其中保存時間序列資訊，如溫度或濕度。但是可以使用它們來存儲任何其他事件，例如運動檢測，車庫門打開，溫度警告等。</p>
 <p>此資訊可用於在儀表板中繪製資訊，或者可以以不同格式導出以進行脫機處理。</p>
 
 <h3>建立桶</h3>
+<hr>
 <p>要建立數據存儲區，您需要<mark>Data Buckets</mark>通過單擊此部分來存取該功能：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/bucketsTab.PNG">
 <p>要建立存儲桶，只需按下<strong>Add Bucket</strong>按鈕，它將顯示以下畫面：</p>
@@ -120,7 +128,7 @@ thing["TempHum"] >> [](pson &out){
   out["humidity"] = dht.readHumidity();
 };<!--
 --></code></pre>
-		<p>也可以讓設備在需要時，即通過在檢測到時發起事件來流式傳輸資訊。在這種情況下，我們可以<mark>Update by Device</mark>在設定存儲桶時使用該選項，並使用此處所述的流式傳輸資源。</p>
+		<p>也可以讓設備在需要時，即通過在檢測到時發起事件來串流傳輸資訊。在這種情況下，我們可以<mark>Update by Device</mark>在設定存儲桶時使用該選項，並使用此處所述的傳輸串流資源。</p>
 	
 		<p>使用以前的<mark>TempHum</mark>示例資源，可以像在下面的程式片段中那樣完成。</p>
 <pre><code><!--
@@ -132,8 +140,8 @@ thing["TempHum"] >> [](pson &out){
   }
 }<!--
 --></code></pre>
-		<p>這樣，數據桶就訂閱了設備資源，並且在每次流調用中都註冊了它的資訊。</p>
-		<p><strong>From Write Call</strong>：此選項將允許設置桶的狀態，使用它不會登記在預設情況下的任何資訊，但它只是等待寫調用，無論是從Arduino的函式庫調用<mark>write_bucket</mark>方法或與Sigfox一樣直接呼叫REST API。此功能打開了從不同設備在同一存儲桶中註冊資訊的選項，或者存儲來自未與伺服器永久連接的設備的資訊(處於睡眠模式或使用Sigfox等其他技術的資訊)。</p>
+		<p>這樣，數據桶就訂閱了設備資源，並且在每次串流調用中都註冊了它的資訊。</p>
+		<p><strong>From Write Call</strong>：此選項將允許設定桶的狀態，使用它不會登記在預設情況下的任何資訊，但它只是等待寫調用，無論是從Arduino的函式庫調用<mark>write_bucket</mark>方法或與Sigfox一樣直接呼叫REST API。此功能打開了從不同設備在同一存儲桶中註冊資訊的選項，或者存儲來自未與伺服器永久連接的設備的資訊(處於睡眠模式或使用Sigfox等其他技術的資訊)。</p>
 		<p>以下是ESP8266設備使用以下<mark>write_bucket</mark>功能將資訊寫入存儲桶的示例：</p>
 <pre><code><!--
 -->void setup() {
@@ -156,26 +164,31 @@ void loop() {
 	</ul>
 </li>
 </ul>
-<hr>
+
 <h3>檢視存儲桶數據</h3>
+<hr>
 <p>一旦設定了數據桶，並且它開始記錄來自設備或寫入調用的數據，它將在表中顯示資訊。每條記錄都包含UTC中的伺服器時間戳（但在控制台的本地時區中顯示）和記錄值。存儲在數據存儲桶中的值可以是單個值，也可以是任何其他JSON文檔。如果JSON文檔由鍵值對組成，如前面的示例所示，它們將以表格格式顯示，就像在下面的畫面截圖中一樣。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/IoTBucketData.png">
-<hr>
+
 <h3>清除存儲桶數據</h3>
+<hr>
 <p>有時清除存儲桶資訊而不刪除整個存儲桶，再次建立和設定它可能很有用。因此，您可以從存儲桶頁面輕鬆清除存儲桶或其中的一部分。在清除過程中，存儲桶仍然可以記錄設備中的資訊。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/Data-Bucket-Clear.png">
-<hr>
+
 <h3>導出存儲桶數據</h3>
+<hr>
 <p>可以以不同的文件格式導出所有存儲的資訊，因此您可以離線處理數據，例如應用人工智能，業務分析，大數據等。這樣，您可以存取存儲桶並設定導出過程，比如選擇文件類型或導出範圍。幾分鐘後，您將收到一封電子郵件，其中包含下載到您的文件（在預設雲控制台中有效期為3個月）。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/DowloadBucket.PNG">
-<hr>
+
 <h2>儀表板</h2>
+<hr>
 <p>儀表板是一個圖形用戶界面，允許以不同的圖形和圖表顯示您的資訊。您可以使用不同的小工具設定儀表板，設定其佈局，維度，顏色和數據源，以便為您的業務或流程產生有價值的資訊。</p>
 <p>儀表板可以從您的設備即時顯示資訊（使用伺服器上的網頁框架以最小延遲），或使用存儲在定期輪詢的數據存儲區中的歷史資訊。可以單獨為每個儀表板視窗小工具設定數據源。對於連接到平台的設備，甚至可以動態地設定每個資源的採樣間隔，即在從傳感器讀數定義的資源中，它將允許調整其物理採樣間隔和通過線路的傳輸。儀表板不僅僅用於顯示數據，還可以通過連接的設備即時啟動，因此您可以使用一些控制小工具，如開/關值或滑塊。</p>
 <p>這是一個示例儀表板，其中定義了一些小工具，如時間序列圖表，環形圖，地圖或單個值，但您可以使用許多其他小工具</p>
 <img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/c05197985d9ee92a9e12aaa71ab7508682bc3fbc.gif">
 <p>準備建立自己的儀表板了嗎？</p>
 <h3>建立儀表板</h3>
+<hr>
 <p>要管理所有儀表板，必須通過單擊<mark>Dashboards</mark>選單項來存取該部分：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/dashboardTab.PNG">
 <p>然後單擊<mark>Add Dashboard</mark>按鈕將打開新界面，以輸入儀表板詳細資訊，如以下畫面截圖所示：</p>
@@ -187,20 +200,22 @@ void loop() {
 	<li><strong>Dashboard description</strong>：在此填寫您需要保留的儀表板的任何說明或詳細資訊。</li>
 </ul>
 <p>完成此過程後，可以存取新的儀表板，預設情況下該儀表板將顯示為空。</p>
-<hr>
+
 <h3>編輯儀表板</h3>
+<hr>
 <p>預設情況下，儀表板以檢視模式顯示，您無法在其中修改或設定儀表板，但是，通過單擊儀表板的右上方開關，可以輕鬆啟用編輯模式。因此，每次需要新增，移動或調整視窗小工具時，都要啟用編輯模式。編輯模式還支援不同的選項，如共享儀表板。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/emptyDashboard.PNG">
-<hr>
+
 <h3>新增Display小工具</h3>
+<hr>
 <p>在儀表板中啟用編輯模式後，將出現一個名為<mark>Add Widget</mark>的新按鈕。單擊它將顯示一個彈出視窗，可以在儀表板中選擇要新增的視窗小工具類型。有不同的小工具用於顯示資訊或控制連接的設備，如下圖所示：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/widgetTypes.PNG">
 
 
 <p>以下小節介紹了每種視窗小工具類型的不同參數。</p>
 
-<h4>時間序列圖</h4>
-<p>時間序列圖表是可以隨時間顯示值的圖表。從這個意義上講，當需要顯示時間序列數據時，這非常有用，例如隨時間變化的溫度變數。可以在同一圖表中繪製單個變數或多個值。此小工具的初始設定如下圖所示：</p>
+<h4>時序圖</h4>
+<p>時序圖表是可以隨時間顯示值的圖表。從這個意義上講，當需要顯示時間序列數據時，這非常有用，例如隨時間變化的溫度變數。可以在同一圖表中繪製單個變數或多個值。此小工具的初始設定如下圖所示：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/TimeSeriesChart.png">
 <p>可設定的參數如下：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/TimeSeriesChartWidget.png">
@@ -311,8 +326,9 @@ void loop() {
 	<li><strong>Color</strong>：文本的顏色。</li>
 	<li><strong>UTC</strong>：以UTC或本地時區顯示時鐘。</li>
 </ul>
-<hr>
+
 <h3>新增控制小工具</h3>
+<hr>
 <p>在Thinger.io中，不僅可以在儀表板中顯示資訊，還可以即時控制設備。在本節中描述了一些可用於控制連接設備的可用小工具。</p>
 <h4>開/關狀態</h4>
 <p>On / Off小工具允許控制連接設備的布爾狀態，例如打開/關閉燈，電機，繼電器或任何其他元件。設備應該暴露一個布爾輸入，就像控制一個led的那些例子一樣。然後將資源映射到此視窗小工具，可以即時更改設備狀態。如果輸入資源定義正確實施，這個小工具也能顯示目前設備狀態。</p>
@@ -329,7 +345,7 @@ void loop() {
 </ul>
 
 <h4>滑塊</h4>
-<p>滑塊小工具允許控制連接設備的數字狀態，例如設置閾值，目標溫度或可能遠程控制的任何其他內部設備狀態。設備應公開數字輸入。然後將資源映射到此視窗小工具，可以即時更改目標值。如果輸入資源定義正確實施，這個小工具也能顯示目前設備狀態。</p>
+<p>滑塊小工具允許控制連接設備的數字狀態，例如設定閾值，目標溫度或可能遠程控制的任何其他內部設備狀態。設備應公開數字輸入。然後將資源映射到此視窗小工具，可以即時更改目標值。如果輸入資源定義正確實施，這個小工具也能顯示目前設備狀態。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/Slider.png">
 <p>可設定的參數如下：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/SliderWidget.png">
@@ -342,8 +358,9 @@ void loop() {
 	<li><strong>Max Value</strong>：滑塊的最大值。</li>
 	<li><strong>Step Width</strong>：滑塊精度。</li>
 </ul>
-<hr>
+
 <h3>分享儀表板</h3>
+<hr>
 <p>預設情況下，任何儀表闆對帳戶所有者都是私有的。但是，可以共享儀表板，以便其他人可以存取您的資訊。要共享儀表板，只需輸入儀表板設定並啟用<mark>Share</mark>開關即可。啟用儀表板共享後，將生成一個可以公開共享的URL。</p>
 <div class="alert alert-warning">
 	注意：產生的授權（附加到URL末尾）可用於部分存取您的資源，例如用於提供圖表的設備或存儲桶。檢視生成的存取令牌以獲取更多詳細資訊
@@ -352,13 +369,15 @@ void loop() {
 	注意：如果通過新增新數據源（設備或存儲桶）來更改儀表板，則必須禁用重新啟用儀表板共享以更新授權。出於安全原因，它不會自動共享新數據源。
 </div>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/ShareDashboard.png">
-<hr>
+
 <h2>端點</h2>
+<hr>
 <p>端點是服務，進程或任何其他目標的入口點。因此，在Thinger.io中，端點可以定義為目標目標，可以被設備調用以執行任何操作，例如發送電子郵件，發送SMS，調用REST API，與IFTTT交互，從不同的方式調用設備帳戶，或調用任何其他HTTP端點。</p>
 
 <p>在小型微控制器中，通過設備直接調用這些端點可能很複雜，並且在設備中需要更多帶寬。通過這種方式，Thinger.io可以處理設備可以直接請求的端點呼叫，通過使用其標識符激活它們並傳遞所需的任何資訊。它還增加了一些靈活性，因為端點請求可以根據需要進行動態更改，而設備中部署的程式保持不變。</p>
-<hr>
+
 <h3>建立端點</h3>
+<hr>
 <p>要管理所有端點，必須通過單擊以下選單項來存取“端點”部分：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/EndpointTab.PNG">
 <p>然後單擊Add Endpoint按鈕，該按鈕將打開一個新界面以輸入端點詳細資訊，如以下畫面截圖所示：</p>
@@ -369,8 +388,9 @@ void loop() {
 	<li><strong>Endpoint Description</strong>：在此填寫您需要保留的儀表板的任何描述或詳細資訊。</li>
 	<li><strong>Endpoint Type</strong>：定義端點類型，根據所選類型，端點將顯示不同的字段。在以下部分中描述了其中一些類型。</li>
 </ul>
-<hr>
+
 <h3>電子郵件端點</h3>
+<hr>
 <p>電子郵件端點允許從您的設備發送電子郵件。您可以定義目標電子郵件地址，主題和撰寫電子郵件正文。</p>
 
 <p>可設定的參數如下：</p>
@@ -399,8 +419,9 @@ thing.call_endpoint("ExampleEmail", data);<!--
 -->pson data = dht.readTemperature();
 thing.call_endpoint("ExampleEmail", data);<!--
 --></code></pre>
-<hr>
+
 <h3>HTTP端點</h3>
+<hr>
 <p>HTTP端點是一種通用類型的端點，可用於與任何其他Web服務或Web應用程式進行交互。因此，可以通過設定方法，URL，標頭和正文來將此端點設定為發出任何HTTP請求。</p>
 <p>可設定的參數如下：</p>
 <ul>
@@ -409,13 +430,15 @@ thing.call_endpoint("ExampleEmail", data);<!--
 	<li><strong>Request Body</strong>：正文可以是具有特定內容的自定義正文，也可以是具有設備發送的資訊的JSON有效負載。在自定義正文中，可以新增自定義變數，如電子郵件示例中所示。這樣，就可以建立不同格式的內容，如XML，SOAP等（請記住在這種情況下新增適當的內容類型）。</li>
 </ul>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/HTTPEndpoint.png">
-<hr>
+
 <h2>存取令牌</h2>
+<hr>
 <p>可以通過REST API調用存取所有Thinger.io後端。事實上，控制台只是一個與API交互的Angular REST客戶端，用於管理設備，存儲桶，端點，儀表板等。必須對每個REST API請求進行身份驗證才能生效，因此，任何客戶端都需要在每次調用時提供授權程式。這樣，存取令牌是向第三方服務或應用程式提供授權以進行API請求的方式，而無需共享用戶名和密碼。此外，通過存取令牌，可以授予對帳戶的特定資源和操作的存取權限，例如讀取特定設備或寫入自定義存儲桶（如本示例中所示）。</p>
 
 <div class="alert-warning alert">注意：<a href="./Thinger.io/APIHost.html">此</a>處更詳細地介紹瞭如何通過API使用存取令牌。</div>
-<hr>
+
 <h3>建立令牌</h3>
+<hr>
 <p>要管理所有令牌，必須Access Tokens通過單擊以下選單項來存取該部分：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/AccessTokenTab.png">
 <p>然後單擊Add Token將打開新界面以輸入端點詳細資訊的按鈕，如以下畫面截圖所示：</p>
@@ -442,7 +465,7 @@ thing.call_endpoint("ExampleEmail", data);<!--
 					<li><mark>ListDevices</mark>：授予存取權限以列出帳戶設備。</li>
 					<li><mark>DeleteDevice</mark>：授予刪除設備的存取權限。</li>
 					<li><mark>CreateDevice</mark>：授予存取權限以建立新設備。</li>
-					<li><mark>UpdateDevice</mark>：授予存取權限以修改設備，例如其描述或憑據。</li>
+					<li><mark>UpdateDevice</mark>：授予存取權限以修改設備，例如其描述或憑證。</li>
 					<li><mark>ListDeviceLocations</mark>：授予存取權限以獲取連接的設備位置。</li>
 				</ul>
 			</li>
