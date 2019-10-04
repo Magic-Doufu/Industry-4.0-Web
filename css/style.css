@@ -8,6 +8,7 @@
 			top: 0px;
 			height: 100vh;
 			padding: 0px;
+			overflow-y: auto;
 		}
 		.card {
 			border-radius: 0px;
@@ -17,14 +18,16 @@
 			background-color: white;
 		}
 		#navbar>div>nav>a {
+			font-family: "微軟正黑體", "jhenghei-UI";
 			color: rgb(0,0,0);
 		}
 		.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 ,#navbar>div>nav>a:hover, .nav-active{
+			font-family: "微軟正黑體", "jhenghei-UI";
 			font-weight: 600;
 		}
 		.h1, .h2, .h3, h1, h2, h3 {
-			margin-bottom: 1rem;
-			margin-top: 1rem;
+			margin-bottom: 1.5rem;
+			margin-top: 1.5rem;
 		}
 		.h4, .h5, .h6, h4, h5, h6 {
 			margin-bottom: 0.5rem;
@@ -52,19 +55,37 @@
 			margin-right: -15px;
     		margin-left: -15px;
 		}
+		.active.sw-tagI::before, .sw-tagT:hover::before {
+			background-color: #28a745;
+		}
 		.active.sw-tagT::before, .sw-tagT:hover::before {
 			background-color: #007bff;
 		}
 		.active.sw-tagS::before, .sw-tagS:hover::before {
 			background-color: #f11;
 		}
+		.active.sw-tagP::before, .sw-tagP:hover::before {
+			background-color: #fa0;
+		}
 		.sw-tag-back {
 			background-color: #111;
+		}
+		footer {
+			text-align: center;
+			padding: 1.5rem;
+		}
+		.ft-head {
+			font-size: 1.3rem;
+			margin-bottom: 1rem;
+		}
+		.ft-class {
+			margin: auto 0.5rem;
+			display: inline-block;
 		}
 		p {
 			margin-top: 1rem;
 		}
-		pre{
+		pre, .codestick{
 			background-color: #f7f7f7;
 			padding: 0.5rem;
 		}

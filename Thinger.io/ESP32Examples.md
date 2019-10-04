@@ -8,11 +8,11 @@
 #define THINGER_SERVER "192.168.137.233" //Server IP
 #include <ThingerESP32.h>
 // Device 驗證資訊
-#define USERNAME "CCYTHinger"
+#define USERNAME "MagicDoufu"
 #define DEVICE_ID "ESP32"
 #define DEVICE_CREDENTIAL "AMDDAC"
 // Wi-Fi 驗證資訊
-#define SSID "MQTT3477"
+#define SSID "ThingerWiFi"
 #define SSID_PASSWORD "ll9187,5"
 
 // 實體化伺服器驗證資訊

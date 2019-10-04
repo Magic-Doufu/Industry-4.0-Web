@@ -7,19 +7,27 @@
 	<script src="https://code.jquery.com/jquery-3.3.0.min.js" integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4=" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/style.css?=123">
 	<META HTTP-EQUIV="EXPIRES" CONTENT="0">
 	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 </head>
 <body>
 	<div class="container-fluid">
-		<img src="img/Web/Landing.jpg" class="img-fluid" alt="Landing image">
-		<div class="row sw-tag-back">
-			<div class="col text-right"> 
+		<div class="row">
+			<img src="img/Web/Landing.jpg" class="img-fluid" alt="Landing image">
+		</div>
+		<div class="row sw-tag-back justify-content-md-center">
+			<div class="col-md-auto text-right"> 
+				<div class="px-5 sw-tag sw-tagI" list="listI">Introduction</div>
+			</div>
+			<div class="col-md-auto text-right"> 
 				<div class="px-5 sw-tag sw-tagT" list="listT">Thinger.io</div>
 			</div>
-			<div class="col">
+			<div class="col-md-auto text-center">
 				<div class="px-5 sw-tag sw-tagS" list="listS">Sensors</div>
+			</div>
+			<div class="col-md-auto text-left">
+				<div class="px-5 sw-tag sw-tagP" list="listP">Protocol</div>
 			</div>
 		</div>
 	</div>
@@ -49,6 +57,20 @@
 				</div>
 			</div>
 		</div>
+	<footer>
+		<hr/>
+		<div class="ft-head">Contact us</div>
+		<div class="ft-body">
+			<div class="ft-class">
+				<div>[Web Page & Thinger.io]</div>
+				<div><a href="mailto:gtrx8fd3ds@gmail.com">gtrx8fd3ds@gmail.com</a></div>
+			</div>
+			<div class="ft-class">
+				<div>[Protocol & Sensor pages]</div>
+				<div><a href="mailto:1105105221@nkust.edu.tw">1105105221@nkust.edu.tw</a></div>
+			</div>
+		</div>
+	</footer>
 	</div>
 	<script type="text/javascript">
 		function RsideInit() {
@@ -106,7 +128,7 @@
 				loadList(sw_tag);
 			} else {
 				$('.sw-tag').first().addClass('active');
-				loadList("listT");
+				loadList("listI");
 			}
 			$('.sw-tag').click(function(){
 				$('.sw-tag').removeClass('active');
@@ -117,10 +139,13 @@
 			})
 			$('#navbar').collapse();
 		}
+		function scrollToId(pID) {
+			//pID = "#" + pID;
+			$('html, body').animate({scrollTop:$('#' + pID).offset().top},1000);
+		}
 		$(document).ready(function(){
 			sw_init();
 		})
 	</script>
-	</style>
 </body>
 </html>

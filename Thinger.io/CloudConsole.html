@@ -1,8 +1,8 @@
 <h2>介紹</h2>
 <hr>
-<p>本文檔提供有關Thinger.io IoT平台後端控制台的資訊。通過這種方式，您將學習如何管理平台的不同元素，如設備，端點，數據存儲桶或存取令牌。</p>
+<p>本文檔提供有關Thinger.io IoT平台後端控制台的資訊。通過這種方式，您將學習如何管理平台的不同元素，如設備，端點，數據數據存儲區或存取令牌。</p>
 
-<p>登錄Thinger.io帳戶後，預設情況下您將存取<mark>Statistics</mark>部分，您可以在其中檢視有關您帳戶的一些基本資訊，例如設備數量，端點，數據存儲桶等。還有一張地圖，顯示所連接設備目前的大致位置。最後，根據發送或接收的資訊，您可以獲得有關設備用量的一些統計資訊。</p>
+<p>登錄Thinger.io帳戶後，預設情況下您將存取<mark>Statistics</mark>部分，您可以在其中檢視有關您帳戶的一些基本資訊，例如設備數量，端點，數據數據存儲區等。還有一張地圖，顯示所連接設備目前的大致位置。最後，根據發送或接收的資訊，您可以獲得有關設備用量的一些統計資訊。</p>
 <p>在<mark>Statistics</mark>頁面的左側，您將找到主選單，其中包含構建IoT項目時所需的所有平台功能。以下各節將更詳細地介紹這些功能。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/Stadistics.PNG">
 
@@ -76,7 +76,7 @@ thing["millis"] >> outputValue(millis());<!--
 <p>有關API的更多資訊可在此處與您的設備進行交互。</p>
 <h3>設備令牌</h3>
 <hr>
-<p>所有與您連接的設備的交互，即使用上面評論的REST API端點或智慧手機，都需要針對平台進行身份驗證。預設情況下，當您通過Thinger.io控制台與設備進行交互時，您將使用從用戶名和密碼獲取的存取令牌隱式地將所有請求簽核到平台。這種授權允許存取您的所有帳戶資源，因此您可以設定設備，存儲桶等。但是，此授權經常過期（但由瀏覽器自動續訂），並且不能用於授予我們對其他設備的存取權限用戶或平台，因為您將提供對所有帳戶的存取權限。</p>
+<p>所有與您連接的設備的交互，即使用上面評論的REST API端點或智慧手機，都需要針對平台進行身份驗證。預設情況下，當您通過Thinger.io控制台與設備進行交互時，您將使用從用戶名和密碼獲取的存取令牌隱式地將所有請求簽核到平台。這種授權允許存取您的所有帳戶資源，因此您可以設定設備，數據存儲區等。但是，此授權經常過期（但由瀏覽器自動續訂），並且不能用於授予我們對其他設備的存取權限用戶或平台，因為您將提供對所有帳戶的存取權限。</p>
 <p>在這種情況下，可以建立特定的存取令牌以授予對設備的存取權限，甚至可以授予對設備上特定資源的存取權限。此外，通過啟用到期日期，可以及時定義令牌有效性。這樣，如果您需要為第三方工具（如IFTTT，外部網頁，移動電話或任何其他服務）提供對某些設備資源的存取權限，強烈建議您建立設備令牌。</p>
 <p>要建立設備令牌，請打開設備儀表板，然後檢視名為 <strong>“Device Tokens”</strong>的子部分。然後，單擊該框右側的綠色<mark>Add</mark>按鈕。然後，會出現一個視窗，您可以設定不同的參數：</p>
 
@@ -96,24 +96,24 @@ thing["millis"] >> outputValue(millis());<!--
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/deviceEdit.png">
 <p>如果您需要更改設備標識符，則必須刪除該設備並使用所需設備註冊一個新設備。</p>
 
-<h2>數據桶</h2>
+<h2>數據存儲區</h2>
 <hr>
-<p>數據桶是某種虛擬存儲，您可以在其中保存時間序列資訊，如溫度或濕度。但是可以使用它們來存儲任何其他事件，例如運動檢測，車庫門打開，溫度警告等。</p>
+<p>數據存儲區是某種虛擬存儲，您可以在其中保存時間序列資訊，如溫度或濕度。但是可以使用它們來存儲任何其他事件，例如運動檢測，車庫門打開，溫度警告等。</p>
 <p>此資訊可用於在儀表板中繪製資訊，或者可以以不同格式導出以進行脫機處理。</p>
 
-<h3>建立桶</h3>
+<h3>建立數據存儲區</h3>
 <hr>
 <p>要建立數據存儲區，您需要<mark>Data Buckets</mark>通過單擊此部分來存取該功能：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/bucketsTab.PNG">
-<p>要建立存儲桶，只需按下<strong>Add Bucket</strong>按鈕，它將顯示以下畫面：</p>
+<p>要建立數據存儲區，只需按下<strong>Add Bucket</strong>按鈕，它將顯示以下畫面：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/AddBucket.PNG">
 
 <p>這裡有必須設定的參數：</p>
 <ul>
-<li><strong>Bucket Id</strong>：您的存儲桶的唯一標識符。</li>
-<li><strong>Bucket name</strong>：使用代表名稱來記住存儲桶範圍，例如<mark>WeatherData</mark>。</li>
+<li><strong>Bucket Id</strong>：您的數據存儲區的唯一標識符。</li>
+<li><strong>Bucket name</strong>：使用代表名稱來記住數據存儲區範圍，例如<mark>WeatherData</mark>。</li>
 <li><strong>Bucket description</strong>：在這裡填寫任何描述更多細節，如室內溫度和濕度。</li>
-<li><strong>Enabled</strong>：可以啟用或禁用數據桶記錄。只需將其打開即可啟用它。</li>
+<li><strong>Enabled</strong>：可以啟用或禁用數據存儲區記錄。只需將其打開即可啟用它。</li>
 <li><strong>Data source</strong>：
 
 	<ul>
@@ -128,7 +128,7 @@ thing["TempHum"] >> [](pson &out){
   out["humidity"] = dht.readHumidity();
 };<!--
 --></code></pre>
-		<p>也可以讓設備在需要時，即通過在檢測到時發起事件來串流傳輸資訊。在這種情況下，我們可以<mark>Update by Device</mark>在設定存儲桶時使用該選項，並使用此處所述的傳輸串流資源。</p>
+		<p>也可以讓設備在需要時，即通過在檢測到時發起事件來串流傳輸資訊。在這種情況下，我們可以<mark>Update by Device</mark>在設定數據存儲區時使用該選項，並使用此處所述的傳輸串流資源。</p>
 	
 		<p>使用以前的<mark>TempHum</mark>示例資源，可以像在下面的程式片段中那樣完成。</p>
 <pre><code><!--
@@ -140,9 +140,9 @@ thing["TempHum"] >> [](pson &out){
   }
 }<!--
 --></code></pre>
-		<p>這樣，數據桶就訂閱了設備資源，並且在每次串流調用中都註冊了它的資訊。</p>
-		<p><strong>From Write Call</strong>：此選項將允許設定桶的狀態，使用它不會登記在預設情況下的任何資訊，但它只是等待寫調用，無論是從Arduino的函式庫調用<mark>write_bucket</mark>方法或與Sigfox一樣直接呼叫REST API。此功能打開了從不同設備在同一存儲桶中註冊資訊的選項，或者存儲來自未與伺服器永久連接的設備的資訊(處於睡眠模式或使用Sigfox等其他技術的資訊)。</p>
-		<p>以下是ESP8266設備使用以下<mark>write_bucket</mark>功能將資訊寫入存儲桶的示例：</p>
+		<p>這樣，數據存儲區就訂閱了設備資源，並且在每次串流調用中都註冊了它的資訊。</p>
+		<p><strong>From Write Call</strong>：此選項將允許設定數據存儲區的狀態，使用它不會登記在預設情況下的任何資訊，但它只是等待寫調用，無論是從Arduino的函式庫調用<mark>write_bucket</mark>方法或與Sigfox一樣直接呼叫REST API。此功能打開了從不同設備在同一數據存儲區中註冊資訊的選項，或者存儲來自未與伺服器永久連接的設備的資訊(處於睡眠模式或使用Sigfox等其他技術的資訊)。</p>
+		<p>以下是ESP8266設備使用以下<mark>write_bucket</mark>功能將資訊寫入數據存儲區的示例：</p>
 <pre><code><!--
 -->void setup() {
   // define the resource with temperature and humidity
@@ -165,19 +165,19 @@ void loop() {
 </li>
 </ul>
 
-<h3>檢視存儲桶數據</h3>
+<h3>檢視數據存儲區數據</h3>
 <hr>
-<p>一旦設定了數據桶，並且它開始記錄來自設備或寫入調用的數據，它將在表中顯示資訊。每條記錄都包含UTC中的伺服器時間戳（但在控制台的本地時區中顯示）和記錄值。存儲在數據存儲桶中的值可以是單個值，也可以是任何其他JSON文檔。如果JSON文檔由鍵值對組成，如前面的示例所示，它們將以表格格式顯示，就像在下面的畫面截圖中一樣。</p>
+<p>一旦設定了數據存儲區，並且它開始記錄來自設備或寫入調用的數據，它將在表中顯示資訊。每條記錄都包含UTC中的伺服器時間戳（但在控制台的本地時區中顯示）和記錄值。存儲在數據數據存儲區中的值可以是單個值，也可以是任何其他JSON文檔。如果JSON文檔由鍵值對組成，如前面的示例所示，它們將以表格格式顯示，就像在下面的畫面截圖中一樣。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/IoTBucketData.png">
 
-<h3>清除存儲桶數據</h3>
+<h3>清除數據存儲區數據</h3>
 <hr>
-<p>有時清除存儲桶資訊而不刪除整個存儲桶，再次建立和設定它可能很有用。因此，您可以從存儲桶頁面輕鬆清除存儲桶或其中的一部分。在清除過程中，存儲桶仍然可以記錄設備中的資訊。</p>
+<p>有時清除數據存儲區資訊而不刪除整個數據存儲區，再次建立和設定它可能很有用。因此，您可以從數據存儲區頁面輕鬆清除數據存儲區或其中的一部分。在清除過程中，數據存儲區仍然可以記錄設備中的資訊。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/Data-Bucket-Clear.png">
 
-<h3>導出存儲桶數據</h3>
+<h3>導出數據存儲區數據</h3>
 <hr>
-<p>可以以不同的文件格式導出所有存儲的資訊，因此您可以離線處理數據，例如應用人工智能，業務分析，大數據等。這樣，您可以存取存儲桶並設定導出過程，比如選擇文件類型或導出範圍。幾分鐘後，您將收到一封電子郵件，其中包含下載到您的文件（在預設雲控制台中有效期為3個月）。</p>
+<p>可以以不同的文件格式導出所有存儲的資訊，因此您可以離線處理數據，例如應用人工智能，業務分析，大數據等。這樣，您可以存取數據存儲區並設定導出過程，比如選擇文件類型或導出範圍。幾分鐘後，您將收到一封電子郵件，其中包含下載到您的文件（在預設雲控制台中有效期為3個月）。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/DowloadBucket.PNG">
 
 <h2>儀表板</h2>
@@ -227,7 +227,7 @@ void loop() {
 		<ul>
 			<li><strong>From Device</strong>：使用此選項，必須選擇一個設備（必須連接以提供資訊）並指定要繪製的資源。下圖是從設備中選擇設備<mark>deviceA</mark>和資源的示例<mark>millis</mark>。請注意，當從設備提供時間序列視窗小工具時，如果關閉或刷新儀表板，它將不會保留資訊，因為它只是從您的設備到儀表板的即時數據。您還可以在不同的刷新模式之間進行選擇，例如以不同的間隔採樣（可以在線更新），或者圖表由設備更新。</li>
 			<img class="img-fluid" src="http://docs.thinger.io/console/assets/dataSource.PNG">
-			<li><strong>From Data Bucket</strong>：使用此選項，視窗小工具將從給定存儲桶中獲取資訊以在其上繪製歷史資訊。因此，只需選擇在您的帳戶中建立的存儲桶標識符即可。如果存儲桶由多個變數組成，則允許選擇要繪製的變數，如下圖所示。從數據存儲區中選擇資訊時，您需要建立要顯示的數據時間範圍，可以相對於目前時間，或兩個日期之間的絕對時間段。</li>
+			<li><strong>From Data Bucket</strong>：使用此選項，視窗小工具將從給定數據存儲區中獲取資訊以在其上繪製歷史資訊。因此，只需選擇在您的帳戶中建立的數據存儲區標識符即可。如果數據存儲區由多個變數組成，則允許選擇要繪製的變數，如下圖所示。從數據存儲區中選擇資訊時，您需要建立要顯示的數據時間範圍，可以相對於目前時間，或兩個日期之間的絕對時間段。</li>
 			<img class="img-fluid" src="http://docs.thinger.io/console/assets/multipleVariable.PNG">
 			<li><strong>Options</strong>：可以設定一些圖形功能，如樣條線，圖例，軸等。</li>
 			<li><strong>Chart Color</strong>：對於從<strong>device</strong>或<strong>data bucket</strong>中選擇的數據，可以設定系列顏色，根據資源中可用的資訊，它將僅顯示一個可設定的顏色，或每個系列的顏色，如上一個截圖。</li>
@@ -236,7 +236,7 @@ void loop() {
 </ul>
 
 <h4>環形圖</h4>
-<p>環形圖是可以顯示值的圖表，通常以圓整百分比的形式顯示。從這個意義上說，當你知道變數在最大值和最小值之間變動時，這非常有用。在這種情況下，只能表示單個變數，既可以從設備即時更新，也可以從數據桶中更新。</p>
+<p>環形圖是可以顯示值的圖表，通常以圓整百分比的形式顯示。從這個意義上說，當你知道變數在最大值和最小值之間變動時，這非常有用。在這種情況下，只能表示單個變數，既可以從設備即時更新，也可以從數據存儲區中更新。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/DonutChart.png">
 <p>可設定的參數如下：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/DonutChartWidget.png">
@@ -252,7 +252,7 @@ void loop() {
 </ul>
 
 <h4>進度條</h4>
-<p>進度條是一個圖表，可以輕鬆地表示某個操作或過程的進度。從這個意義上講，當您有任何流程需要長期完成並且需要進行監控時，這非常有用。在這種情況下，只能表示單個變數，既可以從設備即時更新，也可以從數據桶中更新。</p>
+<p>進度條是一個圖表，可以輕鬆地表示某個操作或過程的進度。從這個意義上講，當您有任何流程需要長期完成並且需要進行監控時，這非常有用。在這種情況下，只能表示單個變數，既可以從設備即時更新，也可以從數據存儲區中更新。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/ProgressBar.png">
 <p>可設定的參數如下：</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/ProgressbarWidget.png">
@@ -268,7 +268,7 @@ void loop() {
 </ul>
 
 <h4>Google地圖</h4>
-<p>此時，地圖可用於表示地圖中的單個位置。即時跟踪設備非常方便，因為圖表可以通過GPRS連接從連接的設備即時提供。也可以從數據桶中繪製位置，因此也可以跟踪像Sigfox這樣的設備。</p>
+<p>此時，地圖可用於表示地圖中的單個位置。即時跟踪設備非常方便，因為圖表可以通過GPRS連接從連接的設備即時提供。也可以從數據存儲區中繪製位置，因此也可以跟踪像Sigfox這樣的設備。</p>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/GoogleMap.png">
 <p>以下是此小工具與連接設備即時協作的示例：</p>
 <a href="https://www.youtube.com/watch?v=3QDDOPMg22g" target="_blank">
@@ -280,7 +280,7 @@ void loop() {
 	<li><strong>Title</strong>：小工具的可選標題。</li>
 	<li><strong>Subtitle</strong>：小工具的可選副標題。</li>
 	<li><strong>Background</strong>：視窗小工具背景的可選顏色（預設為白色）。</li>
-	<li><strong>Location</strong>：設定如何在地圖中提供位置。可以從連接的<strong>device</strong>或<strong>data bucket</strong>中提供資訊。從數據桶或設備饋送繪圖時，需要將所需的緯度和經度（以度為單位）與存儲桶中或設備資源中存在的變數進行匹配。
+	<li><strong>Location</strong>：設定如何在地圖中提供位置。可以從連接的<strong>device</strong>或<strong>data bucket</strong>中提供資訊。從數據存儲區或設備饋送繪圖時，需要將所需的緯度和經度（以度為單位）與數據存儲區中或設備資源中存在的變數進行匹配。
 	<img class="img-fluid" src="http://docs.thinger.io/console/assets/LocationValue.png"></li>
 	<li><strong>Center</strong>：強制地圖自動將位置保持在中心位置。</li>
 </ul>
@@ -363,10 +363,10 @@ void loop() {
 <hr>
 <p>預設情況下，任何儀表闆對帳戶所有者都是私有的。但是，可以共享儀表板，以便其他人可以存取您的資訊。要共享儀表板，只需輸入儀表板設定並啟用<mark>Share</mark>開關即可。啟用儀表板共享後，將生成一個可以公開共享的URL。</p>
 <div class="alert alert-warning">
-	注意：產生的授權（附加到URL末尾）可用於部分存取您的資源，例如用於提供圖表的設備或存儲桶。檢視生成的存取令牌以獲取更多詳細資訊
+	注意：產生的授權（附加到URL末尾）可用於部分存取您的資源，例如用於提供圖表的設備或數據存儲區。檢視生成的存取令牌以獲取更多詳細資訊
 </div>
 <div class="alert alert-warning">
-	注意：如果通過新增新數據源（設備或存儲桶）來更改儀表板，則必須禁用重新啟用儀表板共享以更新授權。出於安全原因，它不會自動共享新數據源。
+	注意：如果通過新增新數據源（設備或數據存儲區）來更改儀表板，則必須禁用重新啟用儀表板共享以更新授權。出於安全原因，它不會自動共享新數據源。
 </div>
 <img class="img-fluid" src="http://docs.thinger.io/console/assets/ShareDashboard.png">
 
@@ -433,7 +433,7 @@ thing.call_endpoint("ExampleEmail", data);<!--
 
 <h2>存取令牌</h2>
 <hr>
-<p>可以通過REST API調用存取所有Thinger.io後端。事實上，控制台只是一個與API交互的Angular REST客戶端，用於管理設備，存儲桶，端點，儀表板等。必須對每個REST API請求進行身份驗證才能生效，因此，任何客戶端都需要在每次調用時提供授權程式。這樣，存取令牌是向第三方服務或應用程式提供授權以進行API請求的方式，而無需共享用戶名和密碼。此外，通過存取令牌，可以授予對帳戶的特定資源和操作的存取權限，例如讀取特定設備或寫入自定義存儲桶（如本示例中所示）。</p>
+<p>可以通過REST API調用存取所有Thinger.io後端。事實上，控制台只是一個與API交互的Angular REST客戶端，用於管理設備，數據存儲區，端點，儀表板等。必須對每個REST API請求進行身份驗證才能生效，因此，任何客戶端都需要在每次調用時提供授權程式。這樣，存取令牌是向第三方服務或應用程式提供授權以進行API請求的方式，而無需共享用戶名和密碼。此外，通過存取令牌，可以授予對帳戶的特定資源和操作的存取權限，例如讀取特定設備或寫入自定義數據存儲區（如本示例中所示）。</p>
 
 <div class="alert-warning alert">注意：<a href="./Thinger.io/APIHost.html">此</a>處更詳細地介紹瞭如何通過API使用存取令牌。</div>
 
@@ -449,7 +449,7 @@ thing.call_endpoint("ExampleEmail", data);<!--
 	<li><strong>Token Name</strong>：令牌名稱，以便輕鬆識別令牌範圍。</li>
 	<li><strong>Enabled</strong>：控制是啟用還是禁用令牌。</li>
 	<li><strong>Token Permissions</strong>
-		：在本節中，可以定義令牌的範圍或級別存取權限。根據給定的權限，令牌可以存取您帳戶的不同部分。新增新權限通常需要選擇權限類型（存取設備，存儲桶，儀表板等），存取級別（某些特定資源或所有類型）以及允許的操作（全部或部分）。此設定由以下畫面截圖處理：
+		：在本節中，可以定義令牌的範圍或級別存取權限。根據給定的權限，令牌可以存取您帳戶的不同部分。新增新權限通常需要選擇權限類型（存取設備，數據存儲區，儀表板等），存取級別（某些特定資源或所有類型）以及允許的操作（全部或部分）。此設定由以下畫面截圖處理：
 		<img class="img-fluid" src="http://docs.thinger.io/console/assets/AddUserTokenPermission.png">
 		<p>可用的權限類型及其操作定義如下：</p>
 		<ul>
@@ -469,17 +469,17 @@ thing.call_endpoint("ExampleEmail", data);<!--
 					<li><mark>ListDeviceLocations</mark>：授予存取權限以獲取連接的設備位置。</li>
 				</ul>
 			</li>
-			<li><strong>Bucket</strong>：提供對單個存儲桶或所有存儲桶的存取。可以定義以下之間的操作：
+			<li><strong>Bucket</strong>：提供對單個數據存儲區或所有數據存儲區的存取。可以定義以下之間的操作：
 				<ul>
-					<li><mark>ReadBucket</mark>：授予對存儲在存儲桶中的讀取資訊的存取權限。</li>
-					<li><mark>WriteBucket</mark>：授予對存儲桶寫入資訊的存取權限。</li>
-					<li><mark>ExportBucket</mark>：授予存取權限以導出存儲在存儲桶中的資訊。</li>
-					<li><mark>ClearBucket</mark>：授予存取權限以清除存儲在存儲桶中的資訊。</li>
-					<li><mark>ListBuckets</mark>：授予存取權限以列出帳戶存儲桶。</li>
-					<li><mark>DeleteBucket</mark>：授予存取刪除存儲桶的權限。</li>
-					<li><mark>CreateBucket</mark>：授予存取權限以建立新存儲桶。</li>
-					<li><mark>UpdateBucket</mark>：授予存取權限以修改存儲桶設定，如數據源，描述等。</li>
-					<li><mark>ReadBucketConfig</mark>：授予存取權限以讀取目前存儲桶設定。</li>
+					<li><mark>ReadBucket</mark>：授予對存儲在數據存儲區中的讀取資訊的存取權限。</li>
+					<li><mark>WriteBucket</mark>：授予對數據存儲區寫入資訊的存取權限。</li>
+					<li><mark>ExportBucket</mark>：授予存取權限以導出存儲在數據存儲區中的資訊。</li>
+					<li><mark>ClearBucket</mark>：授予存取權限以清除存儲在數據存儲區中的資訊。</li>
+					<li><mark>ListBuckets</mark>：授予存取權限以列出帳戶數據存儲區。</li>
+					<li><mark>DeleteBucket</mark>：授予存取刪除數據存儲區的權限。</li>
+					<li><mark>CreateBucket</mark>：授予存取權限以建立新數據存儲區。</li>
+					<li><mark>UpdateBucket</mark>：授予存取權限以修改數據存儲區設定，如數據源，描述等。</li>
+					<li><mark>ReadBucketConfig</mark>：授予存取權限以讀取目前數據存儲區設定。</li>
 				</ul>
 			</li>
 			<li><strong>Endpoint</strong>：提供對單個端點或所有端點的存取。可以定義以下之間的操作：
