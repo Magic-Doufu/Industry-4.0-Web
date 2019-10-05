@@ -1,11 +1,14 @@
-<img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/67c344bcaf24746012ef751c63731fa96b457e4a.gif">
+<img style="max-height: 10rem;" src="./img/Thinger.io/RPiLogo.png">
+<img style="max-height: 10rem;" src="./img/Thinger.io/LinuxLogo.png">
 <p>
 	這個操作方法將介紹如何在Raspberry Pi中使用thinger.io平台時獲得第一步。這包括如何下載，編譯和執行GitHub存儲庫中可用的主要示例。
 </p>
 <hr>
 <h2>要求</h2>
-Raspberry Pi上運行Raspbian，且可透過終端或SSH存取。像Ubuntu這樣的其他操作系統可能有效，但尚未經過測試。
-在thinger.io控制台中註冊設備並手動保存憑據。如果您需要有關此部分的幫助，請檢視其他操作方法。
+<ul>
+	<li>Raspberry Pi上運行Raspbian，且可透過終端或SSH存取。像Ubuntu這樣的其他操作系統可能也行，但尚未經過測試。</li>
+	<li>在thinger.io控制台中註冊設備並手動保存憑據。如果您需要有關此部分的幫助，請檢視其他操作方法。</li>
+</ul>
 <hr>
 <h2>安裝較新的GCC版本</h2>
 <mark>注意：Raspbian Jessie或更新版本不需要。</mark>
@@ -16,7 +19,7 @@ Raspberry Pi上運行Raspbian，且可透過終端或SSH存取。像Ubuntu這樣
 	新的Raspbian版本，從<mark>Jessie</mark>開始已經提供了一個現代編譯器，但如果您使用較舊的Raspbian版本，則需要安裝更新的編譯器。至少需為GCC 4.8.2以上。請在終端中鍵入<code>gcc -v</code>以檢查是否需要更新編譯器。
 </p>
 <p>
-	必須保持所有系統的更新，因此請首先鍵入以下命令來升級所有已安裝的軟件包。這可能需要一些時間，具體取決於您的Internet連接。
+	必須將系統更新至最新，因此請首先鍵入以下命令來升級所有已安裝的資料包。這可能需要一些時間，具體取決於您的網速。
 </p>
 <pre><code>sudo apt-get update
 sudo apt-get upgrade

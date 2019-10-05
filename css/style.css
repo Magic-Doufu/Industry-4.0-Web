@@ -43,6 +43,7 @@
 			z-index: -1;
 		}
 		.sw-tag{
+			text-align: center;
 			display: inline-block;
 			position: relative;
 			cursor: pointer;
@@ -52,10 +53,9 @@
 			line-height: 2.5rem;
 			min-height: 3rem;
 			max-height: 3rem;
-			margin-right: -15px;
     		margin-left: -15px;
 		}
-		.active.sw-tagI::before, .sw-tagT:hover::before {
+		.active.sw-tagI::before, .sw-tagI:hover::before {
 			background-color: #28a745;
 		}
 		.active.sw-tagT::before, .sw-tagT:hover::before {
