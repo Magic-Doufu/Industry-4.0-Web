@@ -18,11 +18,11 @@
 			background-color: white;
 		}
 		#navbar>div>nav>a {
-			font-family: "微軟正黑體", "jhenghei-UI";
+			font-family:  "Microsoft JhengHei", "Microsoft YaHei", "STHeiti";
 			color: rgb(0,0,0);
 		}
 		.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 ,#navbar>div>nav>a:hover, .nav-active{
-			font-family: "微軟正黑體", "jhenghei-UI";
+			font-family:  "Microsoft JhengHei", "Microsoft YaHei", "STHeiti";
 			font-weight: 600;
 		}
 		.h1, .h2, .h3, h1, h2, h3 {

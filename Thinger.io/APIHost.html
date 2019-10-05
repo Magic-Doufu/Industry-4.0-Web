@@ -24,7 +24,7 @@
 <hr>
 <p>使用者在其帳戶中定義的令牌可以像任何其他存取令牌一樣用於對請求進行身份驗證。但是，與從使用者憑證取得的令牌相反，此令牌預設不會過期，並且使用者可以定義帳戶資源上的存取級別。因此，以這種方式，使用者可以定義用於存取單個設備的令牌，或者用於寫入數據存儲區而不包括其他帳戶資源。</p>
 <p>這種令牌可以直接從Thinger.io控制台中定義<mark>Access Tokens</mark>。下圖說明如何為令牌新增權限以寫入單個數據存儲區，但您可以將其設定為授予對帳戶的不同資源和操作的存取權限。</p>
-<img class="img-fluid" src="http://docs.thinger.io/api/assets/token_permission.png">
+<img class="img-fluid" src="./img/Thinger.io/token_permission.png">
 <h3>從使用者憑證取得令牌</h3>
 <hr>
 <p>此方法允許從使用者憑證取得存取令牌和更新令牌。它應該在使用者第一次登錄應用程式時使用。</p>
@@ -553,7 +553,7 @@ curl \
     // work here with the string
 };<!--
 --></code></pre>
-<p>您可以通過https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/command發送HTTP POST請求以設定目前顏色：</p>
+<p>您可以通過https://api.thinger.io/v2/users/alvarolb/devices/nodemcu/command發送HTTP POST請求以輸入事件：</p>
 <pre><code><!--
 -->{
   "in" : "New customer: 101 today!"
@@ -623,7 +623,7 @@ curl \
   }
 }<!--
 --></code></pre>
-<strong>產量</strong>
+<strong>輸出</strong>
 <pre><code><!--
 -->{
   "out" : {
