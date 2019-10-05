@@ -1,4 +1,4 @@
-<img class="img-fluid" src="./img/Thinger.io/sigfox_thinger.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/sigfox_thinger.png">
 <hr>
 <h2>介紹</h2>
 <p>Sigfox是一家成立於2009年的法國公司，其建立無線網絡以連接電表，智慧手錶和洗衣機等低能耗物體，這些物體需要持續發射和發射少量數據。Sigfox採用專有技術，使用工業，科學和醫療ISM無線電波段進行通訊，該無線電波段在歐洲使用868MHz，在美國使用902MHz。它利用廣泛的信號，可以自由穿過固體物體，被稱為“超窄帶”並且需要很少的能量，被稱為“低功率廣域網（LPWAN）”。該網絡基於單跳星型拓撲，需要移動運營商承載生成的流量。該信號還可用於輕鬆覆蓋大面積區域並到達地下物體。</p>
@@ -19,7 +19,7 @@
 	<li><mark>Enabled</mark>，這需要是真的允許桶寫。</li>
 	<li><mark>Data Source</mark>需要設置<mark>From Write Call</mark>，因為Sigfox設備不會直接連接到平台，而是通過REST API接口推送數據。</li>
 </ul>
-<img class="img-fluid" src="./img/Thinger.io/create_sigfox_bucket.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/create_sigfox_bucket.png">
 <p>填寫表單後，只需單擊Add Bucket即可建立數據存儲區。</p>
 <hr>
 <h3>建立存取令牌</h3>
@@ -31,7 +31,7 @@
 	<li><mark>Enabled</mark>，必須是真的允許使用令牌。如果您願意，可以隨時禁用它。</li>
 	<li><mark>Token permissions</mark>，這將配置為訪問我們的Bucket資源，<mark>SmartEverything</mark>在這種情況下，使用該<mark>WriteBucket</mark>操作。</li>
 </ul>
-<img class="img-fluid" src="./img/Thinger.io/create_sigfox_token.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/create_sigfox_token.png">
 <p>填寫表單後，只需單擊“Add Bucket”即可建立令牌。此時，將出現令牌值。在我們的例子中，產生的令牌如下。保留此令牌，因為它將在Sigfox端使用。</p>
 <pre><code><!--
 	-->eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJTbWFydEV2ZXJ5dGhpbmciLCJ1c3IiOiJhbHZhcm9sYiJ9.0Qb48c_ToBiIVcCOdvXU2Kn51mTnGLDcN44shVRzNls<!--
@@ -49,9 +49,9 @@
 	<li>單擊<mark>Callbacks</mark>左側選單，然後新增一個選單。</li>
 	<li>在此步驟中，您需要選擇要建立<mark>Custom Callback</mark>的端口，因為我們需要調用Sigfox後端不直接支援的端點。</li>
 </ul>
-<img class="img-fluid" src="./img/Thinger.io/create_sigfox_callback.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/create_sigfox_callback.png">
 <p>然後，我們需要設定回調以寫入我們的數據存儲區。如果您想了解設定的外觀，請參考我們的截圖。但你會在截圖中看到每個字段的詳細信息。</p>
-<img class="img-fluid" src="./img/Thinger.io/sigfox_callback.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/sigfox_callback.png">
 <p>我們的示例中的配置如下：</p>
 <ul>
 	<li><mark>Type</mark>是<mark>DATA</mark>有<mark>UPLINK</mark>，因為我們希望我們的發送設備中的數據。</li>
@@ -94,15 +94,15 @@
 <h4>Arduino MKRFOX1200</h4>
 <hr>
 <p>Arduino MKRFOX1200旨在為尋求將SigFox連接添加到其項目中的製造商提供實用且經濟高效的解決方案，同時具有最少的網路消耗。它基於Microchip SAMD21和ATA8520 SigFox模塊。可以使用典型用途的2節AA 1.5V電池運行六個月以上。該設計包括使用兩節1.5V AA或AAA電池或外部5V為電路板供電的能力。</p>
-<img class="img-fluid" src="./img/Thinger.io/arduino_mkrfox1200.jpeg">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/arduino_mkrfox1200.jpeg">
 <h5>初始化</h5>
 <hr>
 <p>要對此設備進行編輯，我們將使用Arduino IDE。在這種情況下，有必要安裝或更新電路板工具組，可以直接從電路板管理器完成，搜尋<mark>mrk</mark>和選擇Arduino SAMD電路板。</p>
-<img class="img-fluid" src="./img/Thinger.io/mkrfox1200_install.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/mkrfox1200_install.png">
 <p>您還需要安裝函式庫管理器中提供的<mark>Arduino SigFox for MKRFox1200</mark>函式庫，同時也必需安裝<mark>Arduino Low Power</mark>和<mark>RTCZero</mark>函式庫。</p>
-<img class="img-fluid" src="./img/Thinger.io/arduino_sigfox_library.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/arduino_sigfox_library.png">
 <p>安裝成功後，我們現在可以在Arduino IDE中選擇Board。只需選擇<mark>Arduino MKRFOX12000</mark>即可。您還必須像任何其他Arduino板一樣選擇裝置所連接的端口。</p>
-<img class="img-fluid" src="./img/Thinger.io/arduino_mkr1200_board_selection.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/arduino_mkr1200_board_selection.png">
 <p>您可以通過閃爍以下示例來檢查所有內容是否已啟動並執行，該示例將提供有關模組的訊息，例如電路板ID和PAC。在Sigfox中註冊設備需要此信息。</p>
 <pre><code><!--
 -->#include <SigFox.h>
@@ -240,14 +240,14 @@ void loop() {
 <p><strong>請注意，</strong>如果您想深度睡眠Arduino MRKFOX1200，即從電池運行時，您可以取消註釋<mark>LowPower.sleep</mark>函數調用並註釋<mark>sleep</mark>。你也可以避免使用<mark>Serial</mark>，而<mark>SigFox.debug()</mark>那隻是為了偵錯目的。在睡眠模式下，設備需要手動重置才能再次燒錄。</p>
 <h4>SmartEverything</h4>
 <p>SmartEverything是專為快速原型設計而設計的物聯網設備，因為它完全相容於Arduino，可以使用多個傳感器，如MEMS壓力傳感器，接近和環境光傳感器，iNEMO 9軸慣性模組，濕度和溫度傳感器，甚至NFC NTAG，或GPS / GNSS集成天線。如果這些功能本身非常有趣，該主板還集成了藍牙低功耗（BLE），當然還有Sigfox模組（Telit LE51-868 S 868MHz模組）。</p>
-<img class="img-fluid" src="./img/Thinger.io/sigfox_smarteverything_thinger.jpg">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/sigfox_smarteverything_thinger.jpg">
 <p>憑藉這些出色的功能，我們可以將電路板用於多種用途，例如使用GPS進行車輛追蹤，建立微型氣象站，使用加速度計偵測振動和衝擊，以及任何其他用例。在這個例子中，我們將僅記錄溫度和濕度。這樣，我們建立了一個簡單的程式碼，每10分鐘就會記錄一次溫度和濕度。</p>
 <h5>初始化</h5>
 <hr>
 要對此設備進行編程，我們將使用Arduino IDE。在這種情況下，需要安裝電路板工具鏈，可以直接從電路板管理器完成，搜尋<mark>smarteverything</mark>和選擇Axel Elettronica的箭頭板。
-<img class="img-fluid" src="./img/Thinger.io/smarteverything_install_arduino.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/smarteverything_install_arduino.png">
 <p>安裝成功後，我們現在可以在Arduino IDE中選擇開發板。只需選擇SmartEverything Fox（Native USB Port）即可。您還必須像任何其他Arduino板一樣選擇設備所連接的端口。</p>
-<img class="img-fluid" src="./img/Thinger.io/smarteverything_sigfox_board.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/smarteverything_sigfox_board.png">
 <h5>將數據推送到Sigfox</h5>
 <hr>
 <p>現在是時候編寫一個簡單的程式來將我們的傳感器讀數發送給Sigfox。提供的示例程式基本上將在設置中初始化Sigfox調製解調器，傳感器和USB串列端口以進行一些偵錯。然後，在<mark>Loop()</mark>中，我們的程式將讀取溫度和濕度，並將數據傳輸到Sigfox。它還將檢查傳輸是否可以在成功時閃爍綠色LED或否則為紅色LED。在那之後，它會睡10分鐘，正如我們在介紹中所提到的，Sigfox每天只允許140條消息。</p>
@@ -332,11 +332,11 @@ void loop() {
 <h2>檢查設定</h2>
 <p>在我們同時執行設備程式碼，設定Sigfox回調以及建立數據存儲區之後，我們應該立即檢查所有內容是否已啟動並運行。</p>
 <p>我們可以從檢查Sigfox平台是否正在接收我們的訊息開始。只需轉到Sigfox後端的設備，然後打開Messages左側面板上的部分。我們應該看到類似於以下截圖畫面的內容，其中已收到一些消息。您還可以查看正在發送的有效負載（十六進制）以及鏈路品質，時間戳或回調結果等其他訊息。</p>
-<img class="img-fluid" src="./img/Thinger.io/sigfox_messages.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/sigfox_messages.png">
 <p>這裡有趣的是檢查我們的回調響應是否成功，因為回調圖示會根據結果從綠色變為紅色。在我們的例子中，我們的回調是綠色的，所以請求沒問題。您可以單擊該圖示以檢視伺服器響應，即200 OK HTTP響應。</p>
-<img class="img-fluid" src="./img/Thinger.io/sigfox_callback_response.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/sigfox_callback_response.png">
 <p>然後我們還可以檢查我們的數據存儲區是否正在填充從Sigfox收到的數據。因此，在Thinger.io中打開數據存儲區應如下所示。太好了！我們現在存儲了數據。請注意，存儲區中的列只是我們在Sigfox回調中設定的字段。</p>
-<img class="img-fluid" src="./img/Thinger.io/sigfox_bucket_data.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/sigfox_bucket_data.png">
 <h2>建立儀表板</h2>
 <p>現在我們已將數據存儲在存儲區中，我們可以從Sigfox數據建立即時儀表板。您可以建立小部件，選擇您的存儲區作為數據源，這就是全部！</p>
-<img class="img-fluid" src="./img/Thinger.io/sigfox_dashboard.png">
+<img class="img-fluid" src="./img/Thinger.io/Sigfox/sigfox_dashboard.png">
