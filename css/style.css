@@ -10,11 +10,11 @@
 			padding: 0px;
 			overflow-y: auto;
 		}
-		.card {
+		.menu.card {
 			border-radius: 0px;
 			border: 0px;
 		}
-		.card-header {
+		.menu.card-header {
 			background-color: white;
 		}
 		#navbar>div>nav>a {
@@ -91,6 +91,9 @@
 		}
 		pre code{
 			color: #e83e8c;
+		}
+		code {
+			margin: 0.15rem;
 		}
 		@media (max-width: 767.98px) {
 			.L-side {
