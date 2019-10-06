@@ -98,4 +98,7 @@
 				height: auto !important;
 				box-shadow: 1px 1px 5px #888;
 			}
+			#ex_nav {
+				display: none;
+			}
 		}

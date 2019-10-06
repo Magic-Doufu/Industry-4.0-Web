@@ -1,4 +1,7 @@
 <h2>API HOST</h2>
+<div class="alert alert-warning" role="alert">
+  此頁面重整中，近期將會以不一樣的方式呈現。
+</div>
 <hr>
 <p>本文檔中描述的所有示例都基於相對路徑定義URL端點，假設主機只是您的伺服器IP，網域或僅預設的Thinger.io伺服器。對於通過預設Thinger.io雲發出的所有呼叫，主機地址將如下：</p>
 <a href="https://api.thinger.io">https://api.thinger.io</a>
@@ -24,7 +27,7 @@
 <hr>
 <p>使用者在其帳戶中定義的令牌可以像任何其他存取令牌一樣用於對請求進行身份驗證。但是，與從使用者憑證取得的令牌相反，此令牌預設不會過期，並且使用者可以定義帳戶資源上的存取級別。因此，以這種方式，使用者可以定義用於存取單個設備的令牌，或者用於寫入數據存儲區而不包括其他帳戶資源。</p>
 <p>這種令牌可以直接從Thinger.io控制台中定義<mark>Access Tokens</mark>。下圖說明如何為令牌新增權限以寫入單個數據存儲區，但您可以將其設定為授予對帳戶的不同資源和操作的存取權限。</p>
-<img class="img-fluid" src="./img/Thinger.io/token_permission.png">
+<img class="img-fluid" src="./img/Thinger.io/API/token_permission.png">
 <h3>從使用者憑證取得令牌</h3>
 <hr>
 <p>此方法允許從使用者憑證取得存取令牌和更新令牌。它應該在使用者第一次登錄應用程式時使用。</p>
