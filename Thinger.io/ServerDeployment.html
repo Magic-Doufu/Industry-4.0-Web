@@ -7,7 +7,7 @@
 sudo apt upgrade<!--
  --></code></pre>
 
-<hr><h3 id="安裝-mongodb">安裝 MongoDB</h3>
+<hr><h3 ex_nav id="mongodb">安裝 MongoDB</h3>
 <p>Thinger.io IoT 平台需要 MongoDB 伺服器來存儲一些伺服器資訊。</p>
 <p>因此，第一步是在主機中安裝 MongoDB 伺服器。</p>
 <p>以下資訊來自官方文件。<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/</a></p>
@@ -90,7 +90,7 @@ sudo systemctl enable mongodb
 ene 21 10:56:13 supermicro systemd[1]: Started High-performance, schema-free document-oriented database.
 </code></pre></div></div>
 
-<hr><h3 id="安裝-thingerio-伺服器">安裝 THINGER.IO 伺服器</h3>
+<hr><h3 ex_nav id="安裝-thingerio-伺服器">安裝 THINGER.IO 伺服器</h3>
 <hr><h4 id="使用-snap-指令">使用 Snap 指令</h4>
 
 <p>安裝伺服器就像安裝 Snap 套件一樣簡單。只需將以下命令輸入您的終端即可。<br>
@@ -101,7 +101,7 @@ ene 21 10:56:13 supermicro systemd[1]: Started High-performance, schema-free doc
 <hr><h4 id="使用-ubuntu-store">使用 Ubuntu Store</h4>
 <p>您也可以通過從 Ubuntu Store 來安裝伺服器。只需搜尋 Thinger.io，就會出現套件包。</p>
 
-<hr><h3 id="確認伺服器服務狀態">確認伺服器服務狀態</h3>
+<hr><h3 ex_nav id="確認伺服器服務狀態">確認伺服器服務狀態</h3>
 <p>您可以通過執行以下命令來檢查 Thinger.io Daemon 服務的狀態：<br>
 <div class="codestick">
   <code class="highlighter-rouge">sudo service snap.thinger-maker-server.thingerd status</code>
