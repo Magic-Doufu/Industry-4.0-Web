@@ -1,11 +1,11 @@
 <img class="img-fluid" src="./img/Thinger.io/Sigfox/sigfox_thinger.png">
 <hr>
-<h2>介紹</h2>
+<h2 id="Introduction" ex_nav>介紹</h2>
 <p>Sigfox是一家成立於2009年的法國公司，其建立無線網絡以連接電表，智慧手錶和洗衣機等低能耗物體，這些物體需要持續發射和發射少量數據。Sigfox採用專有技術，使用工業，科學和醫療ISM無線電波段進行通訊，該無線電波段在歐洲使用868MHz，在美國使用902MHz。它利用廣泛的信號，可以自由穿過固體物體，被稱為“超窄帶”並且需要很少的能量，被稱為“低功率廣域網（LPWAN）”。該網絡基於單跳星型拓撲，需要移動運營商承載生成的流量。該信號還可用於輕鬆覆蓋大面積區域並到達地下物體。</p>
 <p>Sigfox與LPWAN行業的許多公司合作，如德州儀器公司或Silicon Labs公司。ISM無線電頻帶支持雙向通訊。現有的Sigfox通訊標準每天最多支援140個上傳訊息，每個訊息可以承載12字節的有效載荷（不包括訊息表頭和傳輸資訊）和每天最多4個下載訊息，每個訊息可以承載有效載荷8個字節。如果您想了解有關Sigfox的更多詳細資訊，請訪問Sigfox Developer Portal。</p>
 <p>本文檔將介紹如何將SigFox設備及其數據集成到Thinger.io平台中。在第一步中，我們將回顧如何設定Thinger.io資源，然後在Sigfox方面，我們將樹豆與平台的通訊以推送我們的傳感器數據。</p>
 <hr>
-<h2>Thinger.io 中的步驟</h2>
+<h2 id="ThingerIoGuide" ex_nav>Thinger.io 端指引</h2>
 <p>我們需要在Thinger.io帳戶中設定一些資源，比如定義一個存儲Sigfox數據的地方，以及授予Sigfox平台的存取權以在我們的帳戶中存儲數據。所需步驟在以下小節中定義。</p>
 <hr>
 <h3>建立數據存儲區</h3>
@@ -37,7 +37,7 @@
 	-->eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJTbWFydEV2ZXJ5dGhpbmciLCJ1c3IiOiJhbHZhcm9sYiJ9.0Qb48c_ToBiIVcCOdvXU2Kn51mTnGLDcN44shVRzNls<!--
 --></code></pre>
 <hr>
-<h2>Sigfox端的步驟</h2>
+<h2 id="SigfoxGuide" ex_nav>Sigfox 端指引</h2>
 <p>此時，我們已經設定了在Thinger.io數據存儲區上接收數據所需的一切。下一步是使用我們的令牌標識符和我們生成的令牌設定Sigfox後端以將數據推送給它。</p>
 <hr>
 <h3>建立Sigfox回調</h3>
@@ -89,7 +89,7 @@
 </ul>
 <p>完成這些步驟後，我們現在應該完全設定回調以將數據推送到數據存儲區。</p>
 <hr>
-<h3>對設備進行編寫程式</h3>
+<h3 id="Coding" ex_nav>編寫程式</h3>
 <p>現在是時候編寫我們的Sigfox設備，它將把數據發送到我們的數據存儲區。在這種情況下，我們提供了SmartEverything設備和Arduino MKRFOX1200的示例。</p>
 <h4>Arduino MKRFOX1200</h4>
 <hr>
@@ -329,7 +329,7 @@ void loop() {
 }<!--
 --></code></pre>
 <hr>
-<h2>檢查設定</h2>
+<h2 id="Settings" ex_nav>檢查設定</h2>
 <p>在我們同時執行設備程式碼，設定Sigfox回調以及建立數據存儲區之後，我們應該立即檢查所有內容是否已啟動並運行。</p>
 <p>我們可以從檢查Sigfox平台是否正在接收我們的訊息開始。只需轉到Sigfox後端的設備，然後打開Messages左側面板上的部分。我們應該看到類似於以下截圖畫面的內容，其中已收到一些消息。您還可以查看正在發送的有效負載（十六進制）以及鏈路品質，時間戳或回調結果等其他訊息。</p>
 <img class="img-fluid" src="./img/Thinger.io/Sigfox/sigfox_messages.png">

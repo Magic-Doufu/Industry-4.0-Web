@@ -2,7 +2,7 @@
   各大開發板如非同款，使用時請參考供應商提供的說明書來連接平台，以下幾款為團隊實際測試成功連接平台的範例參考。
 </div>
 <hr>
-<h2 ex_nav ex_nav id="ESP32">ESP32 / ESP8266</h2>
+<h2 ex_nav id="ESP32">ESP32 / ESP8266</h2>
 <h3>前置作業</h3>
 <p>本範例使用<mark>BPI UNO32</mark>作為實驗板</p>
 <img class="img-fluid" src="./img/ArduinoDevice/ESP32/Board.jpg">
@@ -189,7 +189,7 @@ ThingerCC3000 <span style="color: #0000FF">thing</span>(USERNAME, DEVICE_ID, DEV
 </pre></td></tr></table></div>
 <p><a internal href="">更多範例</a></p>
 <hr>
-<h2 ex_nav ex_nav id="MKR1000">MKR1000</h2>
+<h2 ex_nav id="MKR1000">MKR1000</h2>
 <p>本處使用Arduino MKR1000進行操作</p>
 <img class="img-fluid" src="./img/ArduinoDevice/MKR1000/Board.jpg?20191002">
 <h3>前置作業</h3>
@@ -353,7 +353,7 @@ ThingerYun <span style="color: #0000FF">thing</span>(USERNAME, DEVICE_ID, DEVICE
 </pre></td></tr></table></div>
 <p><a internal href="">更多範例</a></p>
 <hr>
-<h2 ex_nav ex_nav id="LinkitONE">Linkit ONE</h2>
+<h2 ex_nav id="LinkitONE">Linkit ONE</h2>
 <img class="img-fluid" src="./img/ArduinoDevice/LinkitONE/Board.jpg">
 <h3>前置作業</h3>
 <p>建議先不要將<mark>Linkit ONE</mark>連接到電腦</p>
@@ -455,22 +455,24 @@ ThingerLinkItOneWifi <span style="color: #0000FF">thing</span>(USERNAME, DEVICE_
 </pre></td></tr></table></div>
 <p><a internal href="">更多範例</a></p>
 <hr>
-<h2 ex_nav ex_nav id="CC3200">CC3200</h2>
+<h2 ex_nav id="CC3200">CC3200</h2>
 <p>本開發板由基於 Arduino IDE 開發的 energia 提供支援，操作前請先由此 <a target="_blank" href="https://energia.nu/download/">下載適當版本energia</a></p>
 <p>本例採用開發板為amomcu所開發的CC3200實驗板，會選這款主要是其售價較為親民。以下教程在Switch開關上或許不適用於TI所提供之CC3200 LaunchPadXL</p>
-<img src="">
+<img class="img-fluid" src="./img/ArduinoDevice/CC3200/Energia.jpg">
+<p>amomcu之CC3200開發板</p>
+<img class="img-fluid" src="./img/ArduinoDevice/CC3200/Board.jpg">
 <hr>
 <h3>重要的開關簡介</h3>
-<img src="">
-<p>此開發板利用CH340來對CC3200進行寫入，需要開啟該SW電腦才能識別該開發板。</p>
-<img src="">
-<img src="">
-<p>此開關用於表示燒錄或執行狀態，開啟燒錄狀態請將SOP2打開(向上推)，並確認連接CC3200的RX與TX開關為全開狀態</p>
-<img src="">
-<p>此開發板利用CH340來對CC3200進行寫入，需要開啟該SW電腦才能識別該開發板。</p>
+<p>SOP開關 Flash模式</p>
+<img class="img-fluid" src="./img/ArduinoDevice/CC3200/FlashMode.jpg">
+<p>SOP開關 Run模式</p>
+<img class="img-fluid" src="./img/ArduinoDevice/CC3200/RunMode.jpg">
+<p>確認連接CC3200的RX與TX開關為全開狀態(下圖中間)才可正常燒錄</p>
+<p>此開發板利用CH340來對CC3200進行寫入，需要開啟該SW電腦才能識別該開發板。(見下圖中間偏右 CH340G_VCC)</p>
+<img class="img-fluid" src="./img/ArduinoDevice/CC3200/CH340G.jpg">
 <hr>
 <h3>安裝開發板</h3>
-<img src="">
+<img class="img-fluid" src="./img/ArduinoDevice/CC3200/EnergiaBoardManager.jpg">
 <hr>
 <h3>範例程式</h3>
 <p>燒錄範例程式，將認證資訊修改為Server上設定的Device細節即可。</p>
@@ -535,6 +537,3 @@ ThingerWifi <span style="color: #0000FF">thing</span>(USERNAME, DEVICE_ID, DEVIC
 <h3>前置作業</h3>
 <h3>範例程式</h3>
 <p><a internal href="">更多範例</a></p>
-<script type="text/javascript">
-    ex_nav();
-</script>

@@ -1,17 +1,17 @@
-<h2>Raspbian & Linux</h2>
+<h2 id="RaspbianLinux" ex_nav>Raspbian & Linux</h2>
 <img style="max-height: 10rem;" src="./img/Thinger.io/Overview/RPiLogo.png">
 <img style="max-height: 10rem;" src="./img/Thinger.io/Overview/LinuxLogo.png">
 <p>
 	這個操作方法將介紹如何在Raspberry Pi中使用thinger.io平台時獲得第一步。這包括如何下載，編譯和執行GitHub存儲庫中可用的主要示例。
 </p>
 <hr>
-<h2>要求</h2>
+<h2 id="要求" ex_nav>要求</h2>
 <ul>
 	<li>Raspberry Pi上運行Raspbian，且可透過終端或SSH存取。像Ubuntu這樣的其他操作系統可能也行，但尚未經過測試。</li>
 	<li>在thinger.io控制台中註冊設備並手動保存憑據。如果您需要有關此部分的幫助，請檢視其他操作方法。</li>
 </ul>
 <hr>
-<h2>安裝較新的GCC版本</h2>
+<h2 id="安裝較新的GCC版本" ex_nav>安裝較新的GCC版本</h2>
 <mark>注意：Raspbian Jessie或更新版本不需要。</mark>
 <p>
 	必需使用現代編譯器來構建thinger.io示例。
@@ -68,7 +68,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave 
 	<code>sudo update-alternatives --config gcc</code>
 </div>
 <hr>
-<h2>安裝其他依賴項</h2>
+<h2 id="安裝依賴項" ex_nav>安裝依賴項</h2>
 <p>
 	如果您需要將thinger安裝為守護程式，則必須使用CMake編譯示例。如果我們想要使用TLS安全地連接到平台，還需要安裝Open SSL。
 </p>
@@ -85,7 +85,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave 
 	<code>sudo apt-get install cmake libssl-dev</code>
 </div>
 <hr>
-<h2>從平台開始</h2>
+<h2 id="啟程" ex_nav>啟程</h2>
 <p>
 	從GitHub下載最新的Linux客戶端版本。
 </p>
@@ -136,9 +136,9 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave 
 </p>
 <img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/7b3bf8846f66eb57b422a803ac157560ea608e19.png">
 <hr>
-<h2>將客戶端安裝為守護程序</h2>
+<h2 id="將客戶端安裝為常駐程式" ex_nav>將客戶端安裝為常駐程式</h2>
 <p>
-	此時，如果關閉終端或結束SSH連接，客戶端將會停止運作。但是，您可以將客戶端安裝為守護程序服務，因此即使您的Raspberry重新啟動它也會自動啟動。
+	此時，如果關閉終端或結束SSH連接，客戶端將會停止運作。但是，您可以將客戶端安裝為常駐程式服務，因此即使您的Raspberry重新啟動它也會自動啟動。
 </p>
 <p>
 	要安裝已作為服務運行的客戶端，請轉到Raspberry安裝文件夾：
@@ -150,14 +150,14 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave 
 	然後運行<mark>install.sh</mark>腳本，將編譯並安裝客戶端作為服務。
 </p>
 <p>
-	此步驟將複製init腳本文件到<mark>/etc/init.d/thinger</mark>，並將已編譯的二進制文件複製到<mark>/usr/local/bin/thinger</mark>。因此，如果要刪除客戶端守護程序，可以停止該服務並刪除這些文件。
+	此步驟將複製init腳本文件到<mark>/etc/init.d/thinger</mark>，並將已編譯的二進制文件複製到<mark>/usr/local/bin/thinger</mark>。因此，如果要刪除客戶端常駐程式，可以停止該服務並刪除這些文件。
 </p>
 <div class="codestick">
 	<code>chmod +x install.sh ./install.sh</code>
 </div>
 <p></p>
 <div class="alert alert-warning">
-	請注意，此指令將在後台安裝並執行thinger.io客戶端作為守護程序，因此如果再次調用run.sh運行獨立客戶端的腳本，則兩個客戶端將連接到平台並持續斷開連接。如果需要停止後台客戶端，請使用此命令。
+	請注意，此指令將在後台安裝並執行thinger.io客戶端作為常駐程式，因此如果再次調用run.sh運行獨立客戶端的腳本，則兩個客戶端將連接到平台並持續斷開連接。如果需要停止後台客戶端，請使用此命令。
 </div>
 <div class="codestick">
 	<code>sudo service thinger stop</code>
