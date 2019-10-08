@@ -70,6 +70,19 @@ ThingerEthernet <span style="color: #0000FF">thing</span>(<span style="color: #B
 
 <p>請根據您在控制台中註冊設備時填寫或產生的<code>deviceId</code>與<code>deviceCredential</code>來進行修改，<code>username</code>則為您登入雲端控制台的使用者名稱(不是e-mail)。</p>
 <p><strong>將設備連線到伺服器的動作必須在<code>setup()</code>方法前完成。</strong></p>
+
+<hr><h3 ex_nav id="開啟偵錯輸出">開啟偵錯輸出</h3>
+<p>Thinger.io庫提供了對其活動的廣泛記錄，這在需要解決身份驗證和Wi-Fi連接問題時尤其有用。在草圖中包含以下定義，但在任何其他包含之前確保它首先出現（據報導在某些板上會導致崩潰）。</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #BC7A00">#define _DEBUG_</span>
+</pre></td></tr></table></div>
+<p>由於所有除錯訊息都通過<mark>Serial</mark>顯示，因此還需要啟用<mark>Serial</mark>。請在<mark>Setup</mark>方法中啟用它。</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">void</span> <span style="color: #0000FF">setup</span>() {
+  Serial.begin(<span style="color: #666666">115200</span>);
+}
+</pre></td></tr></table></div>
+
 <hr><h3 ex_nav id="新增資源">新增資源</h3>
 <p>
     在 Thinger.io 平台中，每個設備都可以定義多個資源。您可以認為資源是您可以感測或觸發的任何資源。<br/>
@@ -82,13 +95,13 @@ ThingerEthernet <span style="color: #0000FF">thing</span>(<span style="color: #B
     資源的類型共有三種，將在以下各節中進行說明。
 </p>
 <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+  <div class="nav nav-tabs" role="tablist">
     <a class="nav-item nav-link active" id="nav-input-tab" data-toggle="tab" href="#nav-input" role="tab" aria-controls="nav-input" aria-selected="true"><strong>輸入類資源</strong></a>
     <a class="nav-item nav-link" id="nav-output-tab" data-toggle="tab" href="#nav-output" role="tab" aria-controls="nav-output" aria-selected="false"><strong>輸出類資源</strong></a>
     <a class="nav-item nav-link" id="nav-IO-tab" data-toggle="tab" href="#nav-IO" role="tab" aria-controls="nav-IO" aria-selected="false"><strong>輸入輸出資源</strong></a>
   </div>
 </nav>
-<div class="tab-content" id="nav-tabContent">
+<div class="tab-content">
     <div class="tab-pane fade show active" id="nav-input" role="tabpanel" aria-labelledby="nav-input-tab">
         <p>
             如果您需要控制或啟動IoT設備，則需要定義輸入資源。通過這種方式，輸入資源可以為您的設備提供資訊。<br/>
@@ -397,14 +410,14 @@ thing[<span style="color: #BA2121">&quot;yaw&quot;</span>] <span style="color: #
 使用這種定義的優點是，當您從API查詢時，您的資源將能夠處理狀態。<br>
 例如，如果啟用或禁用了數位引腳，則可以在API資源管理器或儀表板中檢視其目前狀態。<br></p>
 <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+  <div class="nav nav-tabs" role="tablist">
     <a class="nav-item nav-link active" id="nav-dig-tab" data-toggle="tab" href="#nav-dig" role="tab" aria-controls="nav-dig" aria-selected="true"><strong>控制數位引腳</strong></a>
     <a class="nav-item nav-link" id="nav-source-tab" data-toggle="tab" href="#nav-source" role="tab" aria-controls="nav-source" aria-selected="false"><strong>定義輸出資源</strong></a>
     <a class="nav-item nav-link" id="nav-var-tab" data-toggle="tab" href="#nav-var" role="tab" aria-controls="nav-var" aria-selected="false"><strong>修改變數</strong></a>
     <a class="nav-item nav-link" id="nav-servo-tab" data-toggle="tab" href="#nav-servo" role="tab" aria-controls="nav-servo" aria-selected="false"><strong>控制伺服馬達</strong></a>
   </div>
 </nav>
-<div class="tab-content" id="nav-tabContent">
+<div class="tab-content">
     <div class="tab-pane fade show active" id="nav-dig" role="tabpanel" aria-labelledby="nav-dig-tab">
     <p>
         這種資源將允許定義用於聲明對數位引腳的控制的資源，因此您可以交替開啟/關閉狀態，可以用於控制LED，繼電器，燈等。<br>
@@ -455,277 +468,461 @@ thing[<span style="color: #BA2121">&quot;relay&quot;</span>] <span style="color:
 </pre></td></tr></table></div>
     </div>
 </div>
-<!--20191006進度-->
-<div class="alert alert-warning" role="alert">
-    以下區域重整中，近期將會以不一樣的方式呈現。
-</div>
-<hr><h3  id="不同裝置間的橫向溝通">不同裝置間的橫向溝通</h3>
+<hr>
+<h3 ex_nav id="裝置間的橫向溝通">裝置間的橫向溝通</h3>
 <p>在Thinger.io中，設備可以在它們之間進行通信。這裡有兩種狀況。一個是來自同一帳戶的設備之間的通信，另一個是來自不同帳戶的設備之間的通信。我們將描述兩種不同的方法：</p>
-<hr><h4 id="裝置位於同一個帳戶管理下">裝置位於同一個帳戶管理下</h4>
-<p>對於此用例，設備可以使用特定方法與其他設備進行通信。假設我們有一個<mark>deviceA</mark>，並且<mark>deviceB</mark>想要在它們之間進行通信。</p>
-
-在<mark>deviceA</mark>定義如下面的例子一樣的資源。
-<pre><code>setup(){
-    thing[“resourceOnA”] = [](){
-        Serial.println("Someone is calling me!");
+<nav>
+    <div class="nav nav-tabs" role="tablist">
+        <a class="nav-item nav-link active" id="nav-same-account-tab" data-toggle="tab" href="#nav-same-account" role="tab" aria-controls="nav-same-account" aria-selected="true">裝置位於同一個帳戶管理下</a>
+        <a class="nav-item nav-link" id="nav-different-account-tab" data-toggle="tab" href="#nav-different-account" role="tab" aria-controls="nav-different-account" aria-selected="false">裝置位於不同帳戶</a>
+    </div>
+</nav>
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="nav-same-account" role="tabpanel" aria-labelledby="nav-same-account-tab">
+        <p>對於此用例，設備可以使用特定方法與其他設備進行通信。假設我們有一個<mark>deviceA</mark>，並且<mark>deviceB</mark>想要在它們之間進行通信。</p>
+        <p>在<mark>deviceA</mark>定義如下面的例子一樣的資源。</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5</pre></td><td><pre style="margin: 0; line-height: 125%">setup(){
+    thing[<span style="border: 1px solid #FF0000">“</span>resourceOnA<span style="border: 1px solid #FF0000">”</span>] <span style="color: #666666">=</span> [](){
+        Serial.println(<span style="color: #BA2121">&quot;Someone is calling me!&quot;</span>);
     };
 }
-</code></pre>
-<p><mark>deviceB</mark>可以通過運行以下命令輕鬆調用此方法。</p>
-<pre><code>loop(){
+</pre></td></tr></table></div>
+        <p><mark>deviceB</mark>可以通過運行以下命令輕鬆調用此方法。</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5</pre></td><td><pre style="margin: 0; line-height: 125%">loop(){
     thing.handle();
-    // be sure to call it at an appropiate rate
-    thing.call_device("deviceA", "resourceOnA");
+    <span style="color: #408080; font-style: italic">// be sure to call it at an appropiate rate</span>
+    thing.call_device(<span style="color: #BA2121">&quot;deviceA&quot;</span>, <span style="color: #BA2121">&quot;resourceOnA&quot;</span>);
 }
-</code></pre>
-<p><mark>deviceA</mark>也可以定義具有一些預期輸入的資源。</p>
-<pre><code>setup(){
-    thing[“resourceOnA”] << [](pson& in){
-        int val1 = in["anyValue1"];
-        float val2 = in["anyValue2"];
-        // Work with the updated parameters here
+</pre></td></tr></table></div>
+        <p><mark>deviceA</mark>也可以定義具有一些預期輸入的資源。</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6
+7</pre></td><td><pre style="margin: 0; line-height: 125%">setup(){
+    thing[<span style="border: 1px solid #FF0000">“</span>resourceOnA<span style="border: 1px solid #FF0000">”</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
+        <span style="color: #B00040">int</span> val1 <span style="color: #666666">=</span> in[<span style="color: #BA2121">&quot;anyValue1&quot;</span>];
+        <span style="color: #B00040">float</span> val2 <span style="color: #666666">=</span> in[<span style="color: #BA2121">&quot;anyValue2&quot;</span>];
+        <span style="color: #408080; font-style: italic">// Work with the updated parameters here</span>
     };
 }
-</code></pre>
-<p><mark>deviceB</mark>也可以通過定義一個<mark>pson</mark>填充了相同key的類型來調用此方法來提供<mark>resourceOnA</mark>適當的輸入</p>
-<pre><code>loop(){
+</pre></td></tr></table></div>
+        <p><mark>deviceB</mark>也可以通過定義一個<mark>pson</mark>填充了相同key的類型來調用此方法來提供<mark>resourceOnA</mark>適當的輸入</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td><pre style="margin: 0; line-height: 125%">loop(){
     thing.handle();
-    // be sure to call it at an appropiate rate
+    <span style="color: #408080; font-style: italic">// be sure to call it at an appropiate rate</span>
     pson data;
-    data["anyValue1"] = 3;
-    data["anyValue2"] = 43.1;
-    thing.call_device("deviceA", "resourceOnA", data);
+    data[<span style="color: #BA2121">&quot;anyValue1&quot;</span>] <span style="color: #666666">=</span> <span style="color: #666666">3</span>;
+    data[<span style="color: #BA2121">&quot;anyValue2&quot;</span>] <span style="color: #666666">=</span> <span style="color: #666666">43.1</span>;
+    thing.call_device(<span style="color: #BA2121">&quot;deviceA&quot;</span>, <span style="color: #BA2121">&quot;resourceOnA&quot;</span>, data);
 }
-</code></pre>
-<p><mark>deviceB</mark> 也可以通過提供來自回傳數據的已定義資源的數據來調用此方法，在這種情況下，調用與前面的示例類似，但使用資源作為數據源。</p>
-<pre><code>setup(){
-    thing["resourceName"] >> [](pson& out){
-        out["anyValue1"] = 3;
-        out["anyValue2"] = 43.1;
+</pre></td></tr></table></div>
+        <p><mark>deviceB</mark> 也可以通過提供來自回傳數據的已定義資源的數據來調用此方法，在這種情況下，調用與前面的示例類似，但使用資源作為數據源。</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td><pre style="margin: 0; line-height: 125%">setup(){
+    thing[<span style="color: #BA2121">&quot;resourceName&quot;</span>] <span style="color: #666666">&gt;&gt;</span> [](pson<span style="color: #666666">&amp;</span> out){
+        out[<span style="color: #BA2121">&quot;anyValue1&quot;</span>] <span style="color: #666666">=</span> <span style="color: #666666">3</span>;
+        out[<span style="color: #BA2121">&quot;anyValue2&quot;</span>] <span style="color: #666666">=</span> <span style="color: #666666">43.1</span>;
     };
 }
 loop(){
     thing.handle();
-    // be sure to call it at an appropiate rate
-    thing.call_device("deviceA", "resourceOnA", thing["resourceName"]);
+    <span style="color: #408080; font-style: italic">// be sure to call it at an appropiate rate</span>
+    thing.call_device(<span style="color: #BA2121">&quot;deviceA&quot;</span>, <span style="color: #BA2121">&quot;resourceOnA&quot;</span>, thing[<span style="color: #BA2121">&quot;resourceName&quot;</span>]);
 }
-</code></pre>
-<hr><h4 id="裝置位於不同帳戶">裝置位於不同帳戶</h4>
-<p>如果我們想要通過不同帳戶進行通信，我們可以通過調用類型的端點來實現<mark>Thinger.io Device Call</mark>只需在控制台中註冊此類型的端點，如下例所示。</p>
-<img class="img-fluid" src="http://docs.thinger.io/arduino/assets/device_call.png">
+</pre></td></tr></table></div>
+    </div>
+    <div class="tab-pane fade" id="nav-different-account" role="tabpanel" aria-labelledby="nav-different-account-tab">
+        <p>如果我們想要通過不同帳戶進行通信，我們可以通過調用類型的端點來實現<mark>Thinger.io Device Call</mark>只需在控制台中註冊此類型的端點，如下例所示。</p>
+        <img class="img-fluid" src="./img/Thinger.io/Coding/device_call.png">
+        <p>
+            在這種情況下，需要在端點中定義不同的參數：
+            <ul>
+                <li>端點標識符：設備用於調用設備的端點ID。</li>
+                <li>設備所有者：設備所有者用戶名。</li>
+                <li>設備標識符：其他帳戶的設備ID。</li>
+                <li>資源名稱：要調用的設備上的資源。</li>
+                <li>設備存取令牌(token)：在另一個帳戶中生成的設備令牌，用於授予對設備的外部存取權限。</li>
+            </ul>
+            定義後，設備將能夠調用端點，如以下部分所述。它基本上包括調用<mark>call_endpoint</mark>方法。
+        </p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1</pre></td><td><pre style="margin: 0; line-height: 125%">thing.call_endpoint(<span style="color: #BA2121">&quot;DeviceACall&quot;</span>);
+</pre></td></tr></table></div>
+    </div>
+</div>
+
+<hr><h3 ex_nav id="端點">端點</h3>
 <p>
-    在這種情況下，需要在端點中定義不同的參數：
-    <ul>
-        <li>端點標識符：設備用於調用設備的端點ID。</li>
-        <li>設備所有者：設備所有者用戶名。</li>
-        <li>設備標識符：其他帳戶的設備ID。</li>
-        <li>資源名稱：要調用的設備上的資源。</li>
-        <li>設備存取令牌(token)：在另一個帳戶中生成的設備令牌，用於授予對設備的外部存取權限。</li>
-    </ul>
-    定義後，設備將能夠調用端點，如以下部分所述。它基本上包括調用<mark>call_endpoint</mark>方法。
-</p>
-<code>thing.call_endpoint("DeviceACall");</code>
-<p></p>
-<hr><h3 id="端點">端點</h3>
-<p>
-    在Thinger.io中，端點被定義為可由設備訪問的某種外部資源。借助端點功能，設備可以輕鬆地向外部Web服務發送電子郵件、SMS、推送數據，與IFTTT交互以及使用WebHooks（調用HTTP / HTTPS URL）可以執行的任何操作。
+    在Thinger.io中，端點被定義為可由設備存取的某種外部資源。借助端點功能，設備可以輕鬆地向外部Web服務發送電子郵件、SMS、推送數據，與IFTTT互動以及使用WebHooks（調用HTTP / HTTPS URL）可以執行的任何操作。
 </p>
 <p>
     從Arduino裝置上調用端點非常簡單，因為只需要在<code>thing</code>變數上調用<code>call_endpoint</code>方法。
 </p>
-<code>thing.call_endpoint("endpoint_id");</code>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1</pre></td><td><pre style="margin: 0; line-height: 125%">thing.call_endpoint(<span style="color: #BA2121">&quot;endpoint_id&quot;</span>);
+</pre></td></tr></table></div>
 <p>
     您可以簡單地調用端點來執行某些操作，例如發送預定義的電子郵件，或者還使用某些數據調用端點，這在您使用使用設備數據的第三方服務時特別有用。
 </p>
 <div class="alert alert-warning">
     在調用資源時應特別注意，並以適當的速率調用它們。否則，您將很容易消耗大量傳輸流量、寄出數百封電子郵件或在第三方服務中大量消耗API​​調用次數。
 </div>
-<hr>
-<h3>調用端點</h3>
-<p>
-    在這個範例，我們將看到一個基於溫度值發送電子郵件警報的簡單示例。對於此示例，我們已配置一個名為的電子郵件端點<code>high_temp_email</code>，其中包含一些有關溫度的警告文本。
-</p>
-<p>
-    對於這種情況，我們不希望每毫秒檢查溫度，因此我們引入一些變數來控制傳感和警告頻率。在此示例中，每小時檢查一次溫度，如果溫度高於30ºC，它將調用被調用的端點<code>high_temp_email</code>，該端點將向我們發送包含預定義文本的電子郵件。
-</p>
-<p>
-    這裡重要的是不要在循環方法中添加延遲，因為它會阻止所需的<code>thing.handle()</code>方法執行，所以我們在這裡使用基於該<code>millis()</code>函數的非阻塞延遲。
-</p>
-<pre><code>unsigned long lastCheck = 0;
+<nav>
+    <div class="nav nav-tabs" role="tablist">
+        <a class="nav-item nav-link active" id="nav-call-endpoint-tab" data-toggle="tab" href="#nav-call-endpoint" role="tab" aria-controls="nav-call-endpoint" aria-selected="true">調用端點</a>
+        <a class="nav-item nav-link" id="nav-push-data-tab" data-toggle="tab" href="#nav-push-data" role="tab" aria-controls="nav-push-data" aria-selected="false">推送數據</a>
+        <a class="nav-item nav-link" id="nav-email-tab" data-toggle="tab" href="#nav-email" role="tab" aria-controls="nav-email" aria-selected="false">發送電子郵件</a>
+    </div>
+</nav>
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="nav-call-endpoint" role="tabpanel" aria-labelledby="nav-call-endpoint-tab">
+        <p>
+            這個簡單的範例將向您示範如何根據溫度來傳送高溫警報的email，對於範例我們已經先配置了一個名為<code>high_temp_email</code>的電子郵件端點，其中包含有關溫度的警告文本。
+        </p>
+        <p>
+            在此範例，我們不會希望每毫秒檢查溫度，因此引入一些參數來控制感測與發送警告的頻率。此範例中將每小時檢查一次溫度，如果溫度高於30ºC，它將調用<code>high_temp_email</code>端點，該端點將向我們發送包含預定義文本的電子郵件。
+        </p>
+        <p>
+            請不要在<code>loop()</code>方法中加入延遲，因為它會阻止<code>thing.handle()</code>方法執行，因此<code>millis()</code>函數的非阻塞延遲是個好方法。
+        </p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">unsigned</span> <span style="color: #B00040">long</span> lastCheck <span style="color: #666666">=</span> <span style="color: #666666">0</span>;
 loop(){
-    thing.handle(); // required thing handle
-    unsigned long currentTs = millis();
-    if(currentTs-lastCheck>=60*60*1000){
-        lastCheck = currentTs;
-        if(dht.readTemperature()>30){
-            thing.call_endpoint("high_temp_email");
+    thing.handle(); <span style="color: #408080; font-style: italic">// required thing handle</span>
+    <span style="color: #B00040">unsigned</span> <span style="color: #B00040">long</span> currentTs <span style="color: #666666">=</span> millis();
+    <span style="color: #008000; font-weight: bold">if</span>(currentTs<span style="color: #666666">-</span>lastCheck<span style="color: #666666">&gt;=60*60*1000</span>){
+        lastCheck <span style="color: #666666">=</span> currentTs;
+        <span style="color: #008000; font-weight: bold">if</span>(dht.readTemperature()<span style="color: #666666">&gt;30</span>){
+            thing.call_endpoint(<span style="color: #BA2121">&quot;high_temp_email&quot;</span>);
         }
     }
 }
-</code></pre>
-<p>
-您可以在此處建立給現場感測器調用的端點，例如：您的濕度傳感器報告您的植物中沒有水、設備的位置不符合預期以及許多其他狀況時可以進行調用。
-使用端點的另一種有趣方式是將其與IFTTT集成，因此您可以與多個第三方服務進行交互！
-</p>
-<h4>將數據發送到端點</h4>
-<p>
-    將數據發送到端點（採用JSON格式）也非常簡單。
-    我們需要調用<code>call_endpoint</code>方法，但在這種情況下，根據<code>pson</code>數據格式添加一些資訊，這些資訊將自動轉換為JSON。
-    例如，如果我們想要將數據報告給像Keen.io這樣的第三方服務，我們可以在控制台中建立這種端點。
-    設定完成後，我們可以使用讀數調用端點，例如DHT傳感器的濕度和溫度值。
-</p>
-<pre><code>// be careful of sending data at an appropriate rate!
+</pre></td></tr></table></div>
+        <p>
+            您可以在此處建立給感測器調用的端點，例如：您的濕度傳感器報告您的植物中沒有水、設備的位置不符合預期以及許多其他狀況時可以進行調用。
+            使用端點的另一種有趣方式是將其與IFTTT集成，因此您可以與多個第三方服務進行互動！
+        </p>
+    </div>
+    <div class="tab-pane fade" id="nav-push-data" role="tabpanel" aria-labelledby="nav-push-data-tab">
+        <p>
+            將數據推送到端點（採用JSON格式）也非常簡單。
+            我們需要調用<code>call_endpoint</code>方法，但在這種情況下，根據<code>pson</code>數據格式添加一些資訊，這些資訊將自動轉換為JSON。
+            例如，如果我們想要將數據報告給像<code>Keen.io</code>這樣的第三方服務，我們可以在控制台中建立這種端點。
+            設定完成後，我們可以在調用端點時報告讀數，例如DHT傳感器的濕度和溫度值。
+        </p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">// be careful of sending data at an appropriate rate!</span>
 pson data;
-data["temperature"] = dht.readTemperature();
-data["humidity"] = dht.readHumidity();
-thing.call_endpoint("keen_endpoint", data);
-</code></pre>
-<p>
-    您還可以根據已定義的資源發送數據，即假設您有一個已經提供溫度和濕度的資源。可以重複使用此定義將相同的數據發送到端點，而無需重新定義傳感器讀數，如下例所示。
-</p>
-<pre><code>setup(){
-    // defined resource in the setup for reading a sensor value
-    thing["data"] >> (pson& out){
-        out["temperature"] = dht.readTemperature();
-        out["humidity"] = dht.readHumidity();
+data[<span style="color: #BA2121">&quot;temperature&quot;</span>] <span style="color: #666666">=</span> dht.readTemperature();
+data[<span style="color: #BA2121">&quot;humidity&quot;</span>] <span style="color: #666666">=</span> dht.readHumidity();
+thing.call_endpoint(<span style="color: #BA2121">&quot;keen_endpoint&quot;</span>, data);
+</pre></td></tr></table></div>
+        <p>
+            您還可以根據已定義的資源發送數據，即假設您有一個已經提供溫度和濕度的資源。可以重複使用此定義將相同的數據發送到端點，而無需重新定義傳感器讀數，如下例所示。
+        </p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td><pre style="margin: 0; line-height: 125%">setup(){
+    <span style="color: #408080; font-style: italic">// defined resource in the setup for reading a sensor value</span>
+    thing[<span style="color: #BA2121">&quot;data&quot;</span>] <span style="color: #666666">&gt;&gt;</span> (pson<span style="color: #666666">&amp;</span> out){
+        out[<span style="color: #BA2121">&quot;temperature&quot;</span>] <span style="color: #666666">=</span> dht.readTemperature();
+        out[<span style="color: #BA2121">&quot;humidity&quot;</span>] <span style="color: #666666">=</span> dht.readHumidity();
     }
 }
 
 loop(){
-    // be careful of sending data at an appropriate rate!
-    thing.call_endpoint("endpoint", thing["data"]);
+    <span style="color: #408080; font-style: italic">// be careful of sending data at an appropriate rate!</span>
+    thing.call_endpoint(<span style="color: #BA2121">&quot;endpoint&quot;</span>, thing[<span style="color: #BA2121">&quot;data&quot;</span>]);
 }
-</code></pre>
-<h4>電子郵件類型端點示例</h4>
-<p>
-    這是一個簡單的示例，應用於具有自定義正文的電子郵件類型端點
-</p>
-<pre><code>setup()
+</pre></td></tr></table></div>
+    </div>
+    <div class="tab-pane fade" id="nav-email" role="tabpanel" aria-labelledby="nav-email-tab">
+        <p>
+            這是一個簡單的示例，應用於具有自定義正文的電子郵件類型端點
+        </p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td><pre style="margin: 0; line-height: 125%">setup()
 {
- thing["Level"] >> outputValue(actualRelative);
+ thing[<span style="color: #BA2121">&quot;Level&quot;</span>] <span style="color: #666666">&gt;&gt;</span> outputValue(actualRelative);
 }
 loop()
 {
- if(actualLevel>UpperLevel && endpointUpperFlag)
+ <span style="color: #008000; font-weight: bold">if</span>(actualLevel<span style="color: #666666">&gt;</span>UpperLevel <span style="color: #666666">&amp;&amp;</span> endpointUpperFlag)
    {
-    thing.call_endpoint("endpoint_id",thing["Level"]);
-    endpointUpperFlag=0;
+    thing.call_endpoint(<span style="color: #BA2121">&quot;endpoint_id&quot;</span>,thing[<span style="color: #BA2121">&quot;Level&quot;</span>]);
+    endpointUpperFlag<span style="color: #666666">=0</span>;
    }
 }
-</code></pre>
+</pre></td></tr></table></div>
+        <p>
+            請注意，有一個變數限制了此“if”只運行一次，重要的是定義任何條件或方法以保證這種enpoint調用只執行一次（或以適當的速率），因為它可以得到一個微控制器通過thinger.io平台生成的大量電子郵件。在端點配置中，在自定義正文電子郵件中，必須添加雙括號“{{}}”來調用微控制器發送的變數，在我們的示例中，我們使用了以下正文：
+        </p>
+        <p><strong>“實際水平為{{}}％”</strong></p>
+        <p>並收到一封帶有文字的電子郵件：</p>
+        <p><strong>實際水平為80.34％</strong></p>
+    </div>
+</div>
+<hr>
+<h3 ex_nav id="使用資料儲存區">使用資料儲存區</h3>
 <p>
-請注意，有一個變量限制了此“if”只運行一次，重要的是定義任何條件或方法以保證這種enpoint調用只執行一次（或以適當的速率），因為它可以得到一個微控制器通過thinger.io平台生成的大量電子郵件。
-
-在端點配置中，在自定義正文電子郵件中，必須添加雙括號“{{}}”來調用微控制器發送的變數，在我們的示例中，我們使用了以下正文
-
-“實際水平為{{}}％”
-
-並收到一封帶有文字的電子郵件：
-
-實際水平為80.34％
+    Thinger.io提供一個易用且富有擴充性的虛擬儲存系統，該系統允許存儲來自設備輸出資源的長期數據。並可於儀表板中將其可視化，也可以使用不同格式導出數據進行其它處理或第三方資料分析。
 </p>
-<hr><h3 id="串流資源">串流資源</h3>
+<h4>自設備讀取資源</h4>
+<p>此方式無須編寫特定方法即可使用，因為他們將透過雲端平台自動蒐集資料，僅須建立數據統並設定採樣間隔即可，如控制台文檔所述。</p>
+<h4>串流寫入</h4>
 <p>
-在Thinger.io中，您可以打開與設備相關的WebSockets連接，這樣您就可以即時接收傳感器值，事件或任何其他訊息。WebSockets主要用於控制台的儀表板功能，通常用於以固定的可設定間隔傳輸資源。
+    此方式可藉由在資料儲存區在設定時使用"Update from device"選項，並且使用串流媒體資源指令，如下所述：
+</p>
+<p>此例使用事先定義的輸出資源，我們稱它為["location"]，它看起來像下面這樣：</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6
+7</pre></td><td><pre style="margin: 0; line-height: 125%"> <span style="color: #B00040">void</span> <span style="color: #0000FF">loop</span>() {
+  thing.handle();
+  <span style="color: #408080; font-style: italic">// use your own logic here to determine when to stream/record the resource.</span>
+  <span style="color: #008000; font-weight: bold">if</span>(requires_recording){
+      thing.stream(<span style="color: #BA2121">&quot;location&quot;</span>);
+  }
+}
+</pre></td></tr></table></div>
+<h4>由設備主動寫入</h4>
+<p>
+    此選項將允許設定資料儲存區為不讀取任何資訊而是等待調用寫入命令的狀態，Arduino可以使用write_bucket方法(如此例)，而Sigfox也可以直接調用REST API來完成。此功能可以將來自不同設備的資訊寫入至同一個儲存區中，或是存儲來自與伺服器未建立永久連接、處於睡眠狀態或諸如Sigfox之類的設備所提供的資訊。
 </p>
 <p>
-    定義輸出資源時，此功能可立即使用。但是，如果您希望在需要時立即傳輸信息，例如當您的設備檢測到移動，存在等時，您必須編寫一些代碼，這與調用端點非常相似。
+    以下是ESP8266裝置使用write_bucket函數將資訊寫入的範例：
+</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">void</span> <span style="color: #0000FF">setup</span>() {
+  <span style="color: #408080; font-style: italic">// define the resource with temperature and humidity</span>
+  thing[<span style="color: #BA2121">&quot;door_status&quot;</span>] <span style="color: #666666">&gt;&gt;</span> [](pson <span style="color: #666666">&amp;</span>out){ 
+    out[<span style="color: #BA2121">&quot;OPEN&quot;</span>] <span style="color: #666666">=</span> (<span style="color: #B00040">bool</span>)digitalRead(SENSOR_PIN);
+  };
+}
+
+<span style="color: #B00040">void</span> <span style="color: #0000FF">loop</span>() { 
+  <span style="color: #408080; font-style: italic">// handle connection</span>
+  thing.handle();
+
+  <span style="color: #008000; font-weight: bold">if</span>(digitalRead(SENSOR_PIN)<span style="color: #666666">!=</span>previous_status){
+    <span style="color: #408080; font-style: italic">// write to bucket BucketId when the door changes its status</span>
+    thing.write_bucket(<span style="color: #BA2121">&quot;BucketId&quot;</span>, <span style="color: #BA2121">&quot;door_status&quot;</span>);
+  }
+  previous_status<span style="color: #666666">=</span>digitalRead(SENSOR_PIN);
+}
+</pre></td></tr></table></div>
+<!--p>
+    請注意：此指令將搜尋["door_status"]之PSON資源，因此也可以附加自訂易PSON來調用此函數，如下所示：
+</p>
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">void</span> <span style="color: #0000FF">loop</span>(){
+  <span style="color: #408080; font-style: italic">// handle connection</span>
+  thing.handle();
+
+  <span style="color: #008000; font-weight: bold">if</span>(digitalRead(SENSOR_PIN)<span style="color: #666666">!=</span>previous_status){
+    <span style="color: #408080; font-style: italic">// write to bucket BucketId when the door changes its status</span>
+    thing.write_bucket(<span style="color: #BA2121">&quot;BucketId&quot;</span>, <span style="color: #BA2121">&quot;door_status&quot;</span>);
+  }
+  previous_status<span style="color: #666666">=</span>digitalRead(SENSOR_PIN);
+}
+</pre></td></tr></table></div>
+
+<div class="alert alert-warning">
+    建置中...
+</div-->
+<hr>
+<h3 ex_nav id="串流資源">串流資源</h3>
+<p>
+    在Thinger.io中，您可以建立與設備相關的WebSockets連接，這樣您就可以即時接收傳感器值，事件或任何其他訊息。WebSockets主要用於控制台的儀表板功能，通常用於以固定的可設定間隔傳輸資源。<br>
+    定義輸出資源時，此功能可立即使用。但是，如果您希望在需要時立即傳輸信息，例如當您的設備檢測到移動，存在等時，您必須編寫一些程式，這與調用端點非常相似。
 </p>
 <p>
     例如加速計值超過某個閾值，您的傳感器正在進行偵測，或者羅盤方向是否正在發生變化，在這種情況下，您可以決定何時需要傳輸新數據。
 </p>
 <p>
-    串流資源還要求另一個端點連接並偵聽它們（即，從WebSocket連接），因此如果沒有人監聽此數據，則不會發送數據。這由客戶端庫和伺服器自動處理，因此始終流式傳輸數據是安全的，因為設備僅在有目的地時才傳輸信息。
+    串流資源還要求另一個端點連接並偵聽它們（即WebSocket的client端），因此如果沒有人監聽此數據，則不會發送數據。這由客戶端庫和伺服器自動處理，因此始終流式傳輸數據是安全的，因為設備僅在有目的地時才傳輸信息。
 </p>
 <p>
     如果航向值變化超過1度，以下示例將即時報告羅盤航向。
 </p>
 </pre>
-<img class="img-fluid" src="http://docs.thinger.io/arduino/assets/esp8266-real-time-websockets.gif">
-<pre><code>void setup(){
-  thing["heading"] >> [](pson& out){     
-    out = getHeading();
+<img class="img-fluid" src="./img/Thinger.io/Coding/esp8266-real-time-websockets.gif">
+<p>以下是範例所使用的程式</p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">void</span> <span style="color: #0000FF">setup</span>(){
+  thing[<span style="color: #BA2121">&quot;heading&quot;</span>] <span style="color: #666666">&gt;&gt;</span> [](pson<span style="color: #666666">&amp;</span> out){     
+    out <span style="color: #666666">=</span> getHeading();
   };
 }
 
-float previousHeading = 0;
-void loop() {
+<span style="color: #B00040">float</span> previousHeading <span style="color: #666666">=</span> <span style="color: #666666">0</span>;
+<span style="color: #B00040">void</span> <span style="color: #0000FF">loop</span>() {
   thing.handle();
-  float currentHeading = getHeading();
-  if(abs(currentHeading-previousHeading)>=1.0f){
-    thing.stream(thing["heading"]);
-    previousHeading=currentHeading;
+  <span style="color: #B00040">float</span> currentHeading <span style="color: #666666">=</span> getHeading();
+  <span style="color: #008000; font-weight: bold">if</span>(abs(currentHeading<span style="color: #666666">-</span>previousHeading)<span style="color: #666666">&gt;=1.0f</span>){
+    thing.stream(thing[<span style="color: #BA2121">&quot;heading&quot;</span>]);
+    previousHeading<span style="color: #666666">=</span>currentHeading;
   }
 }
-</code></pre>
-<hr><h3 id="開啟偵錯輸出">開啟偵錯輸出</h3>
-<p>Thinger.io庫提供了對其活動的廣泛記錄，這在需要解決身份驗證和Wi-Fi連接問題時尤其有用。在草圖中包含以下定義，但在任何其他包含之前確保它首先出現（據報導在某些板上會導致崩潰）。</p>
-<pre><code>#define _DEBUG_
-
-// the rest of your sketch goes here
-</code></pre>
-<p>由於所有除錯信息都通過<mark>Serial</mark>顯示，因此還需要啟用<mark>Serial</mark>。請在<mark>Setup</mark>方法中啟用它。</p>
-<pre><code>void setup() {
-  Serial.begin(115200);
-}
-</code></pre>
-<hr><h3 id="esp8266-深層睡眠與智慧設定">ESP8266 深層睡眠與SmartConfig</h3>
+</pre></td></tr></table></div>
+<hr>
+<h3 ex_nav id="esp8266-深層睡眠與智慧設定">ESP8266 深層睡眠與SmartConfig</h3>
 <p>
-    <mark>SmartConfig</mark>允許用戶通過同一網絡（例如智能手機或其他wifi客戶端）上的外部設備設定主板的WiFi憑證。這意味著沒有敏感信息寫入韌體或設備上的設定文件。
+    <mark>SmartConfig</mark>允許用戶通過同一網路（例如智慧型手機或其他wifi客戶端）上的外部設備設定主板的WiFi憑證。這意味著沒有敏感訊息寫入韌體或設備上的設定文件。
 </p>
 <p>
-<mark>Deep Sleep</mark>是ESP8266的一種特殊模式，它允許它關閉大部分電路並在一些可配置的時間後喚醒。
-要使深度睡眠（和喚醒）正常工作，必須連接<mark>GPIO16</mark>（通常是<mark>D0</mark>開發板）和<mark>RST</mark>引腳。
+    <mark>Deep Sleep</mark>是ESP8266的一種特殊模式，它允許它關閉大部分電路並在一些可配置的時間後喚醒。
+    要使深度睡眠（和喚醒）正常工作，必須連接<mark>GPIO16</mark>（通常是開發板的<mark>D0</mark>）和<mark>RST</mark>引腳。
 </p>
 <p>
-但是，有些電路板選擇將內建LED連接到<mark>D0</mark>引腳，由於該類別在執行時使用LED作為除錯輔助工具，因此使用<mark>ThingerSmartConfig</mark>類時將進入崩潰循環。
-解決方案是使用重構函數並禁用其使用LED。
+    但是，有些電路板選擇將內建LED連接到<mark>D0</mark>引腳，由於該類別在執行時使用LED作為除錯輔助工具，因此使用<mark>ThingerSmartConfig</mark>類時將進入崩潰循環。<br>
+    解決方案是使用重構函數並禁用其使用LED。
 </p>
-<pre><code>ThingerSmartConfig thing(USERNAME,
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4</pre></td><td><pre style="margin: 0; line-height: 125%">ThingerSmartConfig <span style="color: #0000FF">thing</span>(USERNAME,
                          DEVICE_ID,
                          DEVICE_CREDENTIAL,
-                         false); // required for deep sleep
-</code></pre>
-<hr><h2 id="互動">互動</h2>
+                         <span style="color: #008000">false</span>); <span style="color: #408080; font-style: italic">// required for deep sleep</span>
+</pre></td></tr></table></div>
+<hr>
+
+<h2 ex_nav id="互動">互動</h2>
 <p>
-一旦您定義了資源並且設備已連接到平台，就可以在幾分鐘內輕鬆地與您的設備進行交互。有幾種交互方式，例如建立儀表板，使用移動設備應用存取（目前僅在Android中），從API資源管理器存取或直接調用API。
+    一旦您定義了資源並且設備已連接到平台，就可以在幾分鐘內輕鬆地與您的設備進行互動。有幾種互動方式，例如建立儀表板，使用移動設備應用存取（目前僅在Android中），從API資源管理器存取或直接調用API。
 </p>
 <hr><h3 id="android">Android</h3>
+<p>存取設備最簡單的方法之一就是產生設備令牌來授予對設備的存取權。產生令牌時可以限制共享資源與有效期限，因此可以與他人安全的共享某些設備功能。控制台中將可以產生這個設備的令牌並且將其產生給予Android APP掃描的QRCode</p>
+<img class="img-fluid" src="./img/Thinger.io/Coding/token.png">
 <hr><h4 id="手機端應用程式">手機端應用程式</h4>
-<hr><h4 id="穿戴型裝置">穿戴型裝置</h4>
+<p>
+    目前版本的Android APP不需要任何登錄即可與您的設備進行互動。僅需掃描令牌的QRCode，您的手機就可以立即與您的設備互動－讀取傳感器值、更改LED或繼電器狀態等。
+</p>
+<img class="img-fluid" src="./img/Thinger.io/Coding/phone.png">
+<!--hr><h4 id="穿戴型裝置">穿戴型裝置</h4-->
+
 <hr><h3 id="雲端控制台">雲端控制台</h3>
 <p>
-    Cloud Console為隨插即用的設備交互加入了一些支援。
+    Cloud Console為隨插即用的設備互動加入了一些支援。
 </p>
 <p>
-    您可以從API資源管理器與設備進行交互，也可以創建即時儀表板以顯示設備訊息。沒有必要編寫額外的程式碼來支援這種交互，只需在您的設備中聲明您的資源，您就可以直接在控制台中存取它們。
+    您可以從API資源管理器與設備進行互動，也可以創建即時儀表板以顯示設備訊息。沒有必要編寫額外的程式碼來支援這種互動，只需在您的設備中聲明您的資源，您就可以直接在控制台中存取它們。
 </p>
 <p>
-因此，本節將介紹雲控制台的不同交互方法。
+    因此，本節將介紹雲控制台的不同互動方法。
 </p>
 <hr><h4 id="儀錶板">儀錶板</h4>
 <p>
-在控制台中，您可以輕鬆建立和設定即時儀表板，以顯示設備數據，如傳感器。您只需選擇設備，關聯資源，然後選擇更新方法，可以是可設定的採樣間隔，也可以根據設備的要求進行更新。
+    在控制台中，您可以輕鬆建立和設定即時儀表板，以顯示設備數據，如傳感器。您只需選擇設備，關聯資源，然後選擇更新方法，可以是可設定的採樣間隔，也可以根據設備的要求進行更新。
 </p>
-TODO參考雲控制台中的儀表板
-<img class="img-fluid" src="http://docs.thinger.io/arduino/assets/dashboards.gif">
-<hr><h4 id="api-探索">API 探索</h4>
+<img class="img-fluid" src="./img/Thinger.io/Coding/dashboards.gif">
+<hr><h4 id="api-探索">API 資源管理器</h4>
 <p>
-    與API設備交互的另一種方式是使用API​​ Explorer。您可以從API Explorer自動存取設備中的每個已定義資源，以便您可以讀取數據，發送指令或值，調用函數等。
+    與API設備互動的另一種方式是使用API​​ Explorer。您可以從API Explorer自動存取設備中的每個已定義資源，以便您可以讀取數據，發送指令或值，調用函數等。
 </p>
 <p>
-    如果要使用Server API與設備進行交互，此功能非常有用，因此您可以輕鬆地可視化設備公開的API以及預期的輸入和輸出。
+    如果要使用Server API與設備進行互動，此功能非常有用，因此您可以輕鬆地可視化設備公開的API以及預期的輸入和輸出。<br>
     此外，在您的設備上編寫程式碼時非常重要，因此您可以輕鬆檢查資源是否按預期工作，例如讀取傳感器值，打開和關閉繼電器等等。
 </p>
-<p>
-    TODO參考雲控制台中的API Explorer
-</p>
-<video loop autoplay src="http://docs.thinger.io/arduino/assets/api-explorer.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
-<p>
-    設備中的每個已定義資源（如傳感器，繼電器，指示燈等）都可以從API資源管理器中直接訪問。此示例直接從資源管理器打開和關閉指示燈。
-</p>
+<div class="alert alert-info">
+    設備中的每個已定義資源（如傳感器，繼電器，指示燈等）都可以從API資源管理器中直接存取。此示例直接從資源管理器打開和關閉指示燈。
+</div>
 
 <script type="text/javascript">
     ex_nav();
