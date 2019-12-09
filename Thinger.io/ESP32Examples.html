@@ -90,7 +90,7 @@ void setup() {
   ledcAttachPin(27, LED_CH_B);//LED B Pin
 
 //設定傳遞給Server的資源
-  thing["RGB"] &lt;&lt; [](pson&amp; in){
+  thing["RGB"] &lt;&lt; [](pson& in){
       ledcWrite(LED_CH_R,in["R"]);
       ledcWrite(LED_CH_G,in["G"]);
       ledcWrite(LED_CH_B,in["B"]);
@@ -138,7 +138,7 @@ void setup() {
 //標示自身持有的資源
 //名稱：DHT11
 //可回送資料：Temp,Humidity
-  thing["DHT11"] &gt;&gt; [](pson&amp; out){
+  thing["DHT11"] &gt;&gt; [](pson& out){
   	//當被呼叫時才向傳感器取得數值
       TempAndHumidity lastValues = dht.getTempAndHumidity();
     //回傳數值給伺服器

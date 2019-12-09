@@ -1,4 +1,5 @@
-<h2 id="撰寫程式">撰寫程式</h2>
+<h2>編寫程式</h2>
+<p>原文參照：<a href="https://docs.thinger.io/coding">https://docs.thinger.io/coding</a></p>
 <p>以下將為您展示 Thinger.io 平台所提供的各種方法與基礎操作方法</p>
 <hr><h3 ex_nav id="架構概觀">架構概觀</h3>
 <p>一支經典的Arduino程式結構通常長得像這樣，它具有一個<code>setup()</code>方法與一個<code>loop()</code>方法。</p>
@@ -13,7 +14,7 @@
 }
 </pre></td></tr></table></div>
 <p><code>setup()</code>用於初始化設備，<code>loop()</code>用於執行階段的迴圈。</p>
-<p>而加入Thinger.io函式庫後，您將需要先引入必須的函式庫，並且在<code>setup()</code>方法階段發起連線與定義該設備所擁有的資源(如繼電器、控制接腳、伺服馬達、需要被執行的函數等)，並於<code>loop()</code>階段不斷的調用<code>thing.handle();</code>來回應伺服器的要求。</p>
+<p>而加入Thinger.io程式庫後，您將需要先引入必須的程式庫，並且在<code>setup()</code>方法階段發起連線與定義該設備所擁有的資源(如繼電器、控制接腳、伺服馬達、需要被執行的函數等)，並於<code>loop()</code>階段不斷的調用<code>thing.handle();</code>來回應伺服器的要求。</p>
 <p>因此結構會變成如此範例所示：</p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
  2
@@ -69,7 +70,7 @@ ThingerEthernet <span style="color: #0000FF">thing</span>(<span style="color: #B
 </pre></td></tr></table></div>
 
 <p>請根據您在控制台中註冊設備時填寫或產生的<code>deviceId</code>與<code>deviceCredential</code>來進行修改，<code>username</code>則為您登入雲端控制台的使用者名稱(不是e-mail)。</p>
-<p><strong>將設備連線到伺服器的動作必須在<code>setup()</code>方法前完成。</strong></p>
+<p><strong>此物件必須在<code>setup()</code>前作為全域物件實體化。</strong></p>
 
 <hr><h3 ex_nav id="開啟偵錯輸出">開啟偵錯輸出</h3>
 <p>Thinger.io庫提供了對其活動的廣泛記錄，這在需要解決身份驗證和Wi-Fi連接問題時尤其有用。在草圖中包含以下定義，但在任何其他包含之前確保它首先出現（據報導在某些板上會導致崩潰）。</p>
@@ -129,7 +130,7 @@ ThingerEthernet <span style="color: #0000FF">thing</span>(<span style="color: #B
                         該示例將使用in參數上的三元運算符來打開/關閉數字引腳10 。<br></p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
-3</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;led&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span>amp; in){
+3</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;led&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
     digitalWrite(<span style="color: #666666">10</span>, in <span style="color: #666666">?</span> HIGH <span style="color: #666666">:</span> LOW);
 };
 </pre></td></tr></table></div>
@@ -151,7 +152,7 @@ ThingerEthernet <span style="color: #0000FF">thing</span>(<span style="color: #B
                         由於pson類型可以包含多種數據類型，我們仍然可以將該pson類型用作整數值。<br></p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
-3</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;servo&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span>amp; in){
+3</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;servo&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
     myServo.write(in);
 };
 </pre></td></tr></table></div>
@@ -173,7 +174,7 @@ ThingerEthernet <span style="color: #0000FF">thing</span>(<span style="color: #B
 2
 3
 4</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">float</span> hysteresis <span style="color: #666666">=</span> <span style="color: #666666">0</span>; <span style="color: #408080; font-style: italic">// defined as a global variable</span>
-thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span>amp; in){
+thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
     hysteresis <span style="color: #666666">=</span> in;
 };
 </pre></td></tr></table></div>
@@ -194,7 +195,7 @@ thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="c
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
 3
-4</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;location&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span>amp; in){
+4</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;location&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
     <span style="color: #B00040">float</span> lat <span style="color: #666666">=</span> in[<span style="color: #BA2121">&quot;lat&quot;</span>];
     <span style="color: #B00040">float</span> lon <span style="color: #666666">=</span> in[<span style="color: #BA2121">&quot;lon&quot;</span>];
 };
@@ -213,7 +214,7 @@ thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="c
                 <div id="input-source5" class="collapse" data-parent="#input-sources">
                     <div class="card-body">
                         <p>
-                            儀錶板或API的工作方式是，當您打開它們時，它們會查詢相關資源以正確顯示其目前狀態，即開關打開或關閉。<br>                        這樣，當API或儀表板打開時，調用每個相關的輸入資源，在調用中接收空數據，因為無意控制資源（pson輸入將為空）。
+                            儀表板或API的工作方式是，當您打開它們時，它們會查詢相關資源以正確顯示其目前狀態，即開關打開或關閉。<br>                        這樣，當API或儀表板打開時，調用每個相關的輸入資源，在調用中接收空數據，因為無意控制資源（pson輸入將為空）。
                         </p>
                         <p>
                             那麼，Dashboards或API如何知道輸入資源的目前狀態是什麼？如果資源為空，則資源必須在輸入參數中設定其目前狀態，如果存在，則使用輸入值。這樣，我們可以獲得三個不同的東西：查詢目前資源狀態（不修改它），修改目前資源狀態，以及取得資源上的預期輸入（這是設備上的API資源管理器的工作方式）。
@@ -228,7 +229,7 @@ thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="c
 5
 6
 7
-8</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;resource&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span>amp; in){
+8</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;resource&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
     <span style="color: #008000; font-weight: bold">if</span>(in.is_empty()){
         in <span style="color: #666666">=</span> currentState;
     }
@@ -247,7 +248,7 @@ thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="c
 5
 6
 7
-8</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;led&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span>amp; in){
+8</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;led&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
     <span style="color: #008000; font-weight: bold">if</span>(in.is_empty()){
         in <span style="color: #666666">=</span> (<span style="color: #B00040">bool</span>) digitalRead(pin);
     }
@@ -284,7 +285,7 @@ thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="c
                         <p>定義輸出資源與定義輸入資源非常相似，但在這種情況下，它使用運算符<code>&gt;&gt;</code>。在回調函數中，可以用任何我們想要的值替換out值，比如在這種情況下傳感器讀數的輸出。</p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
-3</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;temperature&quot;</span>] <span style="color: #666666">&gt;&gt;</span> [](pson<span style="color: #666666">&amp;</span>amp; out){
+3</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;temperature&quot;</span>] <span style="color: #666666">&gt;&gt;</span> [](pson<span style="color: #666666">&amp;</span> out){
       out <span style="color: #666666">=</span> dht.readTemperature();
 };
 </pre></td></tr></table></div>
@@ -307,7 +308,7 @@ thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="c
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
 3
-4</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;location&quot;</span>] <span style="color: #666666">&gt;&gt;</span> [](pson<span style="color: #666666">&amp;</span>amp; out){
+4</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;location&quot;</span>] <span style="color: #666666">&gt;&gt;</span> [](pson<span style="color: #666666">&amp;</span> out){
       out[<span style="color: #BA2121">&quot;lat&quot;</span>] <span style="color: #666666">=</span> gps.getLatitude();
       out[<span style="color: #BA2121">&quot;lon&quot;</span>] <span style="color: #666666">=</span> gps.getLongitude();
 };
@@ -331,7 +332,7 @@ thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="c
 2
 3
 4</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">float</span> yaw <span style="color: #666666">=</span> <span style="color: #666666">0</span>; <span style="color: #408080; font-style: italic">// defined as a global variable</span>
-thing[<span style="color: #BA2121">&quot;yaw&quot;</span>] <span style="color: #666666">&gt;&gt;</span> [](pson<span style="color: #666666">&amp;</span>amp; out){
+thing[<span style="color: #BA2121">&quot;yaw&quot;</span>] <span style="color: #666666">&gt;&gt;</span> [](pson<span style="color: #666666">&amp;</span> out){
       out <span style="color: #666666">=</span> yaw;
 };
 </pre></td></tr></table></div>
@@ -395,7 +396,7 @@ thing[<span style="color: #BA2121">&quot;yaw&quot;</span>] <span style="color: #
     </div>
 </div>
 
-<hr><h4 ex_nav id="沒有參數的資源">沒有參數的資源</h4>
+<hr><h3 ex_nav id="沒有參數的資源">沒有參數的資源</h3>
 <p>您也可以定義不需要任何輸入的資源，也不會生成任何輸出。它們就像可以根據需要執行的回調，例如重啟設備或執行一些必要的操作。<br>
 在這種情況下，資源被定義為沒有任何輸入或輸出參數的函數。</p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
@@ -486,7 +487,7 @@ thing[<span style="color: #BA2121">&quot;relay&quot;</span>] <span style="color:
 3
 4
 5</pre></td><td><pre style="margin: 0; line-height: 125%">setup(){
-    thing[<span style="border: 1px solid #FF0000">“</span>resourceOnA<span style="border: 1px solid #FF0000">”</span>] <span style="color: #666666">=</span> [](){
+    thing[<span style="border: 1px solid #FF0000">"</span>resourceOnA<span style="border: 1px solid #FF0000">"</span>] <span style="color: #666666">=</span> [](){
         Serial.println(<span style="color: #BA2121">&quot;Someone is calling me!&quot;</span>);
     };
 }
@@ -510,7 +511,7 @@ thing[<span style="color: #BA2121">&quot;relay&quot;</span>] <span style="color:
 5
 6
 7</pre></td><td><pre style="margin: 0; line-height: 125%">setup(){
-    thing[<span style="border: 1px solid #FF0000">“</span>resourceOnA<span style="border: 1px solid #FF0000">”</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
+    thing[<span style="border: 1px solid #FF0000">"</span>resourceOnA<span style="border: 1px solid #FF0000">"</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
         <span style="color: #B00040">int</span> val1 <span style="color: #666666">=</span> in[<span style="color: #BA2121">&quot;anyValue1&quot;</span>];
         <span style="color: #B00040">float</span> val2 <span style="color: #666666">=</span> in[<span style="color: #BA2121">&quot;anyValue2&quot;</span>];
         <span style="color: #408080; font-style: italic">// Work with the updated parameters here</span>
@@ -711,9 +712,9 @@ loop()
 }
 </pre></td></tr></table></div>
         <p>
-            請注意，有一個變數限制了此“if”只運行一次，重要的是定義任何條件或方法以保證這種enpoint調用只執行一次（或以適當的速率），因為它可以得到一個微控制器通過thinger.io平台生成的大量電子郵件。在端點配置中，在自定義正文電子郵件中，必須添加雙括號“{{}}”來調用微控制器發送的變數，在我們的示例中，我們使用了以下正文：
+            請注意，有一個變數限制了此"if"只運行一次，重要的是定義任何條件或方法以保證這種enpoint調用只執行一次（或以適當的速率），因為它可以得到一個微控制器通過thinger.io平台生成的大量電子郵件。在端點配置中，在自定義正文電子郵件中，必須添加雙括號"{{}}"來調用微控制器發送的變數，在我們的示例中，我們使用了以下正文：
         </p>
-        <p><strong>“實際水平為{{}}％”</strong></p>
+        <p><strong>"實際水平為{{}}％"</strong></p>
         <p>並收到一封帶有文字的電子郵件：</p>
         <p><strong>實際水平為80.34％</strong></p>
     </div>
@@ -907,7 +908,7 @@ loop()
 <p>
     因此，本節將介紹雲控制台的不同互動方法。
 </p>
-<hr><h4 id="儀錶板">儀錶板</h4>
+<hr><h4 id="儀表板">儀表板</h4>
 <p>
     在控制台中，您可以輕鬆建立和設定即時儀表板，以顯示設備數據，如傳感器。您只需選擇設備，關聯資源，然後選擇更新方法，可以是可設定的採樣間隔，也可以根據設備的要求進行更新。
 </p>
@@ -923,7 +924,4 @@ loop()
 <div class="alert alert-info">
     設備中的每個已定義資源（如傳感器，繼電器，指示燈等）都可以從API資源管理器中直接存取。此示例直接從資源管理器打開和關閉指示燈。
 </div>
-
-<script type="text/javascript">
-    ex_nav();
-</script>
+<div id="guidePages"></div>

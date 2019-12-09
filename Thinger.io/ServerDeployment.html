@@ -1,3 +1,6 @@
+<div class="alert alert-warning">
+  官網近期已改版，直接由AWS、Azure、GCP等雲端平台提供私人雲，其皆可提供具有100%獨立資源的伺服器。
+</div>
 <h2 id="在-ubuntu-上架設伺服器支援1604以後版本">在 UBUNTU 上架設伺服器(支援16.04以後版本)</h2>
 <p>伺服器可以安装在任何與 Ubuntu Snap 套件包相容的架構中，如 x86，AMD64，ARM64 或 armhf（僅支援 Ubuntu OS，相容清單請參考<a href="https://snapcraft.io/">此頁</a>）。</p>
 <p>但是，建議使用 64 位元系統，因為在 32 位元系统中， MongoDB 資料庫中的資料量將會被限制為 2GB。</p>
@@ -124,7 +127,7 @@ ene 20 22:39:19 supermicro systemd[1]: Starting Service for snap application thi
 ene 20 22:39:19 supermicro systemd[1]: Started Service for snap application thinger-maker-server.thingerd.
 </code></pre></div></div>
 <p>此時您應該能夠在瀏覽器中透過本機IP存取網頁控制台，就像雲端控制台一樣。
-<img src="./img/Thinger.io/console_unlogin.png" title="控制台範例" class="img-fluid" alt="控制台範例"></p>
+<img src="./img/Thinger.io/ServerDeployment/console_unlogin.png" title="控制台範例" class="img-fluid" alt="控制台範例"></p>
 
 <hr><h4 id="重新啟動系統服務">重新啟動系統服務</h4>
 <p>如果更新配置文件，可以通過以下指另重新啟動服務。<br>
@@ -136,3 +139,5 @@ ene 20 22:39:19 supermicro systemd[1]: Started Service for snap application thin
 <div class="codestick">
   <code class="highlighter-rouge">sudo service snap.thinger-maker-server.thingerd stop</code>
 </div></p>
+
+<div id="guidePages"></div>

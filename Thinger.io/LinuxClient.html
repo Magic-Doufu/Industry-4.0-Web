@@ -1,11 +1,17 @@
-<h2 id="RaspbianLinux" ex_nav>Raspbian & Linux</h2>
-<img style="max-height: 10rem;" src="./img/Thinger.io/Overview/RPiLogo.png">
-<img style="max-height: 10rem;" src="./img/Thinger.io/Overview/LinuxLogo.png">
-<p>
-	這個操作方法將介紹如何在Raspberry Pi中使用thinger.io平台時獲得第一步。這包括如何下載，編譯和執行GitHub存儲庫中可用的主要示例。
-</p>
+<div class="d-flex justify-content-center">
+	<div class="px-4 align-self-center">
+		<h2 id="RaspbianLinux" ex_nav>Linux</h2>
+		<img style="max-width: 10rem;" src="./img/Thinger.io/Overview/LinuxLogo.jpg">
+	</div>
+	<div class="p-2 flex-fill flex-grow-1 align-self-center">
+		<p>原文參照： <a href="https://docs.thinger.io/devices/linux">https://docs.thinger.io/devices/linux</a></p>
+		<p>
+			這個操作方法將介紹如何在<mark>Raspberry Pi</mark>中使用thinger.io平台時獲得第一步。這包括如何下載，編譯和執行GitHub存儲庫中可用的主要示例。
+		</p>
+	</div>
+</div>
 <hr>
-<h2 id="要求" ex_nav>要求</h2>
+<h2 ex_nav>需求</h2>
 <ul>
 	<li>Raspberry Pi上運行Raspbian，且可透過終端或SSH存取。像Ubuntu這樣的其他操作系統可能也行，但尚未經過測試。</li>
 	<li>在thinger.io控制台中註冊設備並手動保存憑據。如果您需要有關此部分的幫助，請檢視其他操作方法。</li>
@@ -85,7 +91,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave 
 	<code>sudo apt-get install cmake libssl-dev</code>
 </div>
 <hr>
-<h2 id="啟程" ex_nav>啟程</h2>
+<h2 ex_nav>執行步驟</h2>
 <p>
 	從GitHub下載最新的Linux客戶端版本。
 </p>
@@ -163,3 +169,5 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave 
 	<code>sudo service thinger stop</code>
 </div>
 <p></p>
+
+<div id="guidePages"></div>

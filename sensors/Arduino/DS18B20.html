@@ -1,0 +1,89 @@
+﻿<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>
+			防水溫度探頭DS18B20</h1>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+規格說明：
+探頭採用原裝 DS18B20 溫度感測器晶片
+優質不銹鋼管封裝，防水、防潮、防生銹
+不銹鋼外殼(6*50mm)，引線長度 100cm
+每個探頭經過嚴格測試後獨立包裝
+3.0V～5.5V 供電
+9～12 位可調解析度
+感溫範圍寬 -55 ℃ ～ +125℃
+無需外部元件，獨特的單匯流排界面
+輸出引線：紅色(VCC)，黃色(DATA)，黑色(GND)
+</pre>
+		<p>
+			<img class="img-fluid" src=".\img\sensors\DS18B20\DS18B20(1).jpg" /></p>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+接線圖：
+DS18B20-2 UNO
+========= ====
+紅線       +5V
+黃線       D2
+黑線       GND
+</pre>
+		<p>
+			<span style="color:#ff0000;">注意：黃線需外加一顆 4.7K ohm pull high 電阻至+5V</span></p>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+操作步驟：
+1. 將 \LIBRARY\ 裡面的所有檔案拷貝至 \我的文件\Arduino\libraries\ 裡面
+<a href="https://github.com/NKUSTproject/industry4.0"target="_blank">Library Download</a>
+2. 開啟 Arduino IDE 並點選正確的板子與 COM port
+3. 開啟範例程式 \EXAMPLE\DS18B20-1\DS18B20-2.ino
+4. 上載程式
+5. 開啟 Serial Monitor 並設定為 No line ending 與 9600 baud。Serial Monitor 開始顯示目
+前的環境溫度，嚐試用手握住 DS18B20-2，察看溫度是否上升。
+</pre>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+範例程式：
+#include <onewire.h>
+#include <dallastemperature.h>
+ 
+// Data wire is plugged into pin 2 on the Arduino
+#define ONE_WIRE_BUS 2
+ 
+// Setup a oneWire instance to communicate with any OneWire devices 
+// (not just Maxim/Dallas temperature ICs)
+OneWire oneWire(ONE_WIRE_BUS);
+ 
+// Pass our oneWire reference to Dallas Temperature.
+DallasTemperature sensors(&amp;oneWire);
+ 
+void setup(void)
+{
+  // start serial port
+  Serial.begin(9600);
+  Serial.println(&quot;Dallas Temperature IC Control Library Demo&quot;);
+
+  // Start up the library
+  sensors.begin();
+}
+ 
+ 
+void loop(void)
+{
+  // call sensors.requestTemperatures() to issue a global temperature
+  // request to all devices on the bus
+  Serial.print(&quot; Requesting temperatures...&quot;);
+  sensors.requestTemperatures(); // Send the command to get temperatures
+  Serial.println(&quot;DONE&quot;);
+
+  Serial.print(&quot;Temperature is: &quot;);
+  Serial.print(sensors.getTempCByIndex(0)); // Why &quot;byIndex&quot;? 
+    // You can have more than one IC on the same bus. 
+    // 0 refers to the first IC on the wire
+    delay(1000);
+}
+
+</dallastemperature.h></onewire.h></pre>
+		<p>
+			結果:</p>
+		<p>
+			<img class="img-fluid" src=".\img\sensors\DS18B20\DS18B20(2).JPG" /></p>
+	</body>
+</html>

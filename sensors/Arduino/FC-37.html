@@ -1,0 +1,50 @@
+﻿<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>
+			Arduino FC-37雨滴模組感測器</h1>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+首先將FC-37接上藍色小板子，由於FC-37的接點上並沒有標示正負極，所以就先隨便接上。
+接著藍色小板子四個接點的部份分別是VOC, GND, D0, A0
+
+將VOC接到Arduino板子的5V，GND接到Arduino板子的GND。
+最後將A0接到Arduino板子的A0 ~ A5其中一個接點即可。
+</pre>
+		<p>
+			電路(接線)圖:</p>
+		<p>
+			<img class="img-fluid" src=".\img\sensors\FC-37\FC37.jpg" /></p>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+程式範例:
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+int rain = analogRead(A1);
+if (rain&lt;1000)
+Serial.println(&quot;wet&quot;);
+else
+Serial.println(&quot;dry&quot;);
+delay(1000);
+
+}
+</pre>
+		<p>
+			結果:</p>
+		<p>
+			<img class="img-fluid" src=".\img\sensors\FC-37\1.jpg" /></p>
+		<p>
+			<img class="img-fluid" src=".\img\sensors\FC-37\2.jpg" /></p>
+		<p>
+			&nbsp;</p>
+		<p>
+			<img class="img-fluid" src=".\img\sensors\FC-37\3.jpg" /></p>
+		<p>
+			&nbsp;</p>
+	</body>
+</html>

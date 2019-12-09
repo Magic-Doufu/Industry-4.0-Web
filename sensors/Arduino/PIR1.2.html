@@ -1,0 +1,76 @@
+﻿<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>
+			人體紅外熱釋電感測器</h1>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+◎人體紅外熱釋電感測器，該感測器能檢測運動的人或動物身上發出的紅外線。
+
+◎輸出開關訊號，與Arduino感測器擴展板v5.0結合使用，可以應用於各種需要檢測運動人體或動物的場合。
+
+◎傳統的熱釋電紅外傳感器需要人體熱釋電紅外監視器、專用芯片和複雜的外圍電路來實現，體積略大，電路複雜，可靠性略低。這款紅外熱釋電運動感測器，專為Arduino設計，採用數字一體化集成人體熱釋電紅外監視器，具有體積小、可靠性高、功耗低、外圍電路簡單等特點。
+
+◎人體紅外熱釋電感測器可在各種單晶片控制器上應用，尤其在Arduino控制器上更簡單，通過3P感測器連接線插接到Arduino專用感測器擴展板上，可以非常容易地實現與環境感知相關的互動作品。
+</pre>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+◎規格：
+輸入電壓：3.3~5V
+工作電流：&lt;20mA
+工作溫度：-20~85℃
+輸出電壓：高電平3V，低電平0V
+輸出延遲時間（高電平）：2.3~3秒左右
+感應角度：100&deg;
+感應距離：6米
+輸出指示燈：高電平點亮
+輸出引腳極限電流：1mA
+輸出介面：數位介面
+模組尺寸：30mm&times;23mm
+模組重量：4g
+引腳定義：S：信號輸出，+：電源(VCC)，-：地(GND)
+接線方法：S埠接到控制器的數位輸入引腳上。5V 和GND分別接到電源的+5V和GND。
+</pre>
+		<p>
+			電路(接線)圖:</p>
+		<p>
+			<img class="img-fluid" src=".\img\sensors\PIR1.2\PIR1.2.jpg" /></p>
+		<p>
+			&nbsp;</p>
+		<pre style="word-wrap: break-word; white-space: pre-wrap;">
+程式範例:
+const int PIRSensor = 2;     // 紅外線動作感測器連接的腳位07
+const int ledPin =  13;      // LED 腳位
+int sensorValue = 0;         // 紅外線動作感測器訊號變數
+
+void setup() {
+
+  pinMode(PIRSensor,INPUT);    
+  pinMode(ledPin,OUTPUT);       
+  Serial.begin(9600);  
+}
+
+void loop(){
+
+  // 讀取 PIR Sensor 的狀態
+  sensorValue = digitalRead(PIRSensor);
+  // 判斷 PIR Sensor 的狀態
+  if (sensorValue == HIGH) {    
+    digitalWrite(ledPin, HIGH);  // 有人，開燈
+    Serial.println(&quot;有人，開燈&quot;);
+  }
+  else { 
+    digitalWrite(ledPin, LOW);   // 沒人，關燈
+   Serial.println(&quot; &quot;);
+    
+  }
+}
+</pre>
+		<p>
+			結果:</p>
+		<p>
+			<img class="img-fluid" src=".\img\sensors\PIR1.2\PIR1.21.jpg" /></p>
+		<p>
+			<img class="img-fluid" src=".\img\sensors\PIR1.2\PIR1.22.jpg" /></p>
+	</body>
+</html>

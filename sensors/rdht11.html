@@ -9,8 +9,8 @@ DATA腳用於微處理器與DHT-11之間的通訊，一次通訊時間為4ms左�
 數據傳輸正確時，8bits的校驗和等於8bits濕度整數數據+8bits濕度小數數據+8bits溫度整數數據+8bits溫度小數數據之和。<br>
 用戶發送一次開始信號之後，DHT-11從低功耗模式轉到高速模式，等待主機開始信號結束後，DHT-11發送響應信號，送出40bits的數據，當數據傳輸完之後，DHT-11會切回至低功耗模式直到再次接到開始訊號。<br>
 <img src="https://i.imgur.com/ueutZN0.png" alt=""></p><p>以下為使用python的範例程式</p><pre><code>
-import RPi.GPIO as GPIO //載入GPIO函式庫
-import time //載入TIME函式庫
+import RPi.GPIO as GPIO //載入GPIO程式庫
+import time //載入TIME程式庫
 while(1):
  channel =7 
  data = []
