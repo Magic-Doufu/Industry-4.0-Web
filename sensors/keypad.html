@@ -1,15 +1,15 @@
-<div id="doc" class="markdown-body container-fluid comment-enabled"><h1 id="鍵盤"><a class="anchor hidden-xs" href="#鍵盤" title="鍵盤"><span class="octicon octicon-link"></span></a>鍵盤</h1><p>市面上4X4或3X4的鍵盤內部原理都一樣，只是按鍵多寡不同。我選用的鍵盤為4X4。<br>
-<img src="https://i.imgur.com/bey4hZP.png" alt=""><br>
+<div id="doc"><h1 id="鍵盤"><a class="anchor hidden-xs" href="#鍵盤" title="鍵盤"><span class="octicon octicon-link"></span></a>鍵盤</h1><p>市面上4X4或3X4的鍵盤內部原理都一樣，只是按鍵多寡不同。我選用的鍵盤為4X4。<br>
+<img class="img-fluid" src="https://i.imgur.com/bey4hZP.png" alt=""><br>
 內部電路圖<br>
-<img src="https://i.imgur.com/5rHcOMz.png" alt=""><br>
+<img class="img-fluid" src="https://i.imgur.com/5rHcOMz.png" alt=""><br>
 原理:首先先開啟raspberry pi的上拉電阻。<br>
-<img src="https://i.imgur.com/DS4wbJ8.png" alt=""><br>
+<img class="img-fluid" src="https://i.imgur.com/DS4wbJ8.png" alt=""><br>
 假設開關的「行1」~「行3」輸入端全都輸入高電位，無論開關是否被按下，raspberry pi將接收到高電位（1）。為了檢測到其中按鍵被按下，程式必須依序將「行1」~「行3」腳位設定成低電位。<br>
-<img src="https://i.imgur.com/JjH3VPR.png" alt=""><br>
+<img class="img-fluid" src="https://i.imgur.com/JjH3VPR.png" alt=""><br>
 輪到「行2」腳輸入低電位，此時，微控器的輸入腳也將接收到低電位（0），由此可知連接「行2」的「開關B」被按下了。<br>
-<img src="https://i.imgur.com/zWv4GRM.png" alt=""><br>
+<img class="img-fluid" src="https://i.imgur.com/zWv4GRM.png" alt=""><br>
 輪到「行3」腳輸入低電位，由於「開關C」未被按下，因此微控器的輸入腳接收到高電位（1）。<br>
-<img src="https://i.imgur.com/x67pg2b.png" alt=""><br>
+<img class="img-fluid" src="https://i.imgur.com/x67pg2b.png" alt=""><br>
 範例程式碼:</p><pre><code>import RPi.GPIO as GPIO
 import time
 GPIO.setwarnings(False)

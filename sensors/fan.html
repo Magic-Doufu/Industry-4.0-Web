@@ -1,5 +1,5 @@
 <div id="doc" class="markdown-body container-fluid comment-enabled"><h1 id="風扇模塊"><a class="anchor hidden-xs" href="#風扇模塊" title="風扇模塊"><span class="octicon octicon-link"></span></a>風扇模塊</h1><p>本範例使用ywrobot Fan motor V2為範例<br>
-<img src="https://i.imgur.com/96YVKvO.png" alt=""><br>
+<img class="img-fluid" src="https://i.imgur.com/96YVKvO.png" alt=""><br>
 請將GND接至6腳、VCC接至22腳、INA接至16腳、INB接至18腳</p><p>ywrobot Fan motor V2簡易介紹<br>
 該模組利用L9110驅動，透過INA與INB來控制馬達正反轉。當INA輸入1、INB輸入0時，風扇順時針旋轉，當INA輸入0、INB輸入1時，風扇逆時針旋轉。</p><p>範例程式</p><pre><code>import RPi.GPIO as GPIO
 import time

@@ -1,5 +1,5 @@
 <div id="doc" class="markdown-body container-fluid comment-enabled" style="position: relative;"><h1 id="聲音感測器"><a class="anchor hidden-xs" href="#聲音感測器" title="聲音感測器"><span class="octicon octicon-link"></span></a>聲音感測器</h1><p>本範例使用keyes聲音感測模組<br>
-<img src="https://i.imgur.com/fbEqwNO.png" alt=""><br>
+<img class="img-fluid" src="https://i.imgur.com/fbEqwNO.png" alt=""><br>
 由於這個是類比輸出，所以需要搭配數位類比轉換器來使用，如果沒有搭配數位類比轉換器，則會像是數位輸出，只會在聲音達到一定程度時輸出高電平信號。需要將ADC0804的Vin之接腳接至OUT。</p><p>範例程式碼</p><pre><code>import RPi.GPIO as IO        # calling for header file which helps us use GPIO’s of PI
 import time                          # calling for time to provide delays in program
 IO.setwarnings(False)         # do not show any warnings

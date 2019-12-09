@@ -114,6 +114,7 @@
 					if (window.sessionStorage.getItem('page') != null)
 						scrollToId('nav-main');
 					window.sessionStorage.setItem('page',url);
+					$('body').scrollspy({ target: '#ex_nav' })
 				}
 			});
 			return true;
