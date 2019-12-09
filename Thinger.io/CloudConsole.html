@@ -13,8 +13,59 @@
 </div>
 <hr>
 <h3 ex_nav>設備(Device)</h3>
-<h4>建立設備</h4>
+<h4>新增設備</h4>
+<p>在Thinger.io中啟動IoT項目的第一步（除了像Sigfox這樣非TCP Socket連接導向的設備）是通過新增設備來授予存取權限，以便將設備連接到您的帳戶。任何設備皆必須於Thinger.io中註冊才能存取平台。每個設備都有自己的<strong><mark>ID</mark></strong>和<strong><mark>憑證(Credential)</mark></strong>，並與使用者帳戶相關。本節介紹在您的帳戶中註冊新設備所需的步驟。</p>
+<p>要註冊新設備，請在登錄後，轉到左側選單中顯示的<mark>Device</mark>部分。</p>
+<div class="text-center">
+	<img class="img-fluid align-self-center" src="./img/Thinger.io/Cloud/MenuDevice.jpg">
+</div>
+<p class="py-4">此部分將列出您註冊的設備，並將顯示有關其連接的一些資訊。類似於下圖的東西。</p>
+<div class="text-center">
+	<img class="img-fluid align-self-center" src="./img/Thinger.io/Cloud/DeviceList.png">
+</div>
+<p class="py-4">如果這是您第一次造訪Thinger.io，此列表將為空。接下來，我們將為您展示如何新增您的第一個設備。</p>
+<p class="py-4">首先，單擊<strong>Add Device</strong>，將打開一個表單，您可以在其中輸入<strong>設備ID與憑證</strong>。</p>
+<div class="text-center">
+	<img class="img-fluid align-self-center" src="./img/Thinger.io/Cloud/DeviceDetail.png">
+</div>
+<p class="py-4">在此處輸入<strong>Device Id</strong>（不可重複），可以幫助您識別設備的<strong>Device description</strong>以及憑證<strong>device credentials</strong>。每個設備都有自己的ID/憑證，因此帳戶中的設備間不會互相影響。伺服器中的所有密碼都加入透過PRNG產生32字節的鹽，並使用PBKDF2 SHA256與不可消耗的迭代次數進行安全存儲。保留您的<strong>device Id</strong>和<strong>device credentials</strong>，因為您需要它們來連接您的設備（密碼設定後將無法再次檢視）。</p>
+<p class="py-4">如果一切順利，你應該看到一些成功的消息</p>
+<div class="text-center">
+	<img class="img-fluid align-self-center" src="./img/Thinger.io/Cloud/AddDeviceDone.png">
+</div>
+<p class="py-4">現在，您可以返回設備列表，設備應顯示為已斷開連接。</p>
+<div class="text-center">
+	<img class="img-fluid align-self-center" src="./img/Thinger.io/Cloud/DeviceListAdded.png">
+</div>
+<p class="py-4">現在，您可以使用新設備ID和設備憑證連接新設備。根據您的設備，您需要安裝所需的函式庫或開發環境，因此請根據您的設備檢視以下部分：</p>
+
+<div class="py-2"><a href="./Thinger.io/ArduinoClient.html" guideButton></a></div>
+<div class="py-2"><a href="./Thinger.io/LinuxClient.html" guideButton></a></div>
+<p class="py-4">請記住，Sigfox設備不共享已連接設備的概念，因為它們預設情況下是定期發送資訊的離線設備。如果您想存取來自這些設備的資訊，請檢視以下文檔。</p>
+<a href="./Thinger.io/Sigfox.html" guideButton></a>
+<p class="py-4">
+	對於以下示例，我們將使用Arduino IDE和ESP8266設備，如NodeMCU，在這種情況下，您可以打開ESP8266的範例程式，並填寫設備詳細資訊：您的用戶名，設備ID以及建立設備時建立的設備憑證。下圖顯示了程式與帳戶中建立的設備之間的關係。
+</p>
+<div class="text-center">
+	<img class="img-fluid align-self-center" src="./img/Thinger.io/Cloud/DeviceAndCode.png">
+</div>
+<p class="py-4">
+	一旦我們在程式中建立了我們的帳戶標識符，設備標識符和設備憑證，我們就可以編譯並上傳程式。同時，我們只需在設備列表中單擊其ID即可在雲控制台中打開我們的設備。在設備畫面中，您將能夠即時檢視有關設備的一些資訊，例如IP位址，連接狀態或發送/接收的資訊。預設情況下，我們的設備將顯示為已斷開連接，如下圖所示。
+</p>
+<div class="text-center">
+	<img class="img-fluid align-self-center" src="./img/Thinger.io/Cloud/DeviceExplorerOffline.png">
+</div>
+<p class="py-4">設備連接到帳戶後，界面將更改其狀態，顯示已連接，並且正在傳輸資訊，如下圖所示：</p>
+<div class="text-center">
+	<img class="img-fluid align-self-center" src="./img/Thinger.io/Cloud/DeviceExplorerOnline.png">
+</div>
+<p class="py-4">現在我們已將設備連接到帳戶中，已經準備好開始通過網際網路與設備進行互動。</p>
 <hr><h4>設備設定</h4>
+<p>通過單擊設備儀表板右上角的齒輪圖示，可以調整某些設備詳細資訊，如描述或憑證。這樣，您可以通過您選擇的新設備更改設備憑證，以防忘記憑證（憑證無法從資料庫中恢復，因為它已加密）。請注意，更改設備憑證不會斷開設備，但會在斷開連接後阻止其重新連接。</p>
+<div class="text-center">
+	<img class="img-fluid align-self-center" src="./img/Thinger.io/Cloud/DeviceSetting.jpg">
+</div>
+<p class="py-4">如果您需要更改設備ID，則必須刪除該設備並重新註冊一個新設備。</p>
 <hr><h4>設備API</h4>
 <hr><h4>設備令牌(Token)</h4>
 <hr>

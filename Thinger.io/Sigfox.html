@@ -15,7 +15,7 @@
 然後，打開雲控制台中的Buckets部分，並建立一個新的Data Bucket。我們需要一些細節，例如：
 <ul>
 	<li><mark>Bucket Id</mark>，您帳戶中的唯一儲存桶標識符，稍後將與Sigfox集成使用。此示例中的標識符將是<mark>SmartEverything</mark>。保留此標識符，因為它將在Sigfox端使用。</li>
-	<li><mark>Bucket Name</mark>，可以用作標識符的更加用戶友好的表示。</li>
+	<li><mark>Bucket Name</mark>，可以用作標識符的更加使用者友好的表示。</li>
 	<li><mark>Bucket Description</mark>，我們可以放置任何我們想要記住的目的。</li>
 	<li><mark>Enabled</mark>，這需要是真的允許桶寫。</li>
 	<li><mark>Data Source</mark>需要設置<mark>From Write Call</mark>，因為Sigfox設備不會直接連接到平台，而是通過REST API接口推送數據。</li>
@@ -28,7 +28,7 @@
 <p>打開雲控制台中的"訪問令牌"部分，並建立一個新的訪問令牌。我們需要一些細節，例如：</p>
 <ul>
 	<li><mark>Token Id</mark>，您帳戶中的唯一令牌標識符。</li>
-	<li><mark>Token Name</mark>，可以用作標識符的更加用戶友好的表示。</li>
+	<li><mark>Token Name</mark>，可以用作標識符的更加使用者友好的表示。</li>
 	<li><mark>Enabled</mark>，必須是真的允許使用令牌。如果您願意，可以隨時禁用它。</li>
 	<li><mark>Token permissions</mark>，這將配置為訪問我們的Bucket資源，<mark>SmartEverything</mark>在這種情況下，使用該<mark>WriteBucket</mark>操作。</li>
 </ul>
@@ -59,7 +59,7 @@
 	<li><mark>Channel</mark>類型是<mark>URL</mark>，因為我們將調用HTTP端點。</li>
 	<li><mark>Send duplicate</mark> 禁用以避免寫入不同基站收到的重複消息。</li>
 	<li><mark>Custom payload config</mark>將完全取決於您的設備發送的有效負載。在我們的例子中，我們的設備將溫度和濕度發送為32位浮點數，因此我們將有效負載配置為<mark>temp::float:32:little-endian hum::float:32:little-endian</mark>，其中我們將<mark>temp</mark>和<mark>hum</mark>參數定義為小端的32位浮點數。請注意，Sigfox每條訊息僅支援12字節的有效負載，因此您必須最佳化此空間，例如，如果不需要十進制精度，則將溫度和濕度作為整數發送。</li>
-	<li><mark>Url pattern</mark> 必鬚根據您的Thinger.io用戶ID和我們的儲存桶名稱進行配置。
+	<li><mark>Url pattern</mark> 必鬚根據您的Thinger.io使用者ID和我們的儲存桶名稱進行配置。
 		<ol>
 			<li>模式應該是這樣的<mark>https://api.thinger.io/v1/users/{user_id}/buckets/{bucket_id}/data</mark>。</li>
 			<li>你必須根據您的帳戶改變<mark>{user_id}</mark>與<mark>{bucket_id}</mark>。在我們的示例中，模式最終的url將是<mark>https://api.thinger.io/v1/users/alvarolb/buckets/SmartEverything/data</mark>。</li>

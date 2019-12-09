@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			<!--中間-->
-			<div class="col col-12 col-md-9 col-xl-7 M-side p-4 bg-white pt-3">
+			<div class="col col-12 col-md-9 col-xl-7 M-side px-5 bg-white pt-4 pb-4">
 				<div id="#result">
 					
 				</div>
@@ -205,7 +205,7 @@
 			})
 		}
 		function guide_btn() {
-			$.get('ajax/WebComponent/guideButton.html', function(data){
+			$.get('ajax/WebComponent/guideButton.html' + '?_=' + $.now(), function(data){
 				$('a[guideButton]').replaceWith(function(){
 					var url = $(this).attr('href');
 					return $(data).attr('href',url).children().children('strong').text($('#navbar>nav>a[href="' + url + '"]').text()).parent().parent();
