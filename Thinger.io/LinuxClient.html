@@ -6,7 +6,7 @@
 	<div class="p-md-2 flex-fill flex-grow-1 align-self-center">
 		<p>原文參照： <a href="https://docs.thinger.io/devices/linux">https://docs.thinger.io/devices/linux</a></p>
 		<p>
-			這個操作方法將介紹如何在<mark>Raspberry Pi</mark>中使用thinger.io平台時獲得第一步。這包括如何下載，編譯和執行GitHub存儲庫中可用的主要示例。
+			這個操作方法將介紹如何在<mark>Raspberry Pi</mark>中使用thinger.io平台時獲得第一步。這包括如何下載，編譯和執行GitHub存儲庫中可用的主要範例。
 		</p>
 	</div>
 </div>
@@ -20,7 +20,7 @@
 <h2 id="安裝較新的GCC版本" ex_nav>安裝較新的GCC版本</h2>
 <mark>注意：Raspbian Jessie或更新版本不需要。</mark>
 <p>
-	必需使用現代編譯器來構建thinger.io示例。
+	必需使用現代編譯器來構建thinger.io範例。
 </p>
 <p>
 	新的Raspbian版本，從<mark>Jessie</mark>開始已經提供了一個現代編譯器，但如果您使用較舊的Raspbian版本，則需要安裝更新的編譯器。至少需為GCC 4.8.2以上。請在終端中鍵入<code>gcc -v</code>以檢查是否需要更新編譯器。
@@ -76,7 +76,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave 
 <hr>
 <h2 id="安裝依賴項" ex_nav>安裝依賴項</h2>
 <p>
-	如果您需要將thinger安裝為守護程式，則必須使用CMake編譯示例。如果我們想要使用TLS安全地連接到平台，還需要安裝Open SSL。
+	如果您需要將thinger安裝為守護程式，則必須使用CMake編譯範例。如果我們想要使用TLS安全地連接到平台，還需要安裝Open SSL。
 </p>
 <p>
 	首先更新apt存儲庫：
@@ -111,7 +111,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave 
 	<code>nano src/main.cpp</code>
 </div>
 <p>
-	在這種情況下，您必須將字段<mark>USER_ID</mark>，<mark>DEVICE_ID</mark>以及<mark>DEVICE_CREDENTIAL</mark>替換為您在平台中註冊設備時提供的資訊。以下是main.cpp編輯這些字段之前文件應如何顯示的示例螢幕截圖。
+	在這種情況下，您必須將字段<mark>USER_ID</mark>，<mark>DEVICE_ID</mark>以及<mark>DEVICE_CREDENTIAL</mark>替換為您在平台中註冊設備時提供的資訊。以下是main.cpp編輯這些字段之前文件應如何顯示的範例螢幕截圖。
 </p>
 <img class="img-fluid" src="https://discoursefiles.s3-eu-west-1.amazonaws.com/original/1X/2697e5c757b23eec7537fc9ac232544f5923d583.png">
 <p>

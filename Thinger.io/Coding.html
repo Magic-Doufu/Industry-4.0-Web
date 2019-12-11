@@ -127,7 +127,7 @@ ThingerEthernet <span style="color: #0000FF">thing</span>(<span style="color: #B
                     <div class="card-body">
                         <p>這種資源只需要一個開/關狀態，因此可以根據需要啟用或禁用它。由於pson類型包含多種數據類型，我們可以認為pson輸入函數的參數類似於布林值。<br>
                         因此，在setup函數內部，您可以放置​​一個名為led（您也可以使用任何其他名稱）的資源，其輸入參數類型可以使用pson。<br>
-                        該示例將使用in參數上的三元運算符來打開/關閉數字引腳10 。<br></p>
+                        該範例將使用in參數上的三元運算符來打開/關閉數字引腳10 。<br></p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
 3</pre></td><td><pre style="margin: 0; line-height: 125%">thing[<span style="color: #BA2121">&quot;led&quot;</span>] <span style="color: #666666">&lt;&lt;</span> [](pson<span style="color: #666666">&amp;</span> in){
@@ -239,7 +239,7 @@ thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="c
 }
 </pre></td></tr></table></div>
                         <p>
-                            如果沒有輸入物件，此示例代碼基本上返回目前狀態（如布林值，數字等），或使用傳入數據更新目前狀態。這可以很容易地適用於控制LED，同時在打開或更新時在儀表板中顯示其目前狀態。
+                            如果沒有輸入物件，此範例代碼基本上返回目前狀態（如布林值，數字等），或使用傳入數據更新目前狀態。這可以很容易地適用於控制LED，同時在打開或更新時在儀表板中顯示其目前狀態。
                         </p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
@@ -304,7 +304,7 @@ thing[<span style="color: #BA2121">&quot;hysteresis&quot;</span>] <span style="c
         
                 <div id="output-source2" class="collapse" data-parent="#output-sources">
                     <div class="card-body">
-                        <p>以相同的方式輸入資源可以同時接收多個值，輸出資源也可以提供多個數據。這是從GPS提供緯度和經度的示例。<br></p>
+                        <p>以相同的方式輸入資源可以同時接收多個值，輸出資源也可以提供多個數據。這是從GPS提供緯度和經度的範例。<br></p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
 3
@@ -358,7 +358,7 @@ thing[<span style="color: #BA2121">&quot;yaw&quot;</span>] <span style="color: #
                         <p>
                             這種資源通常由供應商定義。<br>
                             在這種情況下，該函數採用兩個不同的pson參數。一個用於輸入數據，另一個用於輸出數據。<br>
-                            此示例使用BMP180傳感器提供高度讀數。它將參考高度作為輸入，並提供目前高度作為輸出。
+                            此範例使用BMP180傳感器提供高度讀數。它將參考高度作為輸入，並提供目前高度作為輸出。
                         </p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
@@ -379,7 +379,7 @@ thing[<span style="color: #BA2121">&quot;yaw&quot;</span>] <span style="color: #
                 </div>
                 <div id="IO-source2" class="collapse" data-parent="#IO-sources">
                     <div class="card-body">
-                        <p>您還可以定義更複雜的輸入/輸出資源（需要多個輸入值），以提供多個輸出值，例如此示例中包含value1和value2提供sum和mult值。</p>
+                        <p>您還可以定義更複雜的輸入/輸出資源（需要多個輸入值），以提供多個輸出值，例如此範例中包含value1和value2提供sum和mult值。</p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
 2
 3
@@ -535,7 +535,7 @@ thing[<span style="color: #BA2121">&quot;relay&quot;</span>] <span style="color:
     thing.call_device(<span style="color: #BA2121">&quot;deviceA&quot;</span>, <span style="color: #BA2121">&quot;resourceOnA&quot;</span>, data);
 }
 </pre></td></tr></table></div>
-        <p><mark>deviceB</mark> 也可以通過提供來自回傳數據的已定義資源的數據來調用此方法，在這種情況下，調用與前面的示例類似，但使用資源作為數據源。</p>
+        <p><mark>deviceB</mark> 也可以通過提供來自回傳數據的已定義資源的數據來調用此方法，在這種情況下，調用與前面的範例類似，但使用資源作為數據源。</p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
  2
  3
@@ -685,7 +685,7 @@ loop(){
     </div>
     <div class="tab-pane fade" id="nav-email" role="tabpanel" aria-labelledby="nav-email-tab">
         <p>
-            這是一個簡單的示例，應用於具有自定義正文的電子郵件類型端點
+            這是一個簡單的範例，應用於具有自定義正文的電子郵件類型端點
         </p>
 <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
  2
@@ -712,7 +712,7 @@ loop()
 }
 </pre></td></tr></table></div>
         <p>
-            請注意，有一個變數限制了此"if"只運行一次，重要的是定義任何條件或方法以保證這種enpoint調用只執行一次（或以適當的速率），因為它可以得到一個微控制器通過thinger.io平台生成的大量電子郵件。在端點配置中，在自定義正文電子郵件中，必須添加雙括號"{{}}"來調用微控制器發送的變數，在我們的示例中，我們使用了以下正文：
+            請注意，有一個變數限制了此"if"只運行一次，重要的是定義任何條件或方法以保證這種enpoint調用只執行一次（或以適當的速率），因為它可以得到一個微控制器通過thinger.io平台生成的大量電子郵件。在端點配置中，在自定義正文電子郵件中，必須添加雙括號"{{}}"來調用微控制器發送的變數，在我們的範例中，我們使用了以下正文：
         </p>
         <p><strong>"實際水平為{{}}％"</strong></p>
         <p>並收到一封帶有文字的電子郵件：</p>
@@ -826,7 +826,7 @@ loop()
     串流資源還要求另一個端點連接並偵聽它們（即WebSocket的client端），因此如果沒有人監聽此數據，則不會發送數據。這由客戶端庫和伺服器自動處理，因此始終流式傳輸數據是安全的，因為設備僅在有目的地時才傳輸信息。
 </p>
 <p>
-    如果航向值變化超過1度，以下示例將即時報告羅盤航向。
+    如果航向值變化超過1度，以下範例將即時報告羅盤航向。
 </p>
 </pre>
 <img class="img-fluid" src="./img/Thinger.io/Coding/esp8266-real-time-websockets.gif">
@@ -922,6 +922,6 @@ loop()
     此外，在您的設備上編寫程式碼時非常重要，因此您可以輕鬆檢查資源是否按預期工作，例如讀取傳感器值，打開和關閉繼電器等等。
 </p>
 <div class="alert alert-info">
-    設備中的每個已定義資源（如傳感器，繼電器，指示燈等）都可以從API資源管理器中直接存取。此示例直接從資源管理器打開和關閉指示燈。
+    設備中的每個已定義資源（如傳感器，繼電器，指示燈等）都可以從API資源管理器中直接存取。此範例直接從資源管理器打開和關閉指示燈。
 </div>
 <div id="guidePages"></div>

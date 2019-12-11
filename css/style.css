@@ -114,16 +114,6 @@ p {
 .indent {
 	text-indent: 2rem;
 }
-pre, .codestick{
-	background-color: #f7f7f7;
-	padding: 0.5rem;
-}
-pre code{
-	color: #e83e8c;
-}
-code {
-	margin: 0.15rem;
-}
 .nav-link.tr2 {
 	padding: 0.5rem;
 	padding-left: 2rem;
