@@ -38,3 +38,7 @@ sidebar: false
 在此處，我們建議了一個開源平台－Thinger.io。這個平台可以幫助你快速學習如何將感測器等機構與網路平台結合，並且該平台提供了一些可以方便使用者操作的功能，甚至可以透過結合IFTTT等服務建立Line機器人。
 [Thinger.io](https://Thinger.io)
 如果需要中文版本的參考文件，歡迎前往[Thinger.io中文文件](https://magic-doufu.github.io/thinger.io-docs-zh-t/)
+
+## 聯絡我們
+本網頁內容由團隊中的不同人進行編輯，如果有任何問題或要求加上歸因請連絡[magic-doufu](mailto:gtrx8fd3ds@gmail.com)或直接連絡該頁負責人。
+感測器與協定：[1105105226@nkust.edu.tw](mailto:1105105221@nkust.edu.tw)
