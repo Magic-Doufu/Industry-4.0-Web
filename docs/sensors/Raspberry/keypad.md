@@ -1,0 +1,50 @@
+# 鍵盤
+鍵盤市面上4X4或3X4的鍵盤內部原理都一樣，只是按鍵多寡不同。我選用的鍵盤為4X4。
+![](https://i.imgur.com/bey4hZP.png)
+內部電路圖
+![](https://i.imgur.com/5rHcOMz.png)
+原理:首先先開啟raspberry pi的上拉電阻。
+![](https://i.imgur.com/DS4wbJ8.png)
+假設開關的「行1」~「行3」輸入端全都輸入高電位，無論開關是否被按下，raspberry pi將接收到高電位（1）。為了檢測到其中按鍵被按下，程式必須依序將「行1」~「行3」腳位設定成低電位。
+![](https://i.imgur.com/JjH3VPR.png)
+輪到「行2」腳輸入低電位，此時，微控器的輸入腳也將接收到低電位（0），由此可知連接「行2」的「開關B」被按下了。
+![](https://i.imgur.com/zWv4GRM.png)
+輪到「行3」腳輸入低電位，由於「開關C」未被按下，因此微控器的輸入腳接收到高電位（1）。
+![](https://i.imgur.com/x67pg2b.png)
+範例程式碼:
+```python
+import RPi.GPIO as GPIO
+import time
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(11,GPIO.OUT)
+GPIO.setup(7,GPIO.OUT)
+GPIO.setup(5,GPIO.OUT)
+GPIO.setup(3,GPIO.OUT)
+GPIO.setup(21,GPIO.IN)
+GPIO.setup(19,GPIO.IN)
+GPIO.setup(15,GPIO.IN)
+GPIO.setup(13,GPIO.IN)
+GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(15, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+y=[21,19,15,13]
+x=[11,7,5,3]
+key=[["0","1","2","3"],
+     ["4","5","6","7"],
+     ["8","9","A","B"],
+     ["C","D","E","F"]]
+
+while(1):
+    for i in range(0,4):
+        GPIO.output(x[i],1)
+    for i in range (0,4):
+        GPIO.output(x[i],0)
+        for j in range(0,4):
+            if(GPIO.input(y[j])==0):
+                print(key[j][i])
+        GPIO.output(x[i],1)
+
+    time.sleep(0.2)
+```

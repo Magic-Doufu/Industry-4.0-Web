@@ -1,0 +1,62 @@
+﻿# Servo motor SG90 伺服馬達SG90
+
+伺服馬達（servo motor），因常用於遙控模型飛機，
+所以又常稱為RC伺服機（RC Servo，Radio Control Servo，Remote Control Servo）、伺服馬達舵機。
+
+伺服馬達裡含有直流馬達、齒輪箱、軸柄、以及控制電路，我們可透過訊號控制軸柄的停止角度，大概都是0到180度，但不同廠牌型號會有不同的範圍；經由齒輪箱降速後，變成適當可用的轉速，並且提供更高的轉矩（扭轉力）。
+
+另外還有能連續轉動的伺服馬達，有些出廠時便能連續轉動，有些則是玩家自己動手改造，這種馬達透過訊號可控制轉動的速度。
+
+一般伺服馬達有三條線，電源（紅色）、接地（黑或棕色）、訊號線（白、黃、橘、藍，甚至是黑色）。透過訊號線傳送PWM脈波來控制軸柄的停止位置旋轉角度，這個訊號脈波必須每秒重複50次（也就是50Hz），而脈衝持續時間長短便代表了馬達該將軸柄轉到什麼位置，範圍從1.0ms到2.0ms（millisecond，毫秒，千分之一秒），若想置中則是1.5ms；也可將1.0ms當做角度0度，那麼1.5ms會是90度，2.0ms則是轉到底180度。注意，也有可能反過來。
+  
+不過每個廠牌型號的伺服馬達可允許旋轉的角度各不相同，也就是說可接受的訊號脈衝範圍也不相同，必須查閱產品資料規格書，若超出範圍可能會損害伺服馬達。
+
+
+規格:
+•重量：9g
+•尺寸：23\*12.2\*29mm
+•工作電壓：4.8V
+•轉矩：1.8kg-cm，當工作電壓為4.8V時
+•運轉速度：0.1秒/60度 ，當工作電壓為4.8V時
+•脈衝寬度範圍：500\~2400µs 
+•死頻帶寬度（dead band width）：10µs
+
+
+![](~@sensors/Servo_SG90_motor/motor.jpg)
+
+    
+
+程式範例：
+```cpp
+#include <Servo.h>
+
+Servo myservo;  // create servo object to control a servo
+int val;    // variable to read the value from the analog pin
+
+void setup() {
+  myservo.attach(9);  // attaches the servo on pin 9 to the servo object
+}
+
+void loop() {
+  
+  myservo.write(0);                  // sets the servo position according to the scaled value
+  delay(500);                           // waits for the servo to get there
+  myservo.write(30);                  // sets the servo position according to the scaled value
+  delay(500);                           // waits for the servo to get there
+  myservo.write(60);                  // sets the servo position according to the scaled value
+  delay(500);                           // waits for the servo to get there
+  myservo.write(75);                  // sets the servo position according to the scaled value
+  delay(500);                           // waits for the servo to get there
+  myservo.write(90);                  // sets the servo position according to the scaled value
+  delay(500);                           // waits for the servo to get there
+}
+```
+結果：
+
+
+電路(接線)
+![](~@sensors/Servo_SG90_motor/164232.jpg)
+
+馬達會依據程式角度做旋轉
+
+
