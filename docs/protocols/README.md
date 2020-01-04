@@ -52,8 +52,8 @@ UART傳輸的數據被組織成數據包。每個數據包包含1個起始位，
 ### 停止位
 為了通知傳輸數據包的結束，UART發送端會將數據傳輸線從低電壓驅動至高電壓至少兩位持續時間。
 
-## I2C(Inter-Integrated Circuit)，唸做I-square-C
-最初是為了晶片間的傳輸而設計
+## I2C
+I2C(Inter-Integrated Circuit)，唸做I-square-C，最初是為了晶片間的傳輸而設計。
 
 它是NXP(前身為飛利浦)開發的通訊協定，主要用來做為IC之間的通訊。它的速度一般是100Kbit/s，有些是400Kbit/s，現在更有到1M bit/s與3.4Mbit/s，因此無法像Ethernet那麼快，所以不適合傳送大量資料。但是它又比RS232快速，所以它非常適合拿來設定IC初始值，或是IC之間的控制訊號傳輸。由於I2C只用兩條線通訊SDA(data)/SCL(clock)，因此空間超級省。
 I2C是序列式的傳輸，只用兩條線，一個叫做SDA專門用來送資料，另一個叫做SCL是用來傳clock。資料格式如下圖，依序是由start condition所開始，然後開始傳資料，最後stop condition結束。所謂start condition就是這兩條線的某種狀態的組合可以拿來認定傳輸的開始。
