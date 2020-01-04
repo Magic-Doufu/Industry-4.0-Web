@@ -41,4 +41,4 @@ sidebar: false
 
 ## 聯絡我們
 本網頁內容由團隊中的不同人進行編輯，如果有任何問題或要求加上歸因請連絡[magic-doufu](mailto:gtrx8fd3ds@gmail.com)或直接連絡該頁負責人。
-感測器與協定：[1105105226@nkust.edu.tw](mailto:1105105221@nkust.edu.tw)
+感測器與協定：[1105105227@nkust.edu.tw](mailto:1105105227@nkust.edu.tw)

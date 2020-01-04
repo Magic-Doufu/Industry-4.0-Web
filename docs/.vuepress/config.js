@@ -46,7 +46,7 @@ module.exports = {
   theme: 'thindark',
   themeConfig: {
     nav:[
-      {text: 'Thinger.io中文文件', link: 'https://magic-doufu.github.io/thinger.io-docs-zh-t/' },
+      {text: 'Thinger.io中文文件', link: 'https://gtrx8fd3ds.gitbook.io/thinger-io/' },
       {text: '感測器實作', link: '/sensors/Arduino/DHT11'},
       {text: '協定原理', link: '/protocols/'}
     ],
