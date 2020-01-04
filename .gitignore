@@ -1,2 +1,4 @@
 /img/*
 Test.php
+node_modules
+dist
